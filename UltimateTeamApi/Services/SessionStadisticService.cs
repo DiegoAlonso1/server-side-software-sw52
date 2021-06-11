@@ -35,12 +35,12 @@ namespace UltimateTeamApi.Services
             }
         }
 
-        public async Task<IEnumerable<SessionStadistic>> GetAllByFunctionalityIdAsync(int functionalityId)
+        public async Task<IEnumerable<SessionStadistic>> GetAllSessionsByFunctionalityIdAsync(int functionalityId)
         {
             return await _sessionStadisticRepository.ListByFunctionalityIdAsync(functionalityId);
         }
 
-        public async Task<IEnumerable<SessionStadistic>> GetAllBySessionIdAsync(int sessionId)
+        public async Task<IEnumerable<SessionStadistic>> GetAllStadisticsBySessionIdAsync(int sessionId)
         {
             return await _sessionStadisticRepository.ListBySessionIdAsync(sessionId);
         }
