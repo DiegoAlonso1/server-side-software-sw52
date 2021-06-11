@@ -16,9 +16,6 @@ namespace UltimateTeamApi.UnitTest
 
         }
 
-
-
-
         //GET USER BY ID ASYNC WHEN VALID USER
         [Test]
         public async Task GetByIdAsyncWhenValidUserReturnsUser()

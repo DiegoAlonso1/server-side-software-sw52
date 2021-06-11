@@ -19,6 +19,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Functionality> Functionalities { get; set; }
         public DbSet<SessionStadistic> SessionStadistics { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -75,7 +76,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
 
 
             /******************************************/
-            /*FUNCTIONALITY ENTITY*/
+                     /*FUNCTIONALITY ENTITY*/
             /******************************************/
             builder.Entity<Functionality>().ToTable("Functionalities");
             builder.Entity<Functionality>().HasKey(f => f.Id);
@@ -92,7 +93,16 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     new Functionality { Id = 7, Name = "ToDo List" }
                 );
 
-
+            /******************************************/
+                      /*NOTIFICATION ENTITY*/
+            /******************************************/
+            builder.Entity<Notification>().ToTable("Notifications");
+            builder.Entity<Notification>().HasKey(n => n.Id);
+            builder.Entity<Notification>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Notification>().Property(n => n.Date).IsRequired();
+            builder.Entity<Notification>().Property(n => n.Description).IsRequired().HasMaxLength(200);
+            builder.Entity<Notification>().HasOne(n => n.Sender).WithMany(n => n.NotificationsSent).HasForeignKey(n => n.SenderId);
+            builder.Entity<Notification>().HasOne(n => n.Remitend).WithMany(n => n.NotificationsReceived).HasForeignKey(n => n.RemitendId);
 
 
             //Apply Naming Convention
