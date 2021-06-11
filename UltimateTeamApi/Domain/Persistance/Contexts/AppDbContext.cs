@@ -18,6 +18,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Functionality> Functionalities { get; set; }
+        public DbSet<SessionStadistic> SessionStadistics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -57,7 +58,24 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
 
 
             /******************************************/
-                      /*FUNCTIONALITY ENTITY*/
+                    /*SESSION STADISTICS ENTITY*/
+            /******************************************/
+            builder.Entity<SessionStadistic>().ToTable("SessionStadistics");
+            builder.Entity<SessionStadistic>().HasKey(s => new { s.FunctionalityId, s.SessionId });
+            builder.Entity<SessionStadistic>().Property(s => s.Count);
+            builder.Entity<SessionStadistic>()
+                .HasOne(s => s.Functionality)
+                .WithMany(f => f.SessionStadistics)
+                .HasForeignKey(s => s.FunctionalityId);
+            //builder.Entity<SessionStadistic>()
+            //    .HasOne(s => s.Session)
+            //    .WithMany(s => s.SessionStadistics)
+            //    .HasForeignKey(s => s.SessionId);         //Esperando a que Session sea implementado
+
+
+
+            /******************************************/
+            /*FUNCTIONALITY ENTITY*/
             /******************************************/
             builder.Entity<Functionality>().ToTable("Functionalities");
             builder.Entity<Functionality>().HasKey(f => f.Id);

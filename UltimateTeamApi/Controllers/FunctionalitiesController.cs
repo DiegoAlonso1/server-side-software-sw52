@@ -17,18 +17,20 @@ namespace UltimateTeamApi.Controllers
     public class FunctionalitiesController : ControllerBase
     {
         private readonly IFunctionalityService _functionalityService;
+        private readonly ISessionStadisticService _sessionStadisticService;
         private readonly IMapper _mapper;
 
-        public FunctionalitiesController(IFunctionalityService functionalityService, IMapper mapper)
+        public FunctionalitiesController(IFunctionalityService functionalityService, IMapper mapper, ISessionStadisticService sessionStadisticService)
         {
             _functionalityService = functionalityService;
             _mapper = mapper;
+            _sessionStadisticService = sessionStadisticService;
         }
 
 
 
         /******************************************/
-                    /*GET ALL ASYNC*/
+        /*GET ALL ASYNC*/
         /******************************************/
 
         [SwaggerOperation(
@@ -70,6 +72,28 @@ namespace UltimateTeamApi.Controllers
 
             var functionalityResource = _mapper.Map<Functionality, FunctionalityResource>(result.Resource);
             return Ok(functionalityResource);
+        }
+
+
+
+        /****************************************************/
+        /*GET ALL SESIONSTADISTICS BY FUNCTIONALITY ID ASYNC*/
+        /****************************************************/
+
+        [SwaggerOperation(
+            Summary = "Get All SessionStadistics By Functionality Id",
+            Description = "Get List of All SessionStadistics By Functionality Id",
+            OperationId = "GetAllSessionStadisticsByFunctionalityId")]
+        [SwaggerResponse(200, "SessionStadistics", typeof(IEnumerable<SessionStadisticResource>))]
+
+        [HttpGet("{functionalityId}/sessions")]
+        [ProducesResponseType(typeof(IEnumerable<SessionStadisticResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IEnumerable<SessionStadisticResource>> GetAllSessionStadisticsByFunctionalityIdAsync(int functionalityId)
+        {
+            var sessionStadistics = await _sessionStadisticService.GetAllSessionsByFunctionalityIdAsync(functionalityId);
+            var resources = _mapper.Map<IEnumerable<SessionStadistic>, IEnumerable<SessionStadisticResource>>(sessionStadistics);
+            return resources;
         }
     }
 }
