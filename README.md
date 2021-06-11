@@ -22,6 +22,16 @@ https://localhost:44345/api
 	* Get All SessionStadistics By Session Id
 	* Assign SessionStadistic
 
+* [Notifications](#notifications)
+	* Get All Notifications
+
+* [User Notifications](#user-nofitications)
+	* Get All Notifications Sent By User Id
+	* Get All Notifications Received By User Id
+	* Get Notification By Id And User Id
+	* Save Notification
+	* Delete Notification
+
 ### USERS<a name="get-all-users"></a>
 
 #### Get All Users
@@ -78,4 +88,40 @@ https://localhost:44345/api
 #### Assign SessionStadistic
 ```
 /sessions/{sessionId}/stadistics/{functionalityId}
+```
+
+
+### NOTIFICATIONS<a name="notifications"></a>
+
+#### Get All Notifications
+```
+/notifications
+```
+
+
+### USER NOTIFICATIONS<a name="user-notifications"></a>
+
+#### Get All Notifications Sent By User Id
+```
+/users/{userId}/notifications/sent
+```
+
+#### Get All Notifications Received By User Id
+```
+/users/{userId}/notifications/received
+```
+
+#### Get Notification By Id And User Id
+```
+/users/{userId}/notifications/{notificationId}
+```
+
+#### Save Notification
+```
+/users/{userId}/notifications
+```
+
+#### Delete Notification
+```
+/users/{userId}/notifications/{notificationId}
 ```
