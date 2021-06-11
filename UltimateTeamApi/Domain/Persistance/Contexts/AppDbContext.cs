@@ -20,13 +20,14 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         public DbSet<Functionality> Functionalities { get; set; }
         public DbSet<SessionStadistic> SessionStadistics { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             /******************************************/
-                        /*USER ENTITY*/
+                            /*USER ENTITY*/
             /******************************************/
             builder.Entity<User>().ToTable("Users");
             builder.Entity<User>().HasKey(u => u.Id);
@@ -41,10 +42,10 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<User>().Property(u => u.ProfilePicture).HasConversion(
                 picture => BitmapConverter.BitmapToByteArray(picture),          //Save as Byte Array
                 byteArr => BitmapConverter.ByteArrayToBitmap(byteArr));         //Get as Bitmap
-            //builder.Entity<User>()
-            //    .HasOne(u => u.Administrator)
-            //    .WithMany(a => a.Users)
-            //    .HasForeignKey(u => u.AdministratorId);       //Esperando a que Administrator sea implementado
+                                                                                //builder.Entity<User>()
+                                                                                //    .HasOne(u => u.Administrator)
+                                                                                //    .WithMany(a => a.Users)
+                                                                                //    .HasForeignKey(u => u.AdministratorId);       //Esperando a que Administrator sea implementado
 
 
 
@@ -76,7 +77,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
 
 
             /******************************************/
-                     /*FUNCTIONALITY ENTITY*/
+                    /*FUNCTIONALITY ENTITY*/
             /******************************************/
             builder.Entity<Functionality>().ToTable("Functionalities");
             builder.Entity<Functionality>().HasKey(f => f.Id);
@@ -94,7 +95,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                 );
 
             /******************************************/
-                      /*NOTIFICATION ENTITY*/
+                    /*NOTIFICATION ENTITY*/
             /******************************************/
             builder.Entity<Notification>().ToTable("Notifications");
             builder.Entity<Notification>().HasKey(n => n.Id);
@@ -103,6 +104,17 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Notification>().Property(n => n.Description).IsRequired().HasMaxLength(200);
             builder.Entity<Notification>().HasOne(n => n.Sender).WithMany(n => n.NotificationsSent).HasForeignKey(n => n.SenderId);
             builder.Entity<Notification>().HasOne(n => n.Remitend).WithMany(n => n.NotificationsReceived).HasForeignKey(n => n.RemitendId);
+
+            /******************************************/
+                    /*FRIENDSHIP ENTITY*/
+            /******************************************/
+            builder.Entity<Friendship>().ToTable("Friendships");
+            builder.Entity<Friendship>().HasKey(f => new { f.user1Id, f.user2Id});
+            builder.Entity<Friendship>().Property(f => f.user1Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Friendship>().Property(f => f.user2Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Friendship>().HasOne(f => f.).WithMany(f => f.);
+
+
 
 
             //Apply Naming Convention
