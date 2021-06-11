@@ -8,7 +8,7 @@ https://localhost:44345/api
 ## Api Endpoints
 
 
-### Users
+### USERS
 
 #### Get All Users
 ```
@@ -36,7 +36,7 @@ https://localhost:44345/api
 ```
 
 
-### Functionalities
+### FUNCTIONALITIES
 
 #### Get All Functionalities
 ```
