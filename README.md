@@ -8,7 +8,7 @@ https://localhost:44345/api
 ## Api Endpoints
 
 
-### Users
+### USERS
 
 #### Get All Users
 ```
@@ -33,4 +33,17 @@ https://localhost:44345/api
 #### Delete User
 ```
 /users/{userId}
+```
+
+
+### FUNCTIONALITIES
+
+#### Get All Functionalities
+```
+/functionalities
+```
+
+#### Get Functionality By Id
+```
+/functionalities/{functionalityId}
 ```

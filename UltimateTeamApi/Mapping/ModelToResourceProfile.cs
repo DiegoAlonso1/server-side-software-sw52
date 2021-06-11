@@ -13,6 +13,7 @@ namespace UltimateTeamApi.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<User, UserResource>();
+            CreateMap<Functionality, FunctionalityResource>();
         }
     }
 }
