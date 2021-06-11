@@ -17,6 +17,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
 
         public DbSet<User> Users { get; set; }
         public DbSet<Administrator> Administrators { get; set; }
+        public DbSet<Functionality> Functionalities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -52,6 +53,26 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Administrator>().HasKey(a => a.Id);
             builder.Entity<Administrator>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
             //Agregar cosas
+
+
+
+            /******************************************/
+                      /*FUNCTIONALITY ENTITY*/
+            /******************************************/
+            builder.Entity<Functionality>().ToTable("Functionalities");
+            builder.Entity<Functionality>().HasKey(f => f.Id);
+            builder.Entity<Functionality>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Functionality>().Property(f => f.Name).IsRequired().HasMaxLength(20);
+            builder.Entity<Functionality>().HasData
+                (
+                    new Functionality { Id = 1, Name = "Stream" },
+                    new Functionality { Id = 2, Name = "Laser Pointer" },
+                    new Functionality { Id = 3, Name = "Boards" },
+                    new Functionality { Id = 4, Name = "Notes" },
+                    new Functionality { Id = 5, Name = "Calendar" },
+                    new Functionality { Id = 6, Name = "Alarm" },
+                    new Functionality { Id = 7, Name = "ToDo List" }
+                );
 
 
 

@@ -45,10 +45,12 @@ namespace UltimateTeamApi
             //Dependency Injection Configuration
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFunctionalityRepository, FunctionalityRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IFunctionalityService, FunctionalityService>();
 
             //Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);

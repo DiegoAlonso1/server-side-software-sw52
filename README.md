@@ -34,3 +34,16 @@ https://localhost:44345/api
 ```
 /users/{userId}
 ```
+
+
+### Functionalities
+
+#### Get All Functionalities
+```
+/functionalities
+```
+
+#### Get Functionality By Id
+```
+/functionalities/{functionalityId}
+```
