@@ -1,11 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace UltimateTeamApi.Domain.Models
 {
     public class User
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public DateTime Birthdate { get; set; }
+        public DateTime LastConnection { get; set; }
+        public Bitmap ProfilePicture { get; set; }
+        public int AdministratorId { get; set; }
+        public Administrator Administrator { get; set; }
+        public List<SubscriptionBill> SubscriptionBills { get; set; }
+        public List<SessionParticipant> SessionsParticipated { get; set; }
+        public List<FriendShip> FriendShips { get; set; }
+        public List<Notification> NotificationsSent { get; set; }
+        public List<Notification> NotificationsReceived { get; set; }
+        public List<GroupMember> Groups { get; set; }
     }
 }

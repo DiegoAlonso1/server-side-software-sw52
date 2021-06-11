@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UltimateTeamApi.Domain.Persistance.Context
+namespace UltimateTeamApi.Domain.Models
 {
-    public class AppDbContext
+    public class GroupMember
     {
     }
 }

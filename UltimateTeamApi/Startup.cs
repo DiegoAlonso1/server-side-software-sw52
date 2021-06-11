@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UltimateTeamApi.Domain.Persistance.Contexts;
+using UltimateTeamApi.Domain.Persistance.Repositories;
+using UltimateTeamApi.Domain.Services;
+using UltimateTeamApi.Persistance.Repositories;
+using UltimateTeamApi.Services;
 
 namespace UltimateTeamApi
 {
@@ -28,9 +34,33 @@ namespace UltimateTeamApi
         {
 
             services.AddControllers();
+
+            //Database
+            
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            //Dependency Injection Configuration
+
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IUserService, UserService>();
+
+            //Apply Endpoints Naming Convention
+            services.AddRouting(options => options.LowercaseUrls = true);
+
+            //AutoMapper Setup
+            services.AddAutoMapper(typeof(Startup));
+
+            //Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UltimateTeamApi", Version = "v1" });
+                c.EnableAnnotations();
             });
         }
 
