@@ -9,6 +9,7 @@ https://localhost:44345/api
 * [Users](#users)
 	* Get All Users
 	* Get User By Id
+	* Get User By Email
 	* Save User
 	* Update User
 	* Delete User
@@ -42,6 +43,11 @@ https://localhost:44345/api
 #### Get User By Id
 ```
 /users/{userId}
+```
+
+#### Get User By Email
+```
+/users/email={email}
 ```
 
 #### Save User

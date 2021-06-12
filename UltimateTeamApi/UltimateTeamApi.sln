@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltimateTeamApi", "UltimateTeamApi.csproj", "{F98065F6-BF49-4509-8764-57669963B0C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateTeamApi.UnitTest", "..\UltimateTeamApi.UnitTest\UltimateTeamApi.UnitTest.csproj", "{D0F68CFA-DF4F-460D-B8BA-A163361B2CBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltimateTeamApi.UnitTest", "..\UltimateTeamApi.UnitTest\UltimateTeamApi.UnitTest.csproj", "{D0F68CFA-DF4F-460D-B8BA-A163361B2CBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateTeamApi.SpecFlowTest", "..\UltimateTeamApi.SpecFlowTest\UltimateTeamApi.SpecFlowTest.csproj", "{56324FB6-03C7-4256-B837-D34311A47589}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D0F68CFA-DF4F-460D-B8BA-A163361B2CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0F68CFA-DF4F-460D-B8BA-A163361B2CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0F68CFA-DF4F-460D-B8BA-A163361B2CBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56324FB6-03C7-4256-B837-D34311A47589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56324FB6-03C7-4256-B837-D34311A47589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56324FB6-03C7-4256-B837-D34311A47589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56324FB6-03C7-4256-B837-D34311A47589}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

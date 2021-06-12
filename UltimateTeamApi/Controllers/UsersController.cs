@@ -74,6 +74,31 @@ namespace UltimateTeamApi.Controllers
 
 
         /******************************************/
+                    /*GET BY EMAIL ASYNC*/
+        /******************************************/
+        [SwaggerOperation(
+            Summary = "Get User By Email",
+            Description = "Get a User By Email",
+            OperationId = "GetByEmail")]
+        [SwaggerResponse(200, "User By Email", typeof(UserResource))]
+
+        [HttpGet("email={email}")]
+        [ProducesResponseType(typeof(UserResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> GetByEmailAsync(string email)
+        {
+            var result = await _userService.GetByEmailAsync(email);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var userResource = _mapper.Map<User, UserResource>(result.Resource);
+            return Ok(userResource);
+        }
+
+
+
+        /******************************************/
                         /*SAVE USER*/
         /******************************************/
         [SwaggerOperation(

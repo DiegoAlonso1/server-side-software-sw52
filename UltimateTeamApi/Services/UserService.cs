@@ -60,6 +60,16 @@ namespace UltimateTeamApi.Services
             return new UserResponse(existingUser);
         }
 
+        public async Task<UserResponse> GetByEmailAsync(string email)
+        {
+            var existingUser = await _userRepository.FindByEmailAsync(email);
+
+            if (existingUser == null)
+                return new UserResponse("User not found");
+
+            return new UserResponse(existingUser);
+        }
+
         public async Task<UserResponse> SaveAsync(User user)
         {
             try

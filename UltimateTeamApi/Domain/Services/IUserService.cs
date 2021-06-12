@@ -12,6 +12,7 @@ namespace UltimateTeamApi.Domain.Services
         Task<IEnumerable<User>> GetAllAsync();
         Task<IEnumerable<User>> GetAllByAdministratorIdAsync(int administratorId);
         Task<UserResponse> GetByIdAsync(int userId);
+        Task<UserResponse> GetByEmailAsync(string email);
         Task<UserResponse> SaveAsync(User user);
         Task<UserResponse> UpdateAsync(int userId, User userRequest);
         Task<UserResponse> DeleteAsync(int userId);
