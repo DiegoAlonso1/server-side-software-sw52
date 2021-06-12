@@ -25,7 +25,7 @@ https://localhost:44345/api
 * [Notifications](#notifications)
 	* Get All Notifications
 
-* [User Notifications](#user-nofitications)
+* [User Notifications](#user-notifications)
 	* Get All Notifications Sent By User Id
 	* Get All Notifications Received By User Id
 	* Get Notification By Id And User Id
