@@ -26,20 +26,27 @@ namespace UltimateTeamApi.UnitTest
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
             User user = new User { Id = 2 };
             Notification notification = new Notification { Id = 1 };
+            user.NotificationsReceived = new System.Collections.Generic.List<Notification>();
+            user.NotificationsReceived.Add(notification);
             var notificationId = notification.Id;
             var userId = user.Id;
 
+            mockUserRepository.Setup(r => r.FindByIdAsync(userId))
+                .Returns(Task.FromResult(user));
+
             mockNotificationRepository.Setup(r => r.FindByIdAsync(notificationId))
                 .Returns(Task.FromResult(notification));
+
+
 
             var service = new NotificationService(mockNotificationRepository.Object, mockUnitOfWork.Object, mockUserRepository.Object);
 
             //Act
             var result = await service.GetByIdAndUserIdAsync(notificationId, userId);
-            var userResult = result.Resource;
+            var notificationResult = result.Resource;
 
             //Assert
-            userResult.Should().Be(notification);
+            notificationResult.Should().Be(notification);
         }
 
 
@@ -52,8 +59,12 @@ namespace UltimateTeamApi.UnitTest
             var mockNotificationRepository = GetDefaultINotificationRepositoryInstance();
             var mockUserRepository = GetDefaultIUserRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            User user = new User { Id = 2 };
             var notificationId = 1;
             var userId = 2;
+
+            mockUserRepository.Setup(r => r.FindByIdAsync(userId))
+                .Returns(Task.FromResult(user));
 
             mockNotificationRepository.Setup(r => r.FindByIdAsync(notificationId))
                 .Returns(Task.FromResult<Notification>(null));
@@ -66,6 +77,31 @@ namespace UltimateTeamApi.UnitTest
 
             //Assert
             message.Should().Be("Notification not found");
+        }
+
+        //GET NOTIFICATION BY ID ASYNC WHEN NO USER FOUND
+        [Test]
+        public async Task GetByIdAsyncWhenNoUserFoundReturnsUserNotFoundResponse()
+        {
+            //Arrange
+            var mockNotificationRepository = GetDefaultINotificationRepositoryInstance();
+            var mockUserRepository = GetDefaultIUserRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            User user = new User { Id = 2 };
+            var notificationId = 1;
+            var userId = 2;
+
+            mockUserRepository.Setup(r => r.FindByIdAsync(userId))
+                .Returns(Task.FromResult<User>(null));
+
+            var service = new NotificationService(mockNotificationRepository.Object, mockUnitOfWork.Object, mockUserRepository.Object);
+
+            //Act
+            var result = await service.GetByIdAndUserIdAsync(notificationId, userId);
+            var message = result.Message;
+
+            //Assert
+            message.Should().Be("User not found");
         }
 
         //DEFAULTS

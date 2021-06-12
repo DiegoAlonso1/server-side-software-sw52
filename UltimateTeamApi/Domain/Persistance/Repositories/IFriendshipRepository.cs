@@ -6,7 +6,7 @@ using UltimateTeamApi.Domain.Models;
 
 namespace UltimateTeamApi.Domain.Persistance.Repositories
 {
-    interface IFriendshipRepository
+    public interface IFriendshipRepository
     {
         Task<IEnumerable<Friendship>> ListByUserIdAsync(int userId);
         Task<Friendship> FindByUser1IdAndUser2IdAsync(int user1Id, int user2Id);

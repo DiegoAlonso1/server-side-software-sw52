@@ -102,8 +102,8 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Notification>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Notification>().Property(n => n.Date).IsRequired();
             builder.Entity<Notification>().Property(n => n.Description).IsRequired().HasMaxLength(200);
-            builder.Entity<Notification>().HasOne(n => n.Sender).WithMany(n => n.NotificationsSent).HasForeignKey(n => n.SenderId);
-            builder.Entity<Notification>().HasOne(n => n.Remitend).WithMany(n => n.NotificationsReceived).HasForeignKey(n => n.RemitendId);
+            builder.Entity<Notification>().HasOne(n => n.Sender).WithMany(u => u.NotificationsSent).HasForeignKey(n => n.SenderId);
+            builder.Entity<Notification>().HasOne(n => n.Remitend).WithMany(u => u.NotificationsReceived).HasForeignKey(n => n.RemitendId);
 
             /******************************************/
                     /*FRIENDSHIP ENTITY*/
@@ -112,7 +112,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Friendship>().HasKey(f => new { f.user1Id, f.user2Id});
             builder.Entity<Friendship>().Property(f => f.user1Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Friendship>().Property(f => f.user2Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Friendship>().HasOne(f => f.).WithMany(f => f.);
+            //builder.Entity<Friendship>().HasOne(f => f.).WithMany(f => f.);
 
 
 
