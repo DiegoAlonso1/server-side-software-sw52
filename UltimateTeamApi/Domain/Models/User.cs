@@ -19,7 +19,7 @@ namespace UltimateTeamApi.Domain.Models
         public Administrator Administrator { get; set; }
         public List<SubscriptionBill> SubscriptionBills { get; set; }
         public List<SessionParticipant> SessionsParticipated { get; set; }
-        public List<FriendShip> FriendShips { get; set; }
+        public List<Friendship> FriendShips { get; set; }
         public List<Notification> NotificationsSent { get; set; }
         public List<Notification> NotificationsReceived { get; set; }
         public List<GroupMember> GroupMembers { get; set; }
