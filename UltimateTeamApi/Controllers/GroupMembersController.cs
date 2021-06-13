@@ -41,8 +41,8 @@ namespace UltimateTeamApi.Controllers
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IEnumerable<GroupResource>> GetAllGroupsByUserIdAsync(int userId)
         {
-            var groups = await _groupMemberService.GetAllByUserIdAsync(userId);
-            var resources = _mapper.Map<IEnumerable<Group>, IEnumerable<GroupResource>>((IEnumerable<Group>)groups);
+            var groups = await _groupMemberService.GetAllGroupsByUserIdAsync(userId);
+            var resources = _mapper.Map<IEnumerable<Group>, IEnumerable<GroupResource>>(groups);
             return resources;
         }
 

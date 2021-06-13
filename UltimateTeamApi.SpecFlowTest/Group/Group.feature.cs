@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace UltimateTeamApi.SpecFlowTest.User
+namespace UltimateTeamApi.SpecFlowTest.Group
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace UltimateTeamApi.SpecFlowTest.User
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.8.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class UserFeature : object, Xunit.IClassFixture<UserFeature.FixtureData>, System.IDisposable
+    public partial class GroupFeature : object, Xunit.IClassFixture<GroupFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace UltimateTeamApi.SpecFlowTest.User
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "User.feature"
+#line 1 "Group.feature"
 #line hidden
         
-        public UserFeature(UserFeature.FixtureData fixtureData, UltimateTeamApi_SpecFlowTest_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public GroupFeature(GroupFeature.FixtureData fixtureData, UltimateTeamApi_SpecFlowTest_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace UltimateTeamApi.SpecFlowTest.User
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "User", "User", "\tCreate, Update, Delete and Get a User", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Group", "Group", "\tCreate, Update, Delete and Get a Group", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,17 +80,17 @@ namespace UltimateTeamApi.SpecFlowTest.User
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="1 Initialize some User Intances")]
-        [Xunit.TraitAttribute("FeatureTitle", "User")]
-        [Xunit.TraitAttribute("Description", "1 Initialize some User Intances")]
+        [Xunit.SkippableFactAttribute(DisplayName="1 Initialize some Group Intances")]
+        [Xunit.TraitAttribute("FeatureTitle", "Group")]
+        [Xunit.TraitAttribute("Description", "1 Initialize some Group Intances")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void _1InitializeSomeUserIntances()
+        public virtual void _1InitializeSomeGroupIntances()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Initialize some User Intances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Initialize some Group Intances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -110,7 +110,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name"});
+                table4.AddRow(new string[] {
+                            "TeamUltimate"});
+                table4.AddRow(new string[] {
+                            "Backyardigans"});
+                table4.AddRow(new string[] {
+                            "Pollitos FC"});
+                table4.AddRow(new string[] {
+                            "Roomies"});
+#line 6
+ testRunner.When("groups required attributes provided to initialize instances", ((string)(null)), table4, "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "LastName",
                             "UserName",
@@ -120,7 +133,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table14.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "Sam",
                             "Morales",
                             "ElTioSam",
@@ -130,7 +143,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-04-19",
                             "null",
                             "1"});
-                table14.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "Lucia",
                             "Revollar",
                             "Lulu",
@@ -140,154 +153,36 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-01-20",
                             "null",
                             "1"});
-                table14.AddRow(new string[] {
-                            "Maria",
-                            "Santillan",
-                            "Maria503",
-                            "ma503@yopmail.com",
-                            "Password",
-                            "2000-07-30",
-                            "2018-09-12",
-                            "null",
-                            "1"});
-                table14.AddRow(new string[] {
-                            "Lionel",
-                            "Messi",
-                            "ElMeias",
-                            "leo@barzabestclub.com",
-                            "elMejorDelMundo",
-                            "1212-12-12",
-                            "1219-12-12",
-                            "null",
-                            "1"});
-#line 8
- testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table14, "When ");
+#line 12
+ testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table5, "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "UserCreator"});
+                table6.AddRow(new string[] {
+                            "True"});
+#line 16
+ testRunner.Then("assign the user with Id 1 on the group with Id 2", ((string)(null)), table6, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "UserCreator"});
+                table7.AddRow(new string[] {
+                            "False"});
+#line 19
+ testRunner.Then("assign the user with Id 2 on the group with Id 2", ((string)(null)), table7, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to register")]
-        [Xunit.TraitAttribute("FeatureTitle", "User")]
-        [Xunit.TraitAttribute("Description", "The user wants to register")]
-        public virtual void TheUserWantsToRegister()
+        [Xunit.SkippableFactAttribute(DisplayName="The user wants to create a group")]
+        [Xunit.TraitAttribute("FeatureTitle", "Group")]
+        [Xunit.TraitAttribute("Description", "The user wants to create a group")]
+        public virtual void TheUserWantsToCreateAGroup()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to register", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 17
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Name",
-                            "LastName",
-                            "UserName",
-                            "Email",
-                            "Password",
-                            "Birthdate",
-                            "LastConnection",
-                            "ProfilePicture",
-                            "AdministratorId"});
-                table15.AddRow(new string[] {
-                            "Fernan",
-                            "Floo",
-                            "Fernanfloo",
-                            "fernan@elcrack.es",
-                            "Contraseña",
-                            "1999-05-21",
-                            "2020-03-20",
-                            "null",
-                            "1"});
-#line 18
- testRunner.When("the user complete the form with the required fields and click the Register button" +
-                        "", ((string)(null)), table15, "When ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to update their data profile")]
-        [Xunit.TraitAttribute("FeatureTitle", "User")]
-        [Xunit.TraitAttribute("Description", "The user wants to update their data profile")]
-        public virtual void TheUserWantsToUpdateTheirDataProfile()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to update their data profile", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 24
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Name",
-                            "LastName",
-                            "UserName",
-                            "Email",
-                            "Password",
-                            "Birthdate",
-                            "LastConnection",
-                            "ProfilePicture",
-                            "AdministratorId"});
-                table16.AddRow(new string[] {
-                            "Fernando",
-                            "Firulais",
-                            "FernanElCrack",
-                            "fernan@elcrack.es",
-                            "NuevaContraseña",
-                            "1999-05-21",
-                            "2020-05-20",
-                            "null",
-                            "1"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to create a group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 25
- testRunner.When("the user with id 5 complete the form with required fields and click the Update bu" +
-                        "tton", ((string)(null)), table16, "When ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="The administrator wants to see all users")]
-        [Xunit.TraitAttribute("FeatureTitle", "User")]
-        [Xunit.TraitAttribute("Description", "The administrator wants to see all users")]
-        public virtual void TheAdministratorWantsToSeeAllUsers()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The administrator wants to see all users", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 31
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -307,88 +202,26 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
-                            "Name",
-                            "LastName",
-                            "UserName",
-                            "Email",
-                            "Password",
-                            "Birthdate",
-                            "LastConnection",
-                            "ProfilePicture",
-                            "AdministratorId"});
-                table17.AddRow(new string[] {
-                            "1",
-                            "Sam",
-                            "Morales",
-                            "ElTioSam",
-                            "sam@hotmail.com",
-                            "TresNodos",
-                            "2002-04-19",
-                            "2020-04-19",
-                            "null",
-                            "1"});
-                table17.AddRow(new string[] {
-                            "2",
-                            "Lucia",
-                            "Revollar",
-                            "Lulu",
-                            "lulu@gmail.com",
-                            "CrusUpc#3",
-                            "2003-01-09",
-                            "2020-01-20",
-                            "null",
-                            "1"});
-                table17.AddRow(new string[] {
-                            "3",
-                            "Maria",
-                            "Santillan",
-                            "Maria503",
-                            "ma503@yopmail.com",
-                            "Password",
-                            "2000-07-30",
-                            "2018-09-12",
-                            "null",
-                            "1"});
-                table17.AddRow(new string[] {
-                            "4",
-                            "Lionel",
-                            "Messi",
-                            "ElMeias",
-                            "leo@barzabestclub.com",
-                            "elMejorDelMundo",
-                            "1212-12-12",
-                            "1219-12-12",
-                            "null",
-                            "1"});
-                table17.AddRow(new string[] {
-                            "5",
-                            "Fernando",
-                            "Firulais",
-                            "FernanElCrack",
-                            "fernan@elcrack.es",
-                            "NuevaContraseña",
-                            "1999-05-21",
-                            "2020-05-20",
-                            "null",
-                            "1"});
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name"});
+                table8.AddRow(new string[] {
+                            "Bichotas"});
+#line 26
+ testRunner.When("the user complete the form with the required fields and click the Create button", ((string)(null)), table8, "When ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="The user wants to update a group")]
+        [Xunit.TraitAttribute("FeatureTitle", "Group")]
+        [Xunit.TraitAttribute("Description", "The user wants to update a group")]
+        public virtual void TheUserWantsToUpdateAGroup()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to update a group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 32
- testRunner.When("the administrator goes to Users Page, user list should return", ((string)(null)), table17, "When ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to see his profile data")]
-        [Xunit.TraitAttribute("FeatureTitle", "User")]
-        [Xunit.TraitAttribute("Description", "The user wants to see his profile data")]
-        public virtual void TheUserWantsToSeeHisProfileData()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to see his profile data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 42
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -408,46 +241,79 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 43
- testRunner.When("the user with id 5 goes to Profile Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
-                            "Name",
-                            "LastName",
-                            "UserName",
-                            "Email",
-                            "Password",
-                            "Birthdate",
-                            "LastConnection",
-                            "ProfilePicture",
-                            "AdministratorId"});
-                table18.AddRow(new string[] {
-                            "5",
-                            "Fernando",
-                            "Firulais",
-                            "FernanElCrack",
-                            "fernan@elcrack.es",
-                            "NuevaContraseña",
-                            "1999-05-21",
-                            "2020-05-20",
-                            "null",
-                            "1"});
-#line 44
- testRunner.Then("user details should be", ((string)(null)), table18, "Then ");
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name"});
+                table9.AddRow(new string[] {
+                            "TeamWork"});
+#line 33
+ testRunner.When("the user complete the form to update the group with Id 5 and click the Update but" +
+                        "ton", ((string)(null)), table9, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to send a friend request")]
-        [Xunit.TraitAttribute("FeatureTitle", "User")]
-        [Xunit.TraitAttribute("Description", "The user wants to send a friend request")]
-        public virtual void TheUserWantsToSendAFriendRequest()
+        [Xunit.SkippableFactAttribute(DisplayName="The administrator wants to see all groups")]
+        [Xunit.TraitAttribute("FeatureTitle", "Group")]
+        [Xunit.TraitAttribute("Description", "The administrator wants to see all groups")]
+        public virtual void TheAdministratorWantsToSeeAllGroups()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to send a friend request", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The administrator wants to see all groups", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 39
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "Name"});
+                table10.AddRow(new string[] {
+                            "1",
+                            "TeamUltimate"});
+                table10.AddRow(new string[] {
+                            "2",
+                            "Backyardigans"});
+                table10.AddRow(new string[] {
+                            "3",
+                            "Pollitos FC"});
+                table10.AddRow(new string[] {
+                            "4",
+                            "Roomies"});
+                table10.AddRow(new string[] {
+                            "5",
+                            "TeamWork"});
+#line 40
+ testRunner.When("the administrator goes to Groups Page, group list should return", ((string)(null)), table10, "When ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="The user wants to see his group data")]
+        [Xunit.TraitAttribute("FeatureTitle", "Group")]
+        [Xunit.TraitAttribute("Description", "The user wants to see his group data")]
+        public virtual void TheUserWantsToSeeHisGroupData()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to see his group data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 50
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -469,45 +335,29 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 51
- testRunner.When("the user send a friend request to email \"lulu@gmail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("the user goes to Group Lists and click on group with id 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
-                            "Name",
-                            "LastName",
-                            "UserName",
-                            "Email",
-                            "Password",
-                            "Birthdate",
-                            "LastConnection",
-                            "ProfilePicture",
-                            "AdministratorId"});
-                table19.AddRow(new string[] {
-                            "2",
-                            "Lucia",
-                            "Revollar",
-                            "Lulu",
-                            "lulu@gmail.com",
-                            "CrusUpc#3",
-                            "2003-01-09",
-                            "2020-01-20",
-                            "null",
-                            "1"});
+                            "Name"});
+                table11.AddRow(new string[] {
+                            "5",
+                            "TeamWork"});
 #line 52
- testRunner.Then("the receiving user details should be", ((string)(null)), table19, "Then ");
+ testRunner.Then("group details should be", ((string)(null)), table11, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to delete his account")]
-        [Xunit.TraitAttribute("FeatureTitle", "User")]
-        [Xunit.TraitAttribute("Description", "The user wants to delete his account")]
-        public virtual void TheUserWantsToDeleteHisAccount()
+        [Xunit.SkippableFactAttribute(DisplayName="The user wants to see the members list of his group")]
+        [Xunit.TraitAttribute("FeatureTitle", "Group")]
+        [Xunit.TraitAttribute("Description", "The user wants to see the members list of his group")]
+        public virtual void TheUserWantsToSeeTheMembersListOfHisGroup()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to delete his account", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to see the members list of his group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 58
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -529,9 +379,10 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 59
- testRunner.When("the user with id 5 click the Delete Account button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("the user goes to Group Lists and click on the group with Id 2 and go to member li" +
+                        "st", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "LastName",
@@ -542,19 +393,74 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table20.AddRow(new string[] {
-                            "5",
-                            "Fernando",
-                            "Firulais",
-                            "FernanElCrack",
-                            "fernan@elcrack.es",
-                            "NuevaContraseña",
-                            "1999-05-21",
-                            "2020-05-20",
+                table12.AddRow(new string[] {
+                            "1",
+                            "Sam",
+                            "Morales",
+                            "ElTioSam",
+                            "sam@hotmail.com",
+                            "TresNodos",
+                            "2002-04-19",
+                            "2020-04-19",
+                            "null",
+                            "1"});
+                table12.AddRow(new string[] {
+                            "2",
+                            "Lucia",
+                            "Revollar",
+                            "Lulu",
+                            "lulu@gmail.com",
+                            "CrusUpc#3",
+                            "2003-01-09",
+                            "2020-01-20",
                             "null",
                             "1"});
 #line 60
- testRunner.Then("the user with id 5 is removed and removed user details should be", ((string)(null)), table20, "Then ");
+ testRunner.Then("the member list of group with Id 2 should be", ((string)(null)), table12, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="The user wants to delete his group")]
+        [Xunit.TraitAttribute("FeatureTitle", "Group")]
+        [Xunit.TraitAttribute("Description", "The user wants to delete his group")]
+        public virtual void TheUserWantsToDeleteHisGroup()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to delete his group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 67
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 68
+ testRunner.When("the user with id 5 click the Delete Group button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "Name"});
+                table13.AddRow(new string[] {
+                            "5",
+                            "TeamWork"});
+#line 69
+ testRunner.Then("the user with id 5 is removed and removed group details should be", ((string)(null)), table13, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -567,12 +473,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                UserFeature.FeatureSetup();
+                GroupFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                UserFeature.FeatureTearDown();
+                GroupFeature.FeatureTearDown();
             }
         }
     }

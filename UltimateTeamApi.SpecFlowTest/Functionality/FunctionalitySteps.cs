@@ -10,7 +10,9 @@ using TechTalk.SpecFlow.Assist;
 /*INSTRUCTIONS*/
 /*****************************************************************************/
 
-/*1-You must have run the main project at least once.*/
+/*1-You must have run the main project at least once. 
+    If you have created any entity, you must delete the database, recreate 
+    it and rerun the project so that the IDs match the IDs of these tests.*/
 
 /*2-Run 1 test at time. In order as the scenarios have been created. 
     Scenario 1 first, then Scenario 2, and so on. Don't run them in 

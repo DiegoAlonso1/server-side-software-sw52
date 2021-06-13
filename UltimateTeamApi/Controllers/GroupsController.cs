@@ -158,24 +158,24 @@ namespace UltimateTeamApi.Controllers
 
 
 
-        ///****************************************************/
-        //            /*GET ALL MEMBERS BY GROUP ID ASYNC*/
-        ///****************************************************/
+        /****************************************************/
+                /*GET ALL MEMBERS BY GROUP ID ASYNC*/
+        /****************************************************/
 
-        //[SwaggerOperation(
-        //    Summary = "Get All Members By Group Id",
-        //    Description = "Get List of All Members By Group Id",
-        //    OperationId = "GetAllMembersByGroupId")]
-        //[SwaggerResponse(200, "Members", typeof(IEnumerable<UserResource>))]
+        [SwaggerOperation(
+            Summary = "Get All Members By Group Id",
+            Description = "Get List of All Members By Group Id",
+            OperationId = "GetAllMembersByGroupId")]
+        [SwaggerResponse(200, "Members", typeof(IEnumerable<UserResource>))]
 
-        //[HttpGet("{groupId}" / groupMembers)]
-        //[ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
-        //[ProducesResponseType(typeof(BadRequestResult), 404)]
-        //public async Task<IEnumerable<UserResource>> GetAllMembersByGroupIdAsync(int groupId)
-        //{
-        //    var members = await _groupMemberService.GetAllByGroupIdAsync(groupId);
-        //    var resources = _mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>((IEnumerable<User>)members);
-        //    return resources;
-        //}
+        [HttpGet("{groupId}/groupMembers")]
+        [ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IEnumerable<UserResource>> GetAllMembersByGroupIdAsync(int groupId)
+        {
+            var members = await _groupMemberService.GetAllUsersByGroupIdAsync(groupId);
+            var resources = _mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(members);
+            return resources;
+        }
     }
 }

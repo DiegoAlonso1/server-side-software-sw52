@@ -40,14 +40,14 @@ namespace UltimateTeamApi.Services
             }
         }
 
-        public async Task<IEnumerable<GroupMember>> GetAllByGroupIdAsync(int groupId)
+        public async Task<IEnumerable<User>> GetAllUsersByGroupIdAsync(int groupId)
         {
-            return await _groupMemberRepository.ListByGroupIdAsync(groupId);
+            return await _groupMemberRepository.ListUsersByGroupIdAsync(groupId);
         }
 
-        public async Task<IEnumerable<GroupMember>> GetAllByUserIdAsync(int userId)
+        public async Task<IEnumerable<Group>> GetAllGroupsByUserIdAsync(int userId)
         {
-            return await _groupMemberRepository.ListByUserIdAsync(userId);
+            return await _groupMemberRepository.ListGroupsByUserIdAsync(userId);
         }
 
         public async Task<GroupMemberResponse> UnassignGroupMemberAsync(int groupId, int userId)

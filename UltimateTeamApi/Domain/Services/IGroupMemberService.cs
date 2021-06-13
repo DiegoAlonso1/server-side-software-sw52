@@ -9,9 +9,8 @@ namespace UltimateTeamApi.Domain.Services
 {
     public interface IGroupMemberService
     {
-        Task<IEnumerable<GroupMember>> GetAllByUserIdAsync(int userId);
-        Task<IEnumerable<GroupMember>> GetAllByGroupIdAsync(int groupId);
-        //Task<GroupMemberResponse> GetByGroupIdAndUserIdAsync(int groupId, int userId);
+        Task<IEnumerable<Group>> GetAllGroupsByUserIdAsync(int userId);
+        Task<IEnumerable<User>> GetAllUsersByGroupIdAsync(int groupId);
         Task<GroupMemberResponse> AssignGroupMemberAsync(int groupId, int userId);
         Task<GroupMemberResponse> UnassignGroupMemberAsync(int groupId, int userId);
     }
