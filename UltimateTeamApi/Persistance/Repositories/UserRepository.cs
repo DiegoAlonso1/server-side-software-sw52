@@ -25,6 +25,13 @@ namespace UltimateTeamApi.Persistance.Repositories
             return await _context.Users.FindAsync(userId);
         }
 
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            return await _context.Users
+                .Where(u => u.Email == email)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<User>> ListAsync()
         {
             return await _context.Users.ToListAsync();
