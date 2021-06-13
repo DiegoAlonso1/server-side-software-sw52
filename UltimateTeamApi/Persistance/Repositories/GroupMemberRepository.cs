@@ -35,22 +35,36 @@ namespace UltimateTeamApi.Persistance.Repositories
             return await _context.GroupMembers.FindAsync(groupId,userId);
         }
 
-        public async Task<IEnumerable<GroupMember>> ListByGroupIdAsync(int groupId)
+        public async Task<IEnumerable<User>> ListUsersByGroupIdAsync(int groupId)
         {
-            return await _context.GroupMembers
+            var usersId = await _context.GroupMembers
                 .Where(pt => pt.GroupId == groupId)
-                .Include(pt => pt.Group)
-                .Include(pt => pt.User)
+                .Select(pt => pt.UserId)
                 .ToListAsync();
+
+            List<User> users = new List<User>();
+            foreach(int userId in usersId)
+            {
+                var user = await _context.Users.FindAsync(userId);
+                users.Add(user);
+            }
+            return users;
         }
 
-        public async Task<IEnumerable<GroupMember>> ListByUserIdAsync(int userId)
+        public async Task<IEnumerable<Group>> ListGroupsByUserIdAsync(int userId)
         {
-            return await _context.GroupMembers
+            var groupsId = await _context.GroupMembers
                 .Where(pt => pt.UserId == userId)
-                .Include(pt => pt.Group)
-                .Include(pt => pt.User)
+                .Select(pt => pt.GroupId)
                 .ToListAsync();
+
+            List<Group> groups = new List<Group>();
+            foreach (int groupId in groupsId)
+            {
+                var group = await _context.Groups.FindAsync(groupId);
+                groups.Add(group);
+            }
+            return groups;
         }
 
         public void Remove(GroupMember groupMember)

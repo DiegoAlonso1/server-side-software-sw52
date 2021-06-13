@@ -1,5 +1,5 @@
 ﻿Feature: User
-	Create, Update and Get a User
+	Create, Update, Delete and Get a User
 
 # There are some instructions in the file "UserSteps.cs"
 
@@ -13,14 +13,14 @@ Scenario: 1 Initialize some User Intances
 		| Lionel | Messi     | ElMeias  | leo@barzabestclub.com | elMejorDelMundo | 1212-12-12 | 1219-12-12     | null			 | 1			   |
 
 
-#1 - Create a user
+#1 - Create an user
 Scenario: The user wants to register
 	When the user complete the form with the required fields and click the Register button
 		| Name   | LastName  | UserName   | Email				| Password		  | Birthdate  | LastConnection | ProfilePicture | AdministratorId |
 		| Fernan | Floo		 | Fernanfloo | fernan@elcrack.es	| Contraseña	  | 1999-05-21 | 2020-03-20     | null			 | 1			   |
 
 
-#2 - Update a user
+#2 - Update an user
 Scenario: The user wants to update their data profile
 	When the user with id 5 complete the form with required fields and click the Update button
 		| Name	   | LastName | UserName      | Email             | Password        | Birthdate  | LastConnection | ProfilePicture   | AdministratorId |
@@ -39,7 +39,7 @@ Scenario: The administrator wants to see all users
 
 
 #4 - Get user by id
-Scenario: The user wants to see his data profile
+Scenario: The user wants to see his profile data 
 	When the user with id 5 goes to Profile Page
 	Then user details should be
 	| Id | Name     | LastName  | UserName      | Email                 | Password        | Birthdate  | LastConnection | ProfilePicture | AdministratorId |
