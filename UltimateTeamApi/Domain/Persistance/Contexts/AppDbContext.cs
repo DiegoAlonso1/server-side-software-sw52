@@ -90,7 +90,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     new Functionality { Id = 4, Name = "Notes" },
                     new Functionality { Id = 5, Name = "Calendar" },
                     new Functionality { Id = 6, Name = "Alarm" },
-                    new Functionality { Id = 7, Name = "ToDo List" }
+                    new Functionality { Id = 7, Name = "ToDo List" }        
                 );
 
             /******************************************/

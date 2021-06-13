@@ -25,10 +25,12 @@ namespace UltimateTeamApi.SpecFlowTest.User
     public class UserSteps : BaseTest
     {
         private string UserEndpoint { get; set; }
+        private string AdministratorEndpoint { get; set; }
 
         public UserSteps()
         {
             UserEndpoint = $"{ApiUri}api/users";
+            AdministratorEndpoint = $"{ApiUri}api/administrators";
         }
 
 
@@ -40,16 +42,21 @@ namespace UltimateTeamApi.SpecFlowTest.User
         [When(@"users required attributes provided to initialize instances")]
         public void WhenUsersRequiredAttributesProvidedToInitializeInstances(Table dtos)
         {
-            //Creating administrator with id 1
-            try
+            //Ensure there is an administrator with id 1
+            var jsonAdmin = Task.Run(async () => await Client.GetAsync($"{AdministratorEndpoint}/1")).Result;
+
+            if (jsonAdmin == null || jsonAdmin.StatusCode != HttpStatusCode.OK)
             {
-                var admin = new Administrator { Id = 1 };
-                var JsonAdmin = JsonData(admin);
-                Task.Run(async () => await Client.PostAsync(UserEndpoint, JsonAdmin));
-            }
-            catch (Exception ex)
-            {
-                Assert.IsTrue(false, ex.Message);
+                try
+                {
+                    var admin = new Administrator { Id = 1 };
+                    var JsonAdmin = JsonData(admin);
+                    Task.Run(async () => await Client.PostAsync(UserEndpoint, JsonAdmin));
+                }
+                catch (Exception ex)
+                {
+                    Assert.IsTrue(false, ex.Message);
+                }
             }
 
             //Creating some users

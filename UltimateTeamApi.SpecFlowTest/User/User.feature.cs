@@ -110,7 +110,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "LastName",
                             "UserName",
@@ -120,7 +120,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table1.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "Sam",
                             "Morales",
                             "ElTioSam",
@@ -130,7 +130,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-04-19",
                             "null",
                             "1"});
-                table1.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "Lucia",
                             "Revollar",
                             "Lulu",
@@ -140,7 +140,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-01-20",
                             "null",
                             "1"});
-                table1.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "Maria",
                             "Santillan",
                             "Maria503",
@@ -150,7 +150,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2018-09-12",
                             "null",
                             "1"});
-                table1.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "Lionel",
                             "Messi",
                             "ElMeias",
@@ -161,7 +161,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 8
- testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table1, "When ");
+ testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table4, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -195,7 +195,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "LastName",
                             "UserName",
@@ -205,7 +205,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table2.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "Fernan",
                             "Floo",
                             "Fernanfloo",
@@ -217,7 +217,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1"});
 #line 18
  testRunner.When("the user complete the form with the required fields and click the Register button" +
-                        "", ((string)(null)), table2, "When ");
+                        "", ((string)(null)), table5, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -251,7 +251,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "LastName",
                             "UserName",
@@ -261,7 +261,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table3.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "Fernando",
                             "Firulais",
                             "FernanElCrack",
@@ -273,7 +273,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1"});
 #line 25
  testRunner.When("the user with id 5 complete the form with required fields and click the Update bu" +
-                        "tton", ((string)(null)), table3, "When ");
+                        "tton", ((string)(null)), table6, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -307,7 +307,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "LastName",
@@ -318,7 +318,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table4.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "1",
                             "Sam",
                             "Morales",
@@ -329,7 +329,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-04-19",
                             "null",
                             "1"});
-                table4.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "2",
                             "Lucia",
                             "Revollar",
@@ -340,7 +340,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-01-20",
                             "null",
                             "1"});
-                table4.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "3",
                             "Maria",
                             "Santillan",
@@ -351,7 +351,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2018-09-12",
                             "null",
                             "1"});
-                table4.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "4",
                             "Lionel",
                             "Messi",
@@ -362,7 +362,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1219-12-12",
                             "null",
                             "1"});
-                table4.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "5",
                             "Fernando",
                             "Firulais",
@@ -374,7 +374,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 32
- testRunner.When("the administrator goes to Users Page, user list should return", ((string)(null)), table4, "When ");
+ testRunner.When("the administrator goes to Users Page, user list should return", ((string)(null)), table7, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -411,7 +411,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 43
  testRunner.When("the user with id 5 goes to Profile Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "LastName",
@@ -422,7 +422,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table5.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "5",
                             "Fernando",
                             "Firulais",
@@ -434,7 +434,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 44
- testRunner.Then("user details should be", ((string)(null)), table5, "Then ");
+ testRunner.Then("user details should be", ((string)(null)), table8, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -471,7 +471,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 51
  testRunner.When("the user send a friend request to email \"lulu@gmail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "LastName",
@@ -482,7 +482,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table6.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "2",
                             "Lucia",
                             "Revollar",
@@ -494,7 +494,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 52
- testRunner.Then("the receiving user details should be", ((string)(null)), table6, "Then ");
+ testRunner.Then("the receiving user details should be", ((string)(null)), table9, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -531,7 +531,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 59
  testRunner.When("the user with id 5 click the Delete Account button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "LastName",
@@ -542,7 +542,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table7.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "5",
                             "Fernando",
                             "Firulais",
@@ -554,7 +554,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 60
- testRunner.Then("the user with id 5 is removed and removed user details should be", ((string)(null)), table7, "Then ");
+ testRunner.Then("the user with id 5 is removed and removed user details should be", ((string)(null)), table10, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

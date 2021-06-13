@@ -30,7 +30,7 @@ namespace UltimateTeamApi.Controllers
 
 
         /******************************************/
-        /*GET ALL ASYNC*/
+                    /*GET ALL ASYNC*/
         /******************************************/
 
         [SwaggerOperation(
