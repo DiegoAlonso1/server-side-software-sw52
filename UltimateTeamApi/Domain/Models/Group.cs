@@ -9,6 +9,6 @@ namespace UltimateTeamApi.Domain.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<GroupMember> Members { get; set; } = new List<GroupMember>();
+        public List<GroupMember> GroupMembers { get; set; }
     }
 }

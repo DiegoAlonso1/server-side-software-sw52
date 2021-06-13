@@ -21,6 +21,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         public DbSet<SessionStadistic> SessionStadistics { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupMember> GroupMembers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -106,14 +107,29 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Notification>().HasOne(n => n.Remitend).WithMany(n => n.NotificationsReceived).HasForeignKey(n => n.RemitendId);
 
             /******************************************/
-            /*GROUP ENTITY*/
+                    /*GROUP ENTITY*/
             /******************************************/
             builder.Entity<Group>().ToTable("Groups");
             builder.Entity<Group>().HasKey(p => p.Id);
             builder.Entity<Group>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Group>().Property(p => p.Name).IsRequired().HasMaxLength(30);
 
+            /******************************************/
+                    /*GROUPMEMBER ENTITY*/
+            /******************************************/
+            builder.Entity<GroupMember>().ToTable("GroupMembers");
+            builder.Entity<GroupMember>().HasKey(p => new { p.UserId, p.GroupId });
+            builder.Entity<GroupMember>().Property(p => p.UserCreator).IsRequired();
 
+            builder.Entity<GroupMember>()
+                .HasOne(pt => pt.Group)
+                .WithMany(p => p.GroupMembers)
+                .HasForeignKey(pt => pt.GroupId);
+
+            builder.Entity<GroupMember>()
+                .HasOne(pt => pt.User)
+                .WithMany(t => t.GroupMembers)
+                .HasForeignKey(pt => pt.UserId);
 
             //Apply Naming Convention
             builder.ApplySnakeCaseNamingConvention();

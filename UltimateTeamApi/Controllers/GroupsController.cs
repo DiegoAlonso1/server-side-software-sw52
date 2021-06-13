@@ -18,22 +18,24 @@ namespace UltimateTeamApi.Controllers
     public class GroupsController : ControllerBase
     {
         private readonly IGroupService _groupService;
+        private readonly IGroupMemberService _groupMemberService;
         private readonly IMapper _mapper;
 
-        public GroupsController(IGroupService groupService, IMapper mapper)
+        public GroupsController(IGroupService groupService, IMapper mapper, IGroupMemberService groupMemberService)
         {
             _groupService = groupService;
             _mapper = mapper;
+            _groupMemberService = groupMemberService;
         }
 
         /******************************************/
-                    /*GET ALL ASYNC*/
+        /*GET ALL ASYNC*/
         /******************************************/
 
         [SwaggerOperation(
             Summary = "Get All Groups",
             Description = "Get List of All Groups",
-            OperationId = "GetAllGrous")]
+            OperationId = "GetAllGroups")]
         [SwaggerResponse(200, "List of Groups", typeof(IEnumerable<GroupResource>))]
 
         [HttpGet]
@@ -157,22 +159,22 @@ namespace UltimateTeamApi.Controllers
 
 
         ///****************************************************/
-        ///*GET ALL MEMBERS BY GROUP ID ASYNC*/
+        //            /*GET ALL MEMBERS BY GROUP ID ASYNC*/
         ///****************************************************/
 
         //[SwaggerOperation(
         //    Summary = "Get All Members By Group Id",
         //    Description = "Get List of All Members By Group Id",
         //    OperationId = "GetAllMembersByGroupId")]
-        //[SwaggerResponse(200, "Members", typeof(IEnumerable<MemberResource>))]
+        //[SwaggerResponse(200, "Members", typeof(IEnumerable<UserResource>))]
 
-        //[HttpGet("{groupId}" / members)]
+        //[HttpGet("{groupId}" / groupMembers)]
         //[ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
         //[ProducesResponseType(typeof(BadRequestResult), 404)]
         //public async Task<IEnumerable<UserResource>> GetAllMembersByGroupIdAsync(int groupId)
         //{
-        //    var members = await _memberService.GetAllMembersByGroupIdAsync(groupId);
-        //    var resources = _mapper.Map<IEnumerable<GroupMember>, IEnumerable<GroupMemberResource>>(members);
+        //    var members = await _groupMemberService.GetAllByGroupIdAsync(groupId);
+        //    var resources = _mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>((IEnumerable<User>)members);
         //    return resources;
         //}
     }

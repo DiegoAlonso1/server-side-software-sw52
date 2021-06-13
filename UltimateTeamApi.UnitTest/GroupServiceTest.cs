@@ -34,7 +34,7 @@ namespace UltimateTeamApi.UnitTest
 
             // Act
 
-            List<Group> result = (List<Group>)await service.ListAsync();
+            List<Group> result = (List<Group>)await service.GetAllAsync();
             var groupCount = result.Count;
 
             // Assert

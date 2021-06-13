@@ -11,7 +11,6 @@ namespace UltimateTeamApi.Domain.Services
     {
         Task<IEnumerable<Group>> GetAllAsync();
         Task<GroupResponse> GetByIdAsync(int groupId);
-        Task<IEnumerable<Group>> ListAsync();
         Task<GroupResponse> SaveAsync(Group group);
         Task<GroupResponse> UpdateAsync(int groupId, Group groupRequest);
         Task<GroupResponse> DeleteAsync(int groupId);

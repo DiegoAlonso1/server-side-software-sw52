@@ -54,11 +54,6 @@ namespace UltimateTeamApi.Services
             return new GroupResponse(existingGroup);
         }
 
-        public async Task<IEnumerable<Group>> ListAsync()
-        {
-            return await _groupRepository.ListAsync();
-        }
-
         public async Task<GroupResponse> SaveAsync(Group group)
         {
             try

@@ -14,6 +14,7 @@ namespace UltimateTeamApi.Mapping
         {
             CreateMap<SaveUserResource, User>();
             CreateMap<SaveGroupResource, Group>();
+            CreateMap<SaveGroupMemberResource, Group>();
         }
     }
 }

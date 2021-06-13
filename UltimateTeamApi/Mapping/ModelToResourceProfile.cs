@@ -16,6 +16,7 @@ namespace UltimateTeamApi.Mapping
             CreateMap<Functionality, FunctionalityResource>();
             CreateMap<SessionStadistic, SessionStadisticResource>();
             CreateMap<Group, GroupResource>();
+            CreateMap<Group, GroupMemberResource>();
         }
     }
 }

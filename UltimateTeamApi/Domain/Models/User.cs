@@ -22,6 +22,6 @@ namespace UltimateTeamApi.Domain.Models
         public List<FriendShip> FriendShips { get; set; }
         public List<Notification> NotificationsSent { get; set; }
         public List<Notification> NotificationsReceived { get; set; }
-        public List<GroupMember> Groups { get; set; }
+        public List<GroupMember> GroupMembers { get; set; }
     }
 }
