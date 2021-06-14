@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UltimateTeamApi.Domain.Models
+namespace UltimateTeamApi.Resources
 {
-    public class SessionParticipant
-    {
+	public class SessionParticipantResource
+	{
         public int UserId { get; set; }
-        public User Users { get; set; }
         public int SessionsId { get; set; }
-        public Session Session { get; set; }
         public bool Creator { get; set; }
     }
 }
