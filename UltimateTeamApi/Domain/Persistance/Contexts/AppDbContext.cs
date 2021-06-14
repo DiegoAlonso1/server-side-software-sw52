@@ -23,6 +23,9 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<Session> Sesssions { get; set; }
+        public DbSet<SessionParticipant> SessionParticipants { get; set; }
+        public DbSet<SessionType> SessionTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -145,6 +148,22 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
 
             //Apply Naming Convention
             builder.ApplySnakeCaseNamingConvention();
+
+            /******************************************/
+                        /*SESSIONPAR ENTITY*/
+            /******************************************/
+
+            /******************************************/
+                    /*SESSIONPARTICIPANT ENTITY*/
+            /******************************************/
+
+            /******************************************/
+                        /*SESSIONTYPE ENTITY*/
+            /******************************************/
+            builder.Entity<SessionType>().ToTable("SessionTypes");
+            builder.Entity<SessionType>().HasKey(f => f.Id);
+            builder.Entity<SessionType>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<SessionType>().Property(f => f.Type).IsRequired().HasMaxLength(15);
         }
     }
 }
