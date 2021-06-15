@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltimateTeamApi", "Ultimate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltimateTeamApi.UnitTest", "..\UltimateTeamApi.UnitTest\UltimateTeamApi.UnitTest.csproj", "{D0F68CFA-DF4F-460D-B8BA-A163361B2CBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateTeamApi.SpecFlowTest", "..\UltimateTeamApi.SpecFlowTest\UltimateTeamApi.SpecFlowTest.csproj", "{D66CEF71-4522-4D03-8901-2AD9D765BE5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltimateTeamApi.SpecFlowTest", "..\UltimateTeamApi.SpecFlowTest\UltimateTeamApi.SpecFlowTest.csproj", "{D66CEF71-4522-4D03-8901-2AD9D765BE5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateTeamApi.ExternalTools", "..\UltimateTeamApi.ExternalTools\UltimateTeamApi.ExternalTools.csproj", "{36BD3AD3-DFA0-4CB2-BC13-20F1DE836840}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D66CEF71-4522-4D03-8901-2AD9D765BE5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D66CEF71-4522-4D03-8901-2AD9D765BE5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D66CEF71-4522-4D03-8901-2AD9D765BE5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36BD3AD3-DFA0-4CB2-BC13-20F1DE836840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36BD3AD3-DFA0-4CB2-BC13-20F1DE836840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36BD3AD3-DFA0-4CB2-BC13-20F1DE836840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36BD3AD3-DFA0-4CB2-BC13-20F1DE836840}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
