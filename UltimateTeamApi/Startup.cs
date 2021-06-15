@@ -49,6 +49,9 @@ namespace UltimateTeamApi
             services.AddScoped<ISessionStadisticRepository, SessionStadisticRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddScoped<IGroupMemberRepository, GroupMemberRepository>();
+            services.AddScoped<IAdministratorRepository, AdministratorRepository>();
+            services.AddScoped<ISubscriptionBillRepository, SubscriptionBillRepository>();
+            services.AddScoped<ISubscriptionTypeRepository, SubscriptionTypeRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -57,6 +60,9 @@ namespace UltimateTeamApi
             services.AddScoped<ISessionStadisticService, SessionStadisticService>();
             services.AddScoped<IGroupService, GroupService>();
             services.AddScoped<IGroupMemberService, GroupMemberService>();
+            services.AddScoped<IAdministratorService, AdministratorService>();
+            services.AddScoped<ISubscriptionBillService, SubscriptionBillService>();
+            services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 
             //Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
