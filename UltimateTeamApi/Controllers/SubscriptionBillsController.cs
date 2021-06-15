@@ -70,7 +70,7 @@ namespace UltimateTeamApi.Controllers
         }
 
         /******************************************/
-                    /*SAVE USER*/
+                    /*SAVE SUBSCRIPTION BILL*/
         /******************************************/
         [SwaggerOperation(
             Summary = "Save Subscription Bill",
