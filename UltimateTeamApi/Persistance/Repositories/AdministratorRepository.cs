@@ -20,13 +20,6 @@ namespace UltimateTeamApi.Persistance.Repositories
             await _context.AddAsync(administrator);
         }
 
-        public async Task<Administrator> FindByAreaAsync(string area)
-        {
-            return await _context.Administrators
-                .Where(a => a.Area == area)
-                .FirstOrDefaultAsync();
-        }
-
         public async Task<Administrator> FindByIdAsync(int administratorId)
         {
             return await _context.Administrators.FindAsync(administratorId);
@@ -35,6 +28,11 @@ namespace UltimateTeamApi.Persistance.Repositories
         public async Task<IEnumerable<Administrator>> ListAsync()
         {
             return await _context.Administrators.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Administrator>> ListByAreaAsync(string area)
+        {
+            return await _context.Administrators.Where(a => a.Area == area).ToListAsync();
         }
 
         public void Remove(Administrator administrator)

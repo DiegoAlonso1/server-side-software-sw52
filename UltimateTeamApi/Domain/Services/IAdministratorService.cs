@@ -10,9 +10,9 @@ namespace UltimateTeamApi.Domain.Services
     public interface IAdministratorService
     {
         Task<IEnumerable<Administrator>> GetAllAsync();
+        Task<IEnumerable<Administrator>> GetAllByAreaAsync(string area);
         Task<AdministratorResponse> GetByIdAsync(int administratorId);
-        Task<AdministratorResponse> GetByAreaAsync(string area);
-        Task<AdministratorResponse> SaveAsync(User administrator);
+        Task<AdministratorResponse> SaveAsync(Administrator administrator);
         Task<AdministratorResponse> UpdateAsync(int administratorId, Administrator administratorRequest);
         Task<AdministratorResponse> DeleteAsync(int administratorId);
     }
