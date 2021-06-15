@@ -15,6 +15,9 @@ namespace UltimateTeamApi.Mapping
             CreateMap<SaveUserResource, User>();
             CreateMap<SaveGroupResource, Group>();
             CreateMap<SaveGroupMemberResource, Group>();
+            CreateMap<SaveAdministratorResource, Administrator>();
+            CreateMap<SaveSubscriptionBillResource, SubscriptionBill>();
+            CreateMap<SaveSubscriptionTypeResource, SubscriptionType>();
         }
     }
 }
