@@ -26,7 +26,7 @@ namespace UltimateTeamApi.Persistance.Repositories
 
             if (sessionStadistic == null)
             {
-                sessionStadistic = new SessionStadistic { SessionId = sessionId, FunctionalityId = functionalityId, Count = 0 };
+                sessionStadistic = new SessionStadistic { SessionId = sessionId, FunctionalityId = functionalityId, Count = 1 };
                 await AddAsync(sessionStadistic);
             }
 
