@@ -25,6 +25,8 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         public DbSet<Friendship> Friendships { get; set; }
         public DbSet<Session> Sesssions { get; set; }
         public DbSet<SessionParticipant> SessionParticipants { get; set; }
+        public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
+        public DbSet<SubscriptionBill> SubscriptionBills { get; set; }
         public DbSet<SessionType> SessionTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -47,21 +49,27 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<User>().Property(u => u.ProfilePicture).HasConversion(
                 picture => BitmapConverter.BitmapToByteArray(picture),          //Save as Byte Array
                 byteArr => BitmapConverter.ByteArrayToBitmap(byteArr));         //Get as Bitmap
-                                                                                //builder.Entity<User>()
-                                                                                //    .HasOne(u => u.Administrator)
-                                                                                //    .WithMany(a => a.Users)
-                                                                                //    .HasForeignKey(u => u.AdministratorId);       //Esperando a que Administrator sea implementado
+            builder.Entity<User>()
+            .HasOne(u => u.Administrator)
+            .WithMany(a => a.Users)
+            .HasForeignKey(u => u.AdministratorId);       //Esperando a que Administrator sea implementado
 
 
 
             /******************************************/
                         /*ADMINISTRATOR ENTITY*/
             /******************************************/
-            builder.Entity<Administrator>().ToTable("Administrators");
+            builder.Entity<Administrator>().ToTable("administrators");
             builder.Entity<Administrator>().HasKey(a => a.Id);
             builder.Entity<Administrator>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Administrator>().Property(a => a.Name).IsRequired();
+            builder.Entity<Administrator>().Property(a => a.Password).IsRequired();
+            builder.Entity<Administrator>().Property(a => a.Area).IsRequired();
             //Agregar cosas
-
+            builder.Entity<Administrator>()
+                .HasMany(a => a.Users)
+                .WithOne(u => u.Administrator)
+                .HasForeignKey( u => u.AdministratorId);
 
 
             /******************************************/
@@ -114,9 +122,9 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     /*FRIENDSHIP ENTITY*/
             /******************************************/
             builder.Entity<Friendship>().ToTable("Friendships");
-            builder.Entity<Friendship>().HasKey(f => new { f.user1Id, f.user2Id});
-            builder.Entity<Friendship>().Property(f => f.user1Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Friendship>().Property(f => f.user2Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Friendship>().HasKey(f => new { f.User1Id, f.User2Id});
+            builder.Entity<Friendship>().Property(f => f.User1Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Friendship>().Property(f => f.User2Id).IsRequired().ValueGeneratedOnAdd();
             //builder.Entity<Friendship>().HasOne(f => f.).WithMany(f => f.);
 
 
@@ -146,8 +154,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                 .WithMany(t => t.GroupMembers)
                 .HasForeignKey(pt => pt.UserId);
 
-            //Apply Naming Convention
-            builder.ApplySnakeCaseNamingConvention();
+            
 
             /******************************************/
                         /*SESSIONPAR ENTITY*/
@@ -164,6 +171,38 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<SessionType>().HasKey(f => f.Id);
             builder.Entity<SessionType>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<SessionType>().Property(f => f.Type).IsRequired().HasMaxLength(15);
+
+
+            /******************************************/
+                        /*SUBSCRIPTION TYPE*/
+            /******************************************/
+            builder.Entity<SubscriptionType>().ToTable("subscription_types");
+            builder.Entity<SubscriptionType>().HasKey(s => s.Id);
+            builder.Entity<SubscriptionType>().Property(s => s.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<SubscriptionType>().Property(s => s.Type).IsRequired();
+            builder.Entity<SubscriptionType>().Property(s => s.Amount).IsRequired();
+
+            builder.Entity<SubscriptionType>()
+                .HasMany(st => st.SubscriptionBills)
+                .WithOne(sb => sb.SubscriptionType)
+                .HasForeignKey(sb => sb.SubscriptionTypeId);
+
+            /******************************************/
+            /*SUBSCRIPTION BILL*/
+            /******************************************/
+            builder.Entity<SubscriptionBill>().ToTable("subscription_bills");
+            builder.Entity<SubscriptionBill>().HasKey(s => s.Id);
+            builder.Entity<SubscriptionBill>().Property(s => s.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<SubscriptionBill>().Property(s => s.License).IsRequired();
+            builder.Entity<SubscriptionBill>().Property(s => s.ActiveLicense).IsRequired();
+            builder.Entity<SubscriptionBill>().Property(s => s.DeadlineLicense);
+            builder.Entity<SubscriptionBill>().Property(s => s.PeriodMonths).IsRequired();
+            builder.Entity<SubscriptionBill>().Property(s => s.Paid).IsRequired();
+            builder.Entity<SubscriptionBill>().Property(s => s.PaymentMethod).IsRequired();
+
+
+            //Apply Naming Convention
+            builder.ApplySnakeCaseNamingConvention();
         }
     }
 }
