@@ -9,6 +9,7 @@ namespace UltimateTeamApi.Domain.Persistance.Repositories
     public interface ISubscriptionBillRepository
     {
         Task<IEnumerable<SubscriptionBill>> ListAsync();
+        Task<IEnumerable<SubscriptionBill>> ListBySubscriptionTypeIdAsync(int subscriptionTypeId);
         Task<SubscriptionBill> FindByIdAsync(int subscriptionBillId);
         Task AddAsync(SubscriptionBill subscriptionBill);
         void Update(SubscriptionBill subscriptionBill);

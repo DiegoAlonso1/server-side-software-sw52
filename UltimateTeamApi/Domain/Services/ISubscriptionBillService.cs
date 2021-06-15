@@ -10,6 +10,7 @@ namespace UltimateTeamApi.Domain.Services
     public interface ISubscriptionBillService
     {
         Task<IEnumerable<SubscriptionBill>> GetAllAsync();
+        Task<IEnumerable<SubscriptionBill>> GetAllBySubscriptionTypeIdAsync(int subscriptionTypeId);
         Task<SubscriptionBillResponse> GetByIdAsync(int subscriptionBillId);
         Task<SubscriptionBillResponse> SaveAsync(SubscriptionBill subscriptionBill); 
         Task<SubscriptionBillResponse> UpdateAsync(int subscriptionBillId, SubscriptionBill subscriptionBillRequest);
