@@ -110,33 +110,33 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table1.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "1",
                             "Stream"});
-                table1.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "2",
                             "Laser Pointer"});
-                table1.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "3",
                             "Boards"});
-                table1.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "4",
                             "Notes"});
-                table1.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "5",
                             "Calendar"});
-                table1.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "6",
                             "Alarm"});
-                table1.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "7",
                             "ToDo List"});
 #line 9
  testRunner.When("the administrator goes to Functionality Usage Page, functionalities list should r" +
-                        "eturn", ((string)(null)), table1, "When ");
+                        "eturn", ((string)(null)), table5, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -173,14 +173,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 22
  testRunner.When("the administrator select functionality with id 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table2.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "4",
                             "Notes"});
 #line 23
- testRunner.Then("functionality details should be", ((string)(null)), table2, "Then ");
+ testRunner.Then("functionality details should be", ((string)(null)), table6, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -217,16 +217,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 30
  testRunner.When("the administrator select functionality with id 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "SessionId",
                             "FunctionalityId",
                             "Count"});
-                table3.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "1",
                             "4",
                             "8"});
 #line 31
- testRunner.Then("functionality stadistics details should be", ((string)(null)), table3, "Then ");
+ testRunner.Then("functionality stadistics details should be", ((string)(null)), table7, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
