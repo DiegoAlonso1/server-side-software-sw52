@@ -25,7 +25,7 @@ namespace UltimateTeamApi.UnitTest
         public async Task GetByIdAsyncWhenValidSubscriptionBillReturnsSubscriptionBill()
         {
             //Arange
-            var MockSubscriptionBillRepository = GetDeafultIAdministratorRepositoryInstance();
+            var MockSubscriptionBillRepository = GetDeafultISubscriptionBillRepositoryInstance();
             var MockUnitOfWork = GetDeafultIUnitOfWorkInstance();
             SubscriptionBill subcriptionBill = new SubscriptionBill { Id = 5 };
 
@@ -47,7 +47,7 @@ namespace UltimateTeamApi.UnitTest
         public async Task GetByIdAsyncWhenInvalidSubscriptionBillReturnsSubscriptionBillNotFoundResponse()
         {
             //Arange
-            var MockSubscriptionBillRepository = GetDeafultIAdministratorRepositoryInstance();
+            var MockSubscriptionBillRepository = GetDeafultISubscriptionBillRepositoryInstance();
             var MockUnitOfWork = GetDeafultIUnitOfWorkInstance();
             var subscriptionBillId = 2;
             MockSubscriptionBillRepository.Setup(r => r.FindByIdAsync(subscriptionBillId))
@@ -65,7 +65,7 @@ namespace UltimateTeamApi.UnitTest
 
 
         //DEFAULTS
-        private Mock<ISubscriptionBillRepository> GetDeafultIAdministratorRepositoryInstance()
+        private Mock<ISubscriptionBillRepository> GetDeafultISubscriptionBillRepositoryInstance()
         {
             return new Mock<ISubscriptionBillRepository>();
         }
