@@ -11,5 +11,10 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services.Communications
         public DriveFileResponse(string message) : base(message)
         {
         }
+
+        public DriveFileResponse() : base()
+        {
+
+        }
     }
 }
