@@ -62,6 +62,7 @@ namespace UltimateTeamApi.UnitTest
             //Assert
             message.Should().Be("Administrator not found");
         }
+
         //DEFAULTS
         private Mock<IAdministratorRepository> GetDeafultIAdministratorRepositoryInstance()
         {
