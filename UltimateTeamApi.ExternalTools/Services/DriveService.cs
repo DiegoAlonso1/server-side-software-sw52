@@ -14,16 +14,23 @@ namespace UltimateTeamApi.ExternalTools.Services
     {
         private Google.Apis.Drive.v3.DriveService driveService;
 
-        public void AssignGoogleCredential(IGoogleAuthProvider auth, GoogleCredential credencial)
+        public async Task<DriveFileResponse> AssignGoogleCredential(IGoogleAuthProvider auth)
         {
+            GoogleCredential credencial = await auth.GetCredentialAsync();
+
             driveService = new Google.Apis.Drive.v3.DriveService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = credencial
             });
+
+            return new DriveFileResponse(true);
         }
 
         public async Task<IEnumerable<File>> GetAllDriveFiles()
         {
+            if (driveService == null)
+                return new List<File>();
+
             var result = await driveService.Files.List().ExecuteAsync();
             return result.Files;
         }
