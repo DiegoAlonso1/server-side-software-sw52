@@ -27,9 +27,9 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services.Communications
             Message = message;
         }
 
-        public BaseResponse(bool Success)
+        public BaseResponse()
         {
-            this.Success = Success;
+            Success = true;
         }
     }
 }

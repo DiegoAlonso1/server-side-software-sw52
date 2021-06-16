@@ -12,8 +12,9 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services.Communications
         {
         }
 
-        public DriveFileResponse(bool Success) : base(Success)
+        public DriveFileResponse() : base()
         {
+
         }
     }
 }
