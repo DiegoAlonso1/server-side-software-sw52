@@ -15,8 +15,7 @@ using TechTalk.SpecFlow.Assist;
     it and rerun the project so that the IDs match the IDs of these tests.*/
 
 /*2-Run 1 test at time. In order as the scenarios have been created. 
-    Scenario 1 first, then Scenario 2, and so on. Don't run them in 
-    the order they appear in the test explorer.*/
+    Scenario 1 first, then Scenario 2, and so on. */
 
 namespace UltimateTeamApi.SpecFlowTest.Functionality
 {

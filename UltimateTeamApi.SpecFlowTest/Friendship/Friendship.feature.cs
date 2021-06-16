@@ -80,16 +80,16 @@ namespace UltimateTeamApi.SpecFlowTest.Friendship
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="1 Initialize some Friendship Intances")]
+        [Xunit.SkippableFactAttribute(DisplayName="0. Initialize some Friendship Intances")]
         [Xunit.TraitAttribute("FeatureTitle", "Friendship")]
-        [Xunit.TraitAttribute("Description", "1 Initialize some Friendship Intances")]
+        [Xunit.TraitAttribute("Description", "0. Initialize some Friendship Intances")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void _1InitializeSomeFriendshipIntances()
+        public virtual void _0_InitializeSomeFriendshipIntances()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Initialize some Friendship Intances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("0. Initialize some Friendship Intances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -186,14 +186,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to see his friend list")]
+        [Xunit.SkippableFactAttribute(DisplayName="1. The user wants to see his friend list")]
         [Xunit.TraitAttribute("FeatureTitle", "Friendship")]
-        [Xunit.TraitAttribute("Description", "The user wants to see his friend list")]
-        public virtual void TheUserWantsToSeeHisFriendList()
+        [Xunit.TraitAttribute("Description", "1. The user wants to see his friend list")]
+        public virtual void _1_TheUserWantsToSeeHisFriendList()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to see his friend list", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The user wants to see his friend list", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -268,14 +268,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants be friends with another user")]
+        [Xunit.SkippableFactAttribute(DisplayName="2. The user wants be friends with another user")]
         [Xunit.TraitAttribute("FeatureTitle", "Friendship")]
-        [Xunit.TraitAttribute("Description", "The user wants be friends with another user")]
-        public virtual void TheUserWantsBeFriendsWithAnotherUser()
+        [Xunit.TraitAttribute("Description", "2. The user wants be friends with another user")]
+        public virtual void _2_TheUserWantsBeFriendsWithAnotherUser()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants be friends with another user", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The user wants be friends with another user", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 29
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -326,14 +326,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to delete a friend from his friend list")]
+        [Xunit.SkippableFactAttribute(DisplayName="3. The user wants to delete a friend from his friend list")]
         [Xunit.TraitAttribute("FeatureTitle", "Friendship")]
-        [Xunit.TraitAttribute("Description", "The user wants to delete a friend from his friend list")]
-        public virtual void TheUserWantsToDeleteAFriendFromHisFriendList()
+        [Xunit.TraitAttribute("Description", "3. The user wants to delete a friend from his friend list")]
+        public virtual void _3_TheUserWantsToDeleteAFriendFromHisFriendList()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to delete a friend from his friend list", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3. The user wants to delete a friend from his friend list", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 36
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -354,6 +354,9 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 37
+ testRunner.When("the user with id 1 click on the Trash can button next to the user with Id 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
@@ -376,8 +379,9 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-05-20",
                             "null",
                             "1"});
-#line 37
- testRunner.When("the user with Id 1 wants to delete the user with Id 5 from his friend list", ((string)(null)), table4, "When ");
+#line 38
+ testRunner.Then("the user with id 5 is removed from the friend list of the user with Id 1 and remo" +
+                        "ved user details should be", ((string)(null)), table4, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

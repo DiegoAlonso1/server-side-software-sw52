@@ -8,7 +8,7 @@ namespace UltimateTeamApi.Domain.Models
     public class SessionParticipant
     {
         public int UserId { get; set; }
-        public User Users { get; set; }
+        public User User { get; set; }
         public int SessionsId { get; set; }
         public Session Session { get; set; }
         public bool Creator { get; set; }

@@ -80,16 +80,16 @@ namespace UltimateTeamApi.SpecFlowTest.GroupMember
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="1 Initialize some GroupMember Intances")]
+        [Xunit.SkippableFactAttribute(DisplayName="0. Initialize some GroupMember Intances")]
         [Xunit.TraitAttribute("FeatureTitle", "GroupMember")]
-        [Xunit.TraitAttribute("Description", "1 Initialize some GroupMember Intances")]
+        [Xunit.TraitAttribute("Description", "0. Initialize some GroupMember Intances")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void _1InitializeSomeGroupMemberIntances()
+        public virtual void _0_InitializeSomeGroupMemberIntances()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Initialize some GroupMember Intances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("0. Initialize some GroupMember Intances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -174,14 +174,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to see the groups list of his profile data")]
+        [Xunit.SkippableFactAttribute(DisplayName="1. The user wants to see the groups list of his profile data")]
         [Xunit.TraitAttribute("FeatureTitle", "GroupMember")]
-        [Xunit.TraitAttribute("Description", "The user wants to see the groups list of his profile data")]
-        public virtual void TheUserWantsToSeeTheGroupsListOfHisProfileData()
+        [Xunit.TraitAttribute("Description", "1. The user wants to see the groups list of his profile data")]
+        public virtual void _1_TheUserWantsToSeeTheGroupsListOfHisProfileData()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to see the groups list of his profile data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The user wants to see the groups list of his profile data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 28
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -221,14 +221,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to create a group")]
+        [Xunit.SkippableFactAttribute(DisplayName="2. The user wants to create a group")]
         [Xunit.TraitAttribute("FeatureTitle", "GroupMember")]
-        [Xunit.TraitAttribute("Description", "The user wants to create a group")]
-        public virtual void TheUserWantsToCreateAGroup()
+        [Xunit.TraitAttribute("Description", "2. The user wants to create a group")]
+        public virtual void _2_TheUserWantsToCreateAGroup()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to create a group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The user wants to create a group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 36
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -272,14 +272,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The user wants to leave his group")]
+        [Xunit.SkippableFactAttribute(DisplayName="3. The user wants to leave his group")]
         [Xunit.TraitAttribute("FeatureTitle", "GroupMember")]
-        [Xunit.TraitAttribute("Description", "The user wants to leave his group")]
-        public virtual void TheUserWantsToLeaveHisGroup()
+        [Xunit.TraitAttribute("Description", "3. The user wants to leave his group")]
+        public virtual void _3_TheUserWantsToLeaveHisGroup()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The user wants to leave his group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3. The user wants to leave his group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 47
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

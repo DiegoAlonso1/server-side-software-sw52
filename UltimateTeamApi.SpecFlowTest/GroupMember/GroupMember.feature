@@ -5,7 +5,7 @@
 
 
 @mytag
-Scenario: 1 Initialize some GroupMember Intances
+Scenario: 0. Initialize some GroupMember Intances
 	When groups required attributes provided to initialize instances
 		| Name           | 
 		| TeamUltimate	 |
@@ -25,7 +25,7 @@ Scenario: 1 Initialize some GroupMember Intances
 
 
 #1 - Get all groups by user id
-Scenario: The user wants to see the groups list of his profile data
+Scenario: 1. The user wants to see the groups list of his profile data
 	When the user with id 2 goes to Profile Page and click on the groups list
 	Then the groups list of user with Id 2 should be
 		| Id   | Name			 |
@@ -33,7 +33,7 @@ Scenario: The user wants to see the groups list of his profile data
 		| 2	   | Backyardigans	 |
 
 #2 - Assign a group with the user
-Scenario: The user wants to create a group
+Scenario: 2. The user wants to create a group
 	When the user complete the form with the required fields and click the Create button
 	Then it is assigned to the user with Id 2 on the group with Id 3 and list groups should be
 		| Id   | Name			 |
@@ -44,7 +44,7 @@ Scenario: The user wants to create a group
 
 
 #3 - Unassign a group with the user
-Scenario: The user wants to leave his group
+Scenario: 3. The user wants to leave his group
 	When the user with id 2 click the Leave Group button
 	Then the user with id 2 leaves the group and removed group details should be
 		| Id | Name			 |

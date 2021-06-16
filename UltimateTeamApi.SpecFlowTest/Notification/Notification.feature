@@ -2,7 +2,7 @@
 	Get All Notifications
 
 @mytag
-Scenario: 1 Initialize some Friendship Intances
+Scenario: 0. Initialize some Friendship Intances
 	When users required attributes provided to initialize instances
 		| Name     | LastName  | UserName      | Email					| Password		  | Birthdate  | LastConnection | ProfilePicture | AdministratorId |
 		| Sam	   | Morales   | ElTioSam      | sam@hotmail.com		| TresNodos		  | 2002-04-19 | 2020-04-19     | null			 | 1			   |

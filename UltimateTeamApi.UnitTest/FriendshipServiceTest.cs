@@ -25,9 +25,9 @@ namespace UltimateTeamApi.UnitTest
             var mockFriendshipRepository = GetDefaultIFriendshipRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
 
-            var friendship = new Friendship { User1Id = 1, User2Id = 2 };
-            var user1Id = friendship.User1Id;
-            var user2Id = friendship.User2Id;
+            var friendship = new Friendship { PrincipalId = 1, FriendId = 2 };
+            var user1Id = friendship.PrincipalId;
+            var user2Id = friendship.FriendId;
 
             mockFriendshipRepository.Setup(f => f.AssignFriendAsync(user1Id, user2Id))
                 .Returns(Task.CompletedTask);
@@ -78,9 +78,9 @@ namespace UltimateTeamApi.UnitTest
             var mockFriendshipRepository = GetDefaultIFriendshipRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
 
-            var friendship = new Friendship { User1Id = 1, User2Id = 2};
-            var user1Id = friendship.User1Id;
-            var user2Id = friendship.User2Id;
+            var friendship = new Friendship { PrincipalId = 1, FriendId = 2};
+            var user1Id = friendship.PrincipalId;
+            var user2Id = friendship.FriendId;
 
             mockFriendshipRepository.Setup(f => f.UnassignFriendAsync(user1Id, user2Id))
                 .Returns(Task.CompletedTask);

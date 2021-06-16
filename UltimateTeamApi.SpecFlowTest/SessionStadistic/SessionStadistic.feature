@@ -4,7 +4,7 @@
 #There are some instructions in the file "SessionStadistic.feature"
 
 @mytag
-Scenario: 1 Initialize some instances
+Scenario: 0. Initialize some instances
 	When session required attributes provided to initialize instance
 		| SessionTypeId |
 		| 1             |
@@ -17,7 +17,7 @@ Scenario: 1 Initialize some instances
 
 
 #1 - Get all session stadistics by session id
-Scenario: The administrator wants see the session stadistics of a session
+Scenario: 1. The administrator wants see the session stadistics of a session
 	When the administrator goes to Functionality Usage Page on session with id 5, the session stadistics list should return
 		| SessionId | FunctionalityId | Count |
 		| 1         | 1               | 1     |
@@ -28,7 +28,7 @@ Scenario: The administrator wants see the session stadistics of a session
 
 
 #2 - Assign session stadistic
-Scenario: The administrator wants to see session stadistics
+Scenario: 2. The administrator wants to see session stadistics
 	When the user uses the functionality with id 1 in the session with id 1, session stadistics details should be
 		| SessionId | FunctionalityId | Count |
 		| 1         | 1               | 1     |

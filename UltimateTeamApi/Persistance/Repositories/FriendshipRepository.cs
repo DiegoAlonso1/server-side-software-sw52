@@ -26,7 +26,7 @@ namespace UltimateTeamApi.Persistance.Repositories
 
             if (friendship == null)
             {
-                friendship = new Friendship { User1Id = user1Id, User2Id = user2Id};
+                friendship = new Friendship { PrincipalId = user1Id, FriendId = user2Id};
                 await AddAsync(friendship);
             }
 
@@ -37,14 +37,14 @@ namespace UltimateTeamApi.Persistance.Repositories
         public async Task<Friendship> FindByUser1IdAndUser2IdAsync(int user1Id, int user2Id)
         {
             return await _context.Friendships
-                .Where(f => f.User1Id == user1Id && f.User2Id == user2Id)
+                .Where(f => f.PrincipalId == user1Id && f.FriendId == user2Id)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Friendship>> ListByUserIdAsync(int userId)
         {
             return await _context.Friendships
-                .Where(f => f.User1Id == userId)
+                .Where(f => f.PrincipalId == userId)
                 .ToListAsync();
         }
 

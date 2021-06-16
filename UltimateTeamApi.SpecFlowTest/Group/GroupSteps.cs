@@ -18,7 +18,7 @@ using UltimateTeamApi.Domain.Models;
 
 /*2-First run the test that initializes some entities instances. Then run 1 test at 
     time. In order as the scenarios have been created. Scenario 1 first, then Scenario 
-    2, and so on. Don't run them in the order they appear in the test explorer.*/
+    2, and so on. */
 
 
 

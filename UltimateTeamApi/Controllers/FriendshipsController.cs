@@ -59,7 +59,7 @@ namespace UltimateTeamApi.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var friendshipResource = _mapper.Map<User, UserResource>(result.Resource.user2);
+            var friendshipResource = _mapper.Map<User, UserResource>(result.Resource.Friend);
             return Ok(friendshipResource);
         }
 
@@ -82,7 +82,7 @@ namespace UltimateTeamApi.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var friendshipResource = _mapper.Map<User, UserResource>(result.Resource.user1);
+            var friendshipResource = _mapper.Map<User, UserResource>(result.Resource.Principal);
             return Ok(friendshipResource);
         }
 

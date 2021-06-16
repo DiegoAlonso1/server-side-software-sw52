@@ -17,7 +17,7 @@ using UltimateTeamApi.Domain.Models;
 
 /*2-First run the test that initializes some entities instances. Then run 1 test at 
     time. In order as the scenarios have been created. Scenario 1 first, then Scenario 
-    2, and so on. Don't run them in the order they appear in the test explorer.*/
+    2, and so on. */
 
 namespace UltimateTeamApi.SpecFlowTest.User
 {
@@ -49,9 +49,9 @@ namespace UltimateTeamApi.SpecFlowTest.User
             {
                 try
                 {
-                    var admin = new Administrator { Id = 1 };
+                    var admin = new Administrator { Id = 1, Name = "Pedro", Password = "Password", Area = "Area151" };
                     var JsonAdmin = JsonData(admin);
-                    Task.Run(async () => await Client.PostAsync(UserEndpoint, JsonAdmin));
+                    Task.Run(async () => await Client.PostAsync(AdministratorEndpoint, JsonAdmin));
                 }
                 catch (Exception ex)
                 {
@@ -87,7 +87,7 @@ namespace UltimateTeamApi.SpecFlowTest.User
         {
             try
             {
-                var user = dto.CreateInstance<UltimateTeamApi.Domain.Models.User>();
+                var user = dto.CreateInstance<Domain.Models.User>();
                 var data = JsonData(user);
                 var result = Task.Run(async () => await Client.PostAsync(UserEndpoint, data)).Result;
                 Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Save User Integration Test Completed");

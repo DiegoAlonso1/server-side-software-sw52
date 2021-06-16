@@ -40,7 +40,7 @@ namespace UltimateTeamApi.SpecFlowTest.Notification
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Notification", "Notification", "\tSimple calculator for adding two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Notification", "Notification", "\tGet All Notifications", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,16 +80,16 @@ namespace UltimateTeamApi.SpecFlowTest.Notification
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Add two numbers")]
+        [Xunit.SkippableFactAttribute(DisplayName="0. Initialize some Friendship Intances")]
         [Xunit.TraitAttribute("FeatureTitle", "Notification")]
-        [Xunit.TraitAttribute("Description", "Add two numbers")]
+        [Xunit.TraitAttribute("Description", "0. Initialize some Friendship Intances")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void AddTwoNumbers()
+        public virtual void _0_InitializeSomeFriendshipIntances()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("0. Initialize some Friendship Intances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -110,17 +110,68 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+                TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "LastName",
+                            "UserName",
+                            "Email",
+                            "Password",
+                            "Birthdate",
+                            "LastConnection",
+                            "ProfilePicture",
+                            "AdministratorId"});
+                table25.AddRow(new string[] {
+                            "Sam",
+                            "Morales",
+                            "ElTioSam",
+                            "sam@hotmail.com",
+                            "TresNodos",
+                            "2002-04-19",
+                            "2020-04-19",
+                            "null",
+                            "1"});
+                table25.AddRow(new string[] {
+                            "Lucia",
+                            "Revollar",
+                            "Lulu",
+                            "lulu@gmail.com",
+                            "CrusUpc#3",
+                            "2003-01-09",
+                            "2020-01-20",
+                            "null",
+                            "1"});
+                table25.AddRow(new string[] {
+                            "Maria",
+                            "Santillan",
+                            "Maria503",
+                            "ma503@yopmail.com",
+                            "Password",
+                            "2000-07-30",
+                            "2018-09-12",
+                            "null",
+                            "1"});
+                table25.AddRow(new string[] {
+                            "Lionel",
+                            "Messi",
+                            "ElMesias",
+                            "leo@barzabestclub.com",
+                            "elMejorDelMundo",
+                            "1212-12-12",
+                            "1219-12-12",
+                            "null",
+                            "1"});
+                table25.AddRow(new string[] {
+                            "Fernando",
+                            "Firulais",
+                            "FernanElCrack",
+                            "fernan@elcrack.es",
+                            "NuevaContraseña",
+                            "1999-05-21",
+                            "2020-05-20",
+                            "null",
+                            "1"});
 #line 6
- testRunner.Given("the first number is 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 7
- testRunner.And("the second number is 70", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 8
- testRunner.When("the two numbers are added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 9
- testRunner.Then("the result should be 120", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table25, "When ");
 #line hidden
             }
             this.ScenarioCleanup();

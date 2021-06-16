@@ -7,9 +7,9 @@ namespace UltimateTeamApi.Domain.Models
 {
     public class Friendship
     {
-        public int User1Id { get; set; }
-        public User user1 { get; set; }
-        public int User2Id { get; set; }
-        public User user2 { get; set; }
+        public int PrincipalId { get; set; }
+        public User Principal { get; set; }         //User who send invitation
+        public int FriendId { get; set; }
+        public User Friend { get; set; }            //User who accepted the invitation
     }
 }

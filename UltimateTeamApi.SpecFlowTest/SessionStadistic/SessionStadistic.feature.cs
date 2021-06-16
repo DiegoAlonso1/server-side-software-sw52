@@ -80,16 +80,16 @@ namespace UltimateTeamApi.SpecFlowTest.SessionStadistic
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="1 Initialize some instances")]
+        [Xunit.SkippableFactAttribute(DisplayName="0. Initialize some instances")]
         [Xunit.TraitAttribute("FeatureTitle", "SessionStadistic")]
-        [Xunit.TraitAttribute("Description", "1 Initialize some instances")]
+        [Xunit.TraitAttribute("Description", "0. Initialize some instances")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void _1InitializeSomeInstances()
+        public virtual void _0_InitializeSomeInstances()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Initialize some instances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("0. Initialize some instances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -110,14 +110,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                             "SessionTypeId"});
-                table21.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "1"});
-                table21.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "2"});
 #line 8
- testRunner.When("session required attributes provided to initialize instance", ((string)(null)), table21, "When ");
+ testRunner.When("session required attributes provided to initialize instance", ((string)(null)), table26, "When ");
 #line hidden
 #line 12
  testRunner.Then("assign the session with Id 1 with the functionality with Id 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -138,14 +138,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The administrator wants see the session stadistics of a session")]
+        [Xunit.SkippableFactAttribute(DisplayName="1. The administrator wants see the session stadistics of a session")]
         [Xunit.TraitAttribute("FeatureTitle", "SessionStadistic")]
-        [Xunit.TraitAttribute("Description", "The administrator wants see the session stadistics of a session")]
-        public virtual void TheAdministratorWantsSeeTheSessionStadisticsOfASession()
+        [Xunit.TraitAttribute("Description", "1. The administrator wants see the session stadistics of a session")]
+        public virtual void _1_TheAdministratorWantsSeeTheSessionStadisticsOfASession()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The administrator wants see the session stadistics of a session", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The administrator wants see the session stadistics of a session", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 20
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -166,46 +166,46 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                             "SessionId",
                             "FunctionalityId",
                             "Count"});
-                table22.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "1",
                             "1",
                             "1"});
-                table22.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "1",
                             "2",
                             "1"});
-                table22.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "1",
                             "3",
                             "1"});
-                table22.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "2",
                             "2",
                             "1"});
-                table22.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "2",
                             "4",
                             "1"});
 #line 21
  testRunner.When("the administrator goes to Functionality Usage Page on session with id 5, the sess" +
-                        "ion stadistics list should return", ((string)(null)), table22, "When ");
+                        "ion stadistics list should return", ((string)(null)), table27, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="The administrator wants to see session stadistics")]
+        [Xunit.SkippableFactAttribute(DisplayName="2. The administrator wants to see session stadistics")]
         [Xunit.TraitAttribute("FeatureTitle", "SessionStadistic")]
-        [Xunit.TraitAttribute("Description", "The administrator wants to see session stadistics")]
-        public virtual void TheAdministratorWantsToSeeSessionStadistics()
+        [Xunit.TraitAttribute("Description", "2. The administrator wants to see session stadistics")]
+        public virtual void _2_TheAdministratorWantsToSeeSessionStadistics()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The administrator wants to see session stadistics", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The administrator wants to see session stadistics", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 31
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -226,17 +226,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                             "SessionId",
                             "FunctionalityId",
                             "Count"});
-                table23.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "1",
                             "1",
                             "1"});
 #line 32
  testRunner.When("the user uses the functionality with id 1 in the session with id 1, session stadi" +
-                        "stics details should be", ((string)(null)), table23, "When ");
+                        "stics details should be", ((string)(null)), table28, "When ");
 #line hidden
             }
             this.ScenarioCleanup();

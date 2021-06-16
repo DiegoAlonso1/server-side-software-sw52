@@ -33,6 +33,8 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         {
             base.OnModelCreating(builder);
 
+
+
             /******************************************/
                             /*USER ENTITY*/
             /******************************************/
@@ -52,24 +54,24 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<User>()
             .HasOne(u => u.Administrator)
             .WithMany(a => a.Users)
-            .HasForeignKey(u => u.AdministratorId);       //Esperando a que Administrator sea implementado
+            .HasForeignKey(u => u.AdministratorId);
 
 
 
             /******************************************/
                         /*ADMINISTRATOR ENTITY*/
             /******************************************/
-            builder.Entity<Administrator>().ToTable("administrators");
+            builder.Entity<Administrator>().ToTable("Administrators");
             builder.Entity<Administrator>().HasKey(a => a.Id);
             builder.Entity<Administrator>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Administrator>().Property(a => a.Name).IsRequired();
             builder.Entity<Administrator>().Property(a => a.Password).IsRequired();
             builder.Entity<Administrator>().Property(a => a.Area).IsRequired();
-            //Agregar cosas
             builder.Entity<Administrator>()
                 .HasMany(a => a.Users)
                 .WithOne(u => u.Administrator)
                 .HasForeignKey( u => u.AdministratorId);
+
 
 
             /******************************************/
@@ -82,10 +84,10 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                 .HasOne(s => s.Functionality)
                 .WithMany(f => f.SessionStadistics)
                 .HasForeignKey(s => s.FunctionalityId);
-            //builder.Entity<SessionStadistic>()
-            //    .HasOne(s => s.Session)
-            //    .WithMany(s => s.SessionStadistics)
-            //    .HasForeignKey(s => s.SessionId);         //Esperando a que Session sea implementado
+            builder.Entity<SessionStadistic>()
+                .HasOne(s => s.Session)
+                .WithMany(s => s.SessionStadistics)
+                .HasForeignKey(s => s.SessionId);
 
 
 
@@ -107,6 +109,8 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     new Functionality { Id = 7, Name = "ToDo List" }        
                 );
 
+
+
             /******************************************/
                     /*NOTIFICATION ENTITY*/
             /******************************************/
@@ -118,14 +122,23 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Notification>().HasOne(n => n.Sender).WithMany(u => u.NotificationsSent).HasForeignKey(n => n.SenderId);
             builder.Entity<Notification>().HasOne(n => n.Remitend).WithMany(u => u.NotificationsReceived).HasForeignKey(n => n.RemitendId);
 
+
+
             /******************************************/
-                    /*FRIENDSHIP ENTITY*/
+                     /*FRIENDSHIP ENTITY*/
             /******************************************/
             builder.Entity<Friendship>().ToTable("Friendships");
-            builder.Entity<Friendship>().HasKey(f => new { f.User1Id, f.User2Id});
-            builder.Entity<Friendship>().Property(f => f.User1Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Friendship>().Property(f => f.User2Id).IsRequired().ValueGeneratedOnAdd();
-            //builder.Entity<Friendship>().HasOne(f => f.).WithMany(f => f.);
+            builder.Entity<Friendship>().HasKey(f => new { f.PrincipalId, f.FriendId});
+            builder.Entity<Friendship>().Property(f => f.PrincipalId).IsRequired();
+            builder.Entity<Friendship>().Property(f => f.FriendId).IsRequired();
+            builder.Entity<Friendship>()
+                .HasOne(f => f.Principal)
+                .WithMany(u => u.FriendShipsAsPrincipal)
+                .HasForeignKey(f => f.PrincipalId);
+            builder.Entity<Friendship>()
+                .HasOne(f => f.Friend)
+                .WithMany(u => u.FriendShipsAsFriend)
+                .HasForeignKey(f => f.FriendId);
 
 
 
@@ -137,18 +150,18 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Group>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Group>().Property(p => p.Name).IsRequired().HasMaxLength(30);
 
+
+
             /******************************************/
                     /*GROUPMEMBER ENTITY*/
             /******************************************/
             builder.Entity<GroupMember>().ToTable("GroupMembers");
             builder.Entity<GroupMember>().HasKey(p => new { p.UserId, p.GroupId });
             builder.Entity<GroupMember>().Property(p => p.UserCreator).IsRequired();
-
             builder.Entity<GroupMember>()
                 .HasOne(pt => pt.Group)
                 .WithMany(p => p.GroupMembers)
                 .HasForeignKey(pt => pt.GroupId);
-
             builder.Entity<GroupMember>()
                 .HasOne(pt => pt.User)
                 .WithMany(t => t.GroupMembers)
@@ -160,37 +173,59 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                         /*SESSIONPAR ENTITY*/
             /******************************************/
 
+
+
             /******************************************/
                     /*SESSIONPARTICIPANT ENTITY*/
             /******************************************/
+            builder.Entity<SessionParticipant>().ToTable("SessionParticipants");
+            builder.Entity<SessionParticipant>().HasKey(s => new { s.SessionsId, s.UserId });
+            builder.Entity<SessionParticipant>().Property(s => s.Creator).IsRequired();
+            builder.Entity<SessionParticipant>()
+                .HasOne(s => s.Session)
+                .WithMany(s => s.SessionParticipants)
+                .HasForeignKey(s => s.SessionsId);
+            builder.Entity<SessionParticipant>()
+                .HasOne(s => s.User)
+                .WithMany(u => u.SessionsParticipated)
+                .HasForeignKey(s => s.UserId);
+
+
 
             /******************************************/
-                        /*SESSIONTYPE ENTITY*/
+            /*SESSIONTYPE ENTITY*/
             /******************************************/
             builder.Entity<SessionType>().ToTable("SessionTypes");
             builder.Entity<SessionType>().HasKey(f => f.Id);
-            builder.Entity<SessionType>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<SessionType>().Property(f => f.Id).IsRequired();
             builder.Entity<SessionType>().Property(f => f.Type).IsRequired().HasMaxLength(15);
+            builder.Entity<SessionType>().HasData
+                (
+                    new SessionType { Id = 1, Type = "Collaborative" },
+                    new SessionType { Id = 2, Type = "Individual" }
+                );
+
 
 
             /******************************************/
                         /*SUBSCRIPTION TYPE*/
             /******************************************/
-            builder.Entity<SubscriptionType>().ToTable("subscription_types");
+            builder.Entity<SubscriptionType>().ToTable("SubscriptionTypes");
             builder.Entity<SubscriptionType>().HasKey(s => s.Id);
             builder.Entity<SubscriptionType>().Property(s => s.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<SubscriptionType>().Property(s => s.Type).IsRequired();
             builder.Entity<SubscriptionType>().Property(s => s.Amount).IsRequired();
-
             builder.Entity<SubscriptionType>()
                 .HasMany(st => st.SubscriptionBills)
                 .WithOne(sb => sb.SubscriptionType)
                 .HasForeignKey(sb => sb.SubscriptionTypeId);
 
+
+
             /******************************************/
-            /*SUBSCRIPTION BILL*/
+                        /*SUBSCRIPTION BILL*/
             /******************************************/
-            builder.Entity<SubscriptionBill>().ToTable("subscription_bills");
+            builder.Entity<SubscriptionBill>().ToTable("SubscriptionBills");
             builder.Entity<SubscriptionBill>().HasKey(s => s.Id);
             builder.Entity<SubscriptionBill>().Property(s => s.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<SubscriptionBill>().Property(s => s.License).IsRequired();
