@@ -1,3 +1,6 @@
+using Google.Apis.Auth.AspNetCore3;
+using Google.Apis.Drive.v3;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +18,7 @@ using System.Threading.Tasks;
 using UltimateTeamApi.Domain.Persistance.Contexts;
 using UltimateTeamApi.Domain.Persistance.Repositories;
 using UltimateTeamApi.Domain.Services;
+using UltimateTeamApi.ExternalTools.Domain.Services;
 using UltimateTeamApi.Persistance.Repositories;
 using UltimateTeamApi.Services;
 
@@ -63,6 +67,7 @@ namespace UltimateTeamApi
             services.AddScoped<IAdministratorService, AdministratorService>();
             services.AddScoped<ISubscriptionBillService, SubscriptionBillService>();
             services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
+            services.AddScoped<IDriveService, ExternalTools.Services.DriveService>();
 
             //Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -76,6 +81,21 @@ namespace UltimateTeamApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UltimateTeamApi", Version = "v1" });
                 c.EnableAnnotations();
             });
+
+            //Google Configuration
+            services
+                .AddAuthentication(o =>
+                {
+                    o.DefaultChallengeScheme = GoogleOpenIdConnectDefaults.AuthenticationScheme;
+                    o.DefaultForbidScheme = GoogleOpenIdConnectDefaults.AuthenticationScheme;
+                    o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
+                .AddCookie()
+                .AddGoogleOpenIdConnect(options =>
+                {
+                    options.ClientId = "85775309915-j9lv6vi2jd747hplr59h36d26e305l86.apps.googleusercontent.com";
+                    options.ClientSecret = "uEpe7MDtye3dDzIkLJw232Cm";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,6 +112,7 @@ namespace UltimateTeamApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
