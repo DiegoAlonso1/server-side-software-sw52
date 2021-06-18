@@ -68,6 +68,7 @@ namespace UltimateTeamApi
             services.AddScoped<ISubscriptionBillService, SubscriptionBillService>();
             services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
             services.AddScoped<IDriveService, ExternalTools.Services.DriveService>();
+            services.AddScoped<ICalendarService, ExternalTools.Services.CalendarService>();
 
             //Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
