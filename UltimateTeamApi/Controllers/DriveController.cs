@@ -72,7 +72,7 @@ namespace UltimateTeamApi.Controllers
                 return Ok("Logged out");
             }
 
-            return BadRequest("You are already logged out");
+            return Ok("You are already logged out");
         }
 
 

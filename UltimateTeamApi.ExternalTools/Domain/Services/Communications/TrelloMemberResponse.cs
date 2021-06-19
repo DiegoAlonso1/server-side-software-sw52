@@ -7,13 +7,13 @@ using UltimateTeamApi.ExternalTools.Resources;
 
 namespace UltimateTeamApi.ExternalTools.Domain.Services.Communications
 {
-    class TrelloBoardResponse : BaseResponse<TrelloBoardResource>
+    public class TrelloMemberResponse : BaseResponse<TrelloMemberResource>
     {
-        public TrelloBoardResponse(TrelloBoardResource resource) : base(resource)
+        public TrelloMemberResponse(TrelloMemberResource resource) : base(resource)
         {
         }
 
-        public TrelloBoardResponse(string message) : base(message)
+        public TrelloMemberResponse(string message) : base(message)
         {
         }
     }

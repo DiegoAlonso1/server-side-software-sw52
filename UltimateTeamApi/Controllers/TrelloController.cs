@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
@@ -21,22 +23,77 @@ namespace UltimateTeamApi.Controllers
             _trelloService = trelloService;
         }
 
+
         /******************************************/
-        /*GET ALL BOARDS ASYNC*/
+        /*LOGIN TRELLO ACCOUNT*/
         /******************************************/
 
         [SwaggerOperation(
-            Summary = "Get All Boards",
-            Description = "Get List of All Boards",
-            OperationId = "GetAllBoards")]
-        [SwaggerResponse(200, "List of Boards", typeof(Object))]
+            Summary = "Login Trello Account",
+            Description = "Login Trello Account",
+            OperationId = "LoginTrelloAccount")]
+        [SwaggerResponse(200, "Trello Account Logged", typeof(string))]
+
+        [HttpGet("login")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> LoginTrelloAccount()
+        {
+            var result = await _trelloService.AssignToken();
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok("Logged");
+        }
+
+
+        /******************************************/
+        /*LOGOUT TRELLO ACCOUNT*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Logout Trello Account",
+            Description = "Logout Trello Account",
+            OperationId = "LogoutTrelloAccount")]
+        [SwaggerResponse(200, "Trello Account Logged out", typeof(string))]
+
+        [HttpGet("logout")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> LogoutTrelloAccount()
+        {
+            var result = await _trelloService.UnassignToken();
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok("Logged out");
+        }
+
+
+
+        /******************************************/
+        /*GET TRELLO MEMBER BY ID ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Get Trello Member By Id",
+            Description = "Get a Trello Member By Id",
+            OperationId = "GetATrelloMemberById")]
+        [SwaggerResponse(200, "Trello Member By Id", typeof(TrelloMemberResource))]
 
         [HttpGet]
-        [ProducesResponseType(typeof(Object), 200)]
+        [ProducesResponseType(typeof(TrelloMemberResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<Object> GetAllBoardsAsync()
+        public async Task<IActionResult> GetTrelloMemberByIdAsync(string memberId)
         {
-            return await _trelloService.GetAllBoards();
+            var result = await _trelloService.GetMemberById(memberId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
         }
     }
 }
