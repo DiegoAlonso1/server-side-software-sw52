@@ -21,8 +21,8 @@ namespace UltimateTeamApi.ExternalTools.Services
 
         public TrelloService()
         {
-            _apiKey = "e8dfb267131edf831818c377cf6befc1";
-            _token = "9b54840b1e46352f69131ef16b3753fa2678f35c513bb2a70cd2092cc60d05c7";
+            _apiKey = "0389b1cfea7b9c070a520f3dfe6f79db";
+            _token = "f1b4780a0b828067813440b902055007abbeea49167a678fa41be286af5834f5";
             _httpClient = new HttpClient
             {
                 BaseAddress = new Uri("https://api.trello.com/1/")
