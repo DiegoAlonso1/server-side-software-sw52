@@ -1,4 +1,6 @@
-﻿namespace UltimateTeamApi.ExternalTools.Domain.Models.Trello
+﻿using System.Collections.Generic;
+
+namespace UltimateTeamApi.ExternalTools.Domain.Models.Trello
 {
     public class Prefs
     {
@@ -8,5 +10,6 @@
         public int minutesBeforeDeadlineToNotify { get; set; }
         public bool colorBlind { get; set; }
         public string locale { get; set; }
+        
     }
 }
