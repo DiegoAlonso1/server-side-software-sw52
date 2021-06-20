@@ -10,3 +10,12 @@ Scenario: 0. Initialize some Friendship Intances
 		| Maria    | Santillan | Maria503      | ma503@yopmail.com		| Password		  | 2000-07-30 | 2018-09-12     | null			 | 1			   |
 		| Lionel   | Messi     | ElMesias      | leo@barzabestclub.com  | elMejorDelMundo | 1212-12-12 | 1219-12-12     | null			 | 1			   |
 		| Fernando | Firulais  | FernanElCrack | fernan@elcrack.es      | NuevaContraseña | 1999-05-21 | 2020-05-20     | null			 | 1               |
+
+
+#1 - Get all groups by user id
+Scenario: 1. The user wants to see the groups list of his profile data
+	When the user with id 2 goes to Profile Page and click on the groups list
+	Then the groups list of user with Id 2 should be
+		| Id   | Name			 |
+		| 1	   | TeamUltimate	 |
+		| 2	   | Backyardigans	 |

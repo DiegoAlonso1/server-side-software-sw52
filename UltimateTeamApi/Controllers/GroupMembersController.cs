@@ -86,7 +86,7 @@ namespace UltimateTeamApi.Controllers
         [HttpDelete("{groupId}")]
         [ProducesResponseType(typeof(GroupResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> UnassignGroupMemberAsync(int groupId, int userId)
+        public async Task<IActionResult> UnassignGroupMemberAsync(int userId, int groupId)
         {
             var result = await _groupMemberService.UnassignGroupMemberAsync(groupId, userId);
 
