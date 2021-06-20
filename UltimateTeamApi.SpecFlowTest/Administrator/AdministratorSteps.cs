@@ -23,15 +23,29 @@ namespace UltimateTeamApi.SpecFlowTest.Administrator
         /*INITIALIZING TEST WITH SOME ADMINISTRATORS INSTANCES*/
         /**************************************************/
 
-        //[When(@"administrators required attributes provided to initialize instances")]
-        //public void WhenAdministratorsRequiredAttributesProvidedToInitializeInstances(Table dtos)
-        //{
-        //    //ScenarioContext.Current.Pending();
-        //}
+        [When(@"administrators required attributes provided to initialize instances")]
+        public void WhenAdministratorsRequiredAttributesProvidedToInitializeInstances(Table dtos)
+        {
+            //Creating some administrators
+            foreach (var row in dtos.Rows)
+            {
+                try
+                {
+                    var administrator = row.CreateInstance<Domain.Models.Administrator>();
+                    var data = JsonData(administrator);
+                    var result = Task.Run(async () => await Client.PostAsync(AdministratorEndpoint, data)).Result;
+                    Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Save Administrator Integration Test Completed");
+                }
+                catch (Exception ex)
+                {
+                    Assert.IsTrue(false, ex.Message);
+                }
+            }
+        }
 
 
         /**************************************************/
-                            /*SCENARY 1*/
+        /*SCENARY 1*/
         /**************************************************/
 
         [When(@"the administrator complete the form with the required fields and click the Register button")]
