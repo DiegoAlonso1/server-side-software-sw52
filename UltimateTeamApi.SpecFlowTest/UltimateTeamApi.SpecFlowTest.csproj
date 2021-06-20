@@ -28,8 +28,4 @@
     <ProjectReference Include="..\UltimateTeamApi\UltimateTeamApi.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Administrator\" />
-  </ItemGroup>
-
 </Project>
