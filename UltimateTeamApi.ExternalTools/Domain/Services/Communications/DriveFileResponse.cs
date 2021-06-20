@@ -1,10 +1,11 @@
 ﻿using Google.Apis.Drive.v3.Data;
+using UltimateTeamApi.ExternalTools.Resources;
 
 namespace UltimateTeamApi.ExternalTools.Domain.Services.Communications
 {
-    public class DriveFileResponse : BaseResponse<File>
+    public class DriveFileResponse : BaseResponse<DriveFileResource>
     {
-        public DriveFileResponse(File resource) : base(resource)
+        public DriveFileResponse(DriveFileResource resource) : base(resource)
         {
         }
 
