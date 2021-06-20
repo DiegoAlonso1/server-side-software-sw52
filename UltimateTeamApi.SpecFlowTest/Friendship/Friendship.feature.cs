@@ -110,7 +110,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "LastName",
                             "UserName",
@@ -120,7 +120,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table1.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "Sam",
                             "Morales",
                             "ElTioSam",
@@ -130,7 +130,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-04-19",
                             "null",
                             "1"});
-                table1.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "Lucia",
                             "Revollar",
                             "Lulu",
@@ -140,7 +140,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-01-20",
                             "null",
                             "1"});
-                table1.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "Maria",
                             "Santillan",
                             "Maria503",
@@ -150,7 +150,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2018-09-12",
                             "null",
                             "1"});
-                table1.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "Lionel",
                             "Messi",
                             "ElMesias",
@@ -160,7 +160,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1219-12-12",
                             "null",
                             "1"});
-                table1.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "Fernando",
                             "Firulais",
                             "FernanElCrack",
@@ -171,7 +171,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 6
- testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table1, "When ");
+ testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table6, "When ");
 #line hidden
 #line 13
  testRunner.Then("assign the user with Id 1 with the user with Id 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -217,7 +217,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 20
  testRunner.When("the user with Id 1 goes to Friend Lists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "LastName",
@@ -228,7 +228,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table2.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "2",
                             "Lucia",
                             "Revollar",
@@ -239,7 +239,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-01-20",
                             "null",
                             "1"});
-                table2.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "3",
                             "Maria",
                             "Santillan",
@@ -250,7 +250,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2018-09-12",
                             "null",
                             "1"});
-                table2.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "4",
                             "Lionel",
                             "Messi",
@@ -262,7 +262,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 21
- testRunner.Then("the friend list of user with Id 1 should be", ((string)(null)), table2, "Then ");
+ testRunner.Then("the friend list of user with Id 1 should be", ((string)(null)), table7, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -296,7 +296,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "LastName",
@@ -307,7 +307,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table3.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "5",
                             "Fernando",
                             "Firulais",
@@ -320,7 +320,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1"});
 #line 30
  testRunner.When("the user with Id 5 accepts the friend request from the user with Id 1, the user d" +
-                        "etails should be", ((string)(null)), table3, "When ");
+                        "etails should be", ((string)(null)), table8, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -357,7 +357,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 37
  testRunner.When("the user with id 1 click on the Trash can button next to the user with Id 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "LastName",
@@ -368,7 +368,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table4.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "5",
                             "Fernando",
                             "Firulais",
@@ -381,7 +381,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1"});
 #line 38
  testRunner.Then("the user with id 5 is removed from the friend list of the user with Id 1 and remo" +
-                        "ved user details should be", ((string)(null)), table4, "Then ");
+                        "ved user details should be", ((string)(null)), table9, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

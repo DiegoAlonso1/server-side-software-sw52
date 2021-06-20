@@ -146,9 +146,9 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     /*GROUP ENTITY*/
             /******************************************/
             builder.Entity<Group>().ToTable("Groups");
-            builder.Entity<Group>().HasKey(p => p.Id);
-            builder.Entity<Group>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Group>().Property(p => p.Name).IsRequired().HasMaxLength(30);
+            builder.Entity<Group>().HasKey(g => g.Id);
+            builder.Entity<Group>().Property(g => g.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Group>().Property(g => g.Name).IsRequired().HasMaxLength(30);
 
 
 
@@ -156,16 +156,16 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     /*GROUPMEMBER ENTITY*/
             /******************************************/
             builder.Entity<GroupMember>().ToTable("GroupMembers");
-            builder.Entity<GroupMember>().HasKey(p => new { p.UserId, p.GroupId });
-            builder.Entity<GroupMember>().Property(p => p.UserCreator).IsRequired();
+            builder.Entity<GroupMember>().HasKey(gm => new { gm.UserId, gm.GroupId });
+            builder.Entity<GroupMember>().Property(gm => gm.UserCreator).IsRequired();
             builder.Entity<GroupMember>()
-                .HasOne(pt => pt.Group)
-                .WithMany(p => p.GroupMembers)
-                .HasForeignKey(pt => pt.GroupId);
+                .HasOne(gm => gm.Group)
+                .WithMany(g => g.GroupMembers)
+                .HasForeignKey(gm => gm.GroupId);
             builder.Entity<GroupMember>()
-                .HasOne(pt => pt.User)
-                .WithMany(t => t.GroupMembers)
-                .HasForeignKey(pt => pt.UserId);
+                .HasOne(gm => gm.User)
+                .WithMany(u => u.GroupMembers)
+                .HasForeignKey(gm => gm.UserId);
 
             
 

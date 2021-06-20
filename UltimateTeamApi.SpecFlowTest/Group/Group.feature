@@ -58,7 +58,7 @@ Scenario: 4. The user wants to see his group data
 		
 #5 - Get all members by group id
 Scenario: 5. The user wants to see the members list of his group
-	When the user goes to Group Lists and click on the group with Id 2 and go to member list
+	When the user goes to Group Lists and click on the group with Id 2 and go to Member List Section
 	Then the member list of group with Id 2 should be
 		| Id   | Name    | LastName  | UserName | Email					| Password		  | Birthdate  | LastConnection | ProfilePicture | AdministratorId |
 		| 1	   | Sam	 | Morales   | ElTioSam | sam@hotmail.com		| TresNodos		  | 2002-04-19 | 2020-04-19     | null			 | 1			   |

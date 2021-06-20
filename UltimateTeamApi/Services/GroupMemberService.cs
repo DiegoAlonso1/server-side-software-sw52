@@ -24,14 +24,14 @@ namespace UltimateTeamApi.Services
             _userRepository = userRepository;
         }
 
-        public async Task<GroupMemberResponse> AssignGroupMemberAsync(int groupId, int userId)
+        public async Task<GroupMemberResponse> AssignGroupMemberAsync(int groupId, int userId, bool userCreator)
         {
             try
             {
-                await _groupMemberRepository.AssignGroupMemberAsync(groupId, userId);
+                await _groupMemberRepository.AssignGroupMemberAsync(groupId, userId, userCreator);
                 await _unitOfWork.CompleteAsync();
-                GroupMember groupMember = await _groupMemberRepository.FindByGroupIdAndUserIdAsync(groupId, userId);
-                return new GroupMemberResponse(groupMember);
+                GroupMember groupMemberResult = await _groupMemberRepository.FindByGroupIdAndUserIdAsync(groupId, userId);
+                return new GroupMemberResponse(groupMemberResult);
 
             }
             catch (Exception ex)

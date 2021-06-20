@@ -13,7 +13,7 @@ namespace UltimateTeamApi.Domain.Persistance.Repositories
 		Task<GroupMember> FindByGroupIdAndUserIdAsync(int groupId, int userId);
 		Task AddAsync(GroupMember groupMember);
 		void Remove(GroupMember groupMember);
-		Task AssignGroupMemberAsync(int groupId, int userId);
+		Task AssignGroupMemberAsync(int groupId, int userId, bool userCreator);
 		Task UnassignGroupMemberAsync(int groupId, int userId);
 	}
 }

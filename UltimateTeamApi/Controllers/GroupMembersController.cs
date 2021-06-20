@@ -60,9 +60,9 @@ namespace UltimateTeamApi.Controllers
         [HttpPost("{groupId}")]
         [ProducesResponseType(typeof(GroupMemberResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> AssignGroupMemberAsync(int groupId, int userId)
+        public async Task<IActionResult> AssignGroupMemberAsync(int groupId, int userId, [FromBody] SaveGroupMemberResource resource)
         {
-            var result = await _groupMemberService.AssignGroupMemberAsync(groupId, userId);
+            var result = await _groupMemberService.AssignGroupMemberAsync(groupId, userId, resource.UserCreator);
 
             if (!result.Success)
                 return BadRequest(result.Message);
