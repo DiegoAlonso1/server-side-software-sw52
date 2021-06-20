@@ -129,8 +129,6 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             /******************************************/
             builder.Entity<Friendship>().ToTable("Friendships");
             builder.Entity<Friendship>().HasKey(f => new { f.PrincipalId, f.FriendId});
-            builder.Entity<Friendship>().Property(f => f.PrincipalId).IsRequired();
-            builder.Entity<Friendship>().Property(f => f.FriendId).IsRequired();
             builder.Entity<Friendship>()
                 .HasOne(f => f.Principal)
                 .WithMany(u => u.FriendShipsAsPrincipal)

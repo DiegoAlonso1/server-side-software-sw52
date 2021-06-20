@@ -110,20 +110,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name"});
-                table13.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "TeamUltimate"});
-                table13.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "Backyardigans"});
-                table13.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "Pollitos FC"});
-                table13.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "Roomies"});
 #line 9
- testRunner.When("groups required attributes provided to initialize instances", ((string)(null)), table13, "When ");
+ testRunner.When("groups required attributes provided to initialize instances", ((string)(null)), table14, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "LastName",
                             "UserName",
@@ -133,7 +133,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table14.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "Sam",
                             "Morales",
                             "ElTioSam",
@@ -143,7 +143,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-04-19",
                             "null",
                             "1"});
-                table14.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "Lucia",
                             "Revollar",
                             "Lulu",
@@ -154,21 +154,21 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 15
- testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table14, "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
-                            "UserCreator"});
-                table15.AddRow(new string[] {
-                            "True"});
-#line 19
- testRunner.Then("assign the group with Id 1 with the user with Id 2", ((string)(null)), table15, "Then ");
+ testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table15, "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "UserCreator"});
                 table16.AddRow(new string[] {
                             "True"});
+#line 19
+ testRunner.Then("assign the group with Id 1 with the user with Id 2", ((string)(null)), table16, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                            "UserCreator"});
+                table17.AddRow(new string[] {
+                            "True"});
 #line 22
- testRunner.Then("assign the group with Id 2 with the user with Id 2", ((string)(null)), table16, "Then ");
+ testRunner.Then("assign the group with Id 2 with the user with Id 2", ((string)(null)), table17, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -205,17 +205,17 @@ this.ScenarioInitialize(scenarioInfo);
 #line 29
  testRunner.When("the user with id 2 goes to Profile Page and click on the groups list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table17.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "1",
                             "TeamUltimate"});
-                table17.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "2",
                             "Backyardigans"});
 #line 30
- testRunner.Then("the groups list of user with Id 2 should be", ((string)(null)), table17, "Then ");
+ testRunner.Then("the groups list of user with Id 2 should be", ((string)(null)), table18, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -252,21 +252,21 @@ this.ScenarioInitialize(scenarioInfo);
 #line 37
  testRunner.When("the user complete the form with the required fields and click the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table18.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "1",
                             "TeamUltimate"});
-                table18.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "2",
                             "Backyardigans"});
-                table18.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "3",
                             "Pollitos FC"});
 #line 38
  testRunner.Then("it is assigned to the user with Id 2 on the group with Id 3 and list groups shoul" +
-                        "d be", ((string)(null)), table18, "Then ");
+                        "d be", ((string)(null)), table19, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -303,14 +303,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 48
  testRunner.When("the user with id 2 click the Leave Group button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table19.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "2",
                             "Backyardigans"});
 #line 49
- testRunner.Then("the user with id 2 leaves the group and removed group details should be", ((string)(null)), table19, "Then ");
+ testRunner.Then("the user with id 2 leaves the group and removed group details should be", ((string)(null)), table20, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

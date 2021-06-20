@@ -15,13 +15,13 @@ Scenario: 0. Initialize some Friendship Intances
 	Then assign the user with Id 1 with the user with Id 4
 
 
-#1 - Get all friendships by userId
+#1 - Get all friends by userId
 Scenario: 1. The user wants to see his friend list
 	When the user with Id 1 goes to Friend Lists
 	Then the friend list of user with Id 1 should be
 		| Id | Name   | LastName  | UserName  | Email                 | Password        | Birthdate  | LastConnection | ProfilePicture | AdministratorId |
-		| 2  | Lucia  | Revollar  | Lulu      | lulu@gmail.com        | CrusUpc#3       | 2003-01-09 | 2020-01-20     | null           | 1               |
 		| 3  | Maria  | Santillan | Maria503  | ma503@yopmail.com     | Password        | 2000-07-30 | 2018-09-12     | null           | 1               |
+		| 2  | Lucia  | Revollar  | Lulu      | lulu@gmail.com        | CrusUpc#3       | 2003-01-09 | 2020-01-20     | null           | 1               |
 		| 4  | Lionel | Messi     | ElMesias  | leo@barzabestclub.com | elMejorDelMundo | 1212-12-12 | 1219-12-12     | null		   | 1			     |
 
 

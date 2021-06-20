@@ -20,13 +20,13 @@ namespace UltimateTeamApi.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<FriendshipResponse> AssignFriendAsync(int user1Id, int user2Id)
+        public async Task<FriendshipResponse> AssignFriendAsync(int principalId, int friendId)
         {
             try
             {
-                await _friendshipRepository.AssignFriendAsync(user1Id, user2Id);
+                await _friendshipRepository.AssignFriendAsync(principalId, friendId);
                 await _unitOfWork.CompleteAsync();
-                var friendship = await _friendshipRepository.FindByUser1IdAndUser2IdAsync(user1Id, user2Id);
+                var friendship = await _friendshipRepository.FindByPrincipalIdAndFriendIdAsync(principalId, friendId);
                 return new FriendshipResponse(friendship);
             }
             catch (Exception ex)
@@ -35,18 +35,18 @@ namespace UltimateTeamApi.Services
             }
         }
 
-        public async Task<IEnumerable<Friendship>> GetAllByUserIdAsync(int userId)
+        public async Task<IEnumerable<User>> GetAllFriendsByUserIdAsync(int userId)
         {
-            return await _friendshipRepository.ListByUserIdAsync(userId);
+            return await _friendshipRepository.ListFriendsByUserIdAsync(userId);
         }
 
-        public async Task<FriendshipResponse> UnassignFriendAsync(int user1Id, int user2Id)
+        public async Task<FriendshipResponse> UnassignFriendAsync(int principalId, int friendId)
         {
             try
             {
-                Friendship friendship = await _friendshipRepository.FindByUser1IdAndUser2IdAsync(user1Id, user2Id);
+                Friendship friendship = await _friendshipRepository.FindByPrincipalIdAndFriendIdAsync(principalId, friendId);
                 if (friendship == null) throw new Exception();
-                await _friendshipRepository.UnassignFriendAsync(user1Id, user2Id);
+                await _friendshipRepository.UnassignFriendAsync(principalId, friendId);
                 await _unitOfWork.CompleteAsync();
                 return new FriendshipResponse(friendship);
             }

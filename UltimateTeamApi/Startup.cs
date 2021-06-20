@@ -56,6 +56,7 @@ namespace UltimateTeamApi
             services.AddScoped<IAdministratorRepository, AdministratorRepository>();
             services.AddScoped<ISubscriptionBillRepository, SubscriptionBillRepository>();
             services.AddScoped<ISubscriptionTypeRepository, SubscriptionTypeRepository>();
+            services.AddScoped<IFriendshipRepository, FriendshipRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -67,6 +68,7 @@ namespace UltimateTeamApi
             services.AddScoped<IAdministratorService, AdministratorService>();
             services.AddScoped<ISubscriptionBillService, SubscriptionBillService>();
             services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
+            services.AddScoped<IFriendshipService, FriendshipService>();
             services.AddScoped<IDriveService, ExternalTools.Services.DriveService>();
             services.AddScoped<ITrelloService, ExternalTools.Services.TrelloService>();
             services.AddScoped<ICalendarService, ExternalTools.Services.CalendarService>();
