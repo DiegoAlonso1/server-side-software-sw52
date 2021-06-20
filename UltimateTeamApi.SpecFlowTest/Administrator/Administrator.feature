@@ -2,13 +2,13 @@
 	Create, Update, Delete and Get an Administrator
 
 @mytag
-#Scenario: 0. Initialize some Administrator Intances
-#	When administrators required attributes provided to initialize instances
-#		| Name        | Password  | Area	  |
-#		| Crsitiano7  | Madrid13  | null      |
-#		| Paolo9      | Peru2020  | null      |
-#		| MarioG      | Gam264    | null      |
-#		| Isabel_2    | pasword   | null      |
+Scenario: 0. Initialize some Administrator Intances
+	When administrators required attributes provided to initialize instances
+		| Name        | Password  | Area	  |
+		| Crsitiano7  | Madrid13  | null      |
+		| Paolo9      | Peru2020  | null      |
+		| MarioG      | Gam264    | null      |
+		| Isabel_2    | pasword   | null      |
 
 
 #1 - Create an administrator
