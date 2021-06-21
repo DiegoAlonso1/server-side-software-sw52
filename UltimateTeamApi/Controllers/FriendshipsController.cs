@@ -87,6 +87,7 @@ namespace UltimateTeamApi.Controllers
         public async Task<IActionResult> UnassignFriendAsync(int principalId, int friendId)
         {
             var result = await _friendshipService.UnassignFriendAsync(principalId, friendId);
+
             if (!result.Success)
                 return BadRequest(result.Message);
 

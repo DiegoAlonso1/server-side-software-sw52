@@ -80,16 +80,16 @@ namespace UltimateTeamApi.SpecFlowTest.Functionality
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="0. The administrator wants to see all functionalities")]
+        [Xunit.SkippableFactAttribute(DisplayName="1. The administrator wants to see all functionalities")]
         [Xunit.TraitAttribute("FeatureTitle", "Functionality")]
-        [Xunit.TraitAttribute("Description", "0. The administrator wants to see all functionalities")]
+        [Xunit.TraitAttribute("Description", "1. The administrator wants to see all functionalities")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void _0_TheAdministratorWantsToSeeAllFunctionalities()
+        public virtual void _1_TheAdministratorWantsToSeeAllFunctionalities()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("0. The administrator wants to see all functionalities", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The administrator wants to see all functionalities", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -142,14 +142,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="1. The administrator wants to see a functionality details")]
+        [Xunit.SkippableFactAttribute(DisplayName="2. The administrator wants to see a functionality details")]
         [Xunit.TraitAttribute("FeatureTitle", "Functionality")]
-        [Xunit.TraitAttribute("Description", "1. The administrator wants to see a functionality details")]
-        public virtual void _1_TheAdministratorWantsToSeeAFunctionalityDetails()
+        [Xunit.TraitAttribute("Description", "2. The administrator wants to see a functionality details")]
+        public virtual void _2_TheAdministratorWantsToSeeAFunctionalityDetails()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The administrator wants to see a functionality details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The administrator wants to see a functionality details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -186,14 +186,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="2. The administrator wants to see a functionality stadistics")]
+        [Xunit.SkippableFactAttribute(DisplayName="3. The administrator wants to see a functionality stadistics")]
         [Xunit.TraitAttribute("FeatureTitle", "Functionality")]
-        [Xunit.TraitAttribute("Description", "2. The administrator wants to see a functionality stadistics")]
-        public virtual void _2_TheAdministratorWantsToSeeAFunctionalityStadistics()
+        [Xunit.TraitAttribute("Description", "3. The administrator wants to see a functionality stadistics")]
+        public virtual void _3_TheAdministratorWantsToSeeAFunctionalityStadistics()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The administrator wants to see a functionality stadistics", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3. The administrator wants to see a functionality stadistics", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 29
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
