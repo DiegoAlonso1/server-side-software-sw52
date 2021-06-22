@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace UltimateTeamApi.Resources
 {
-    public class GroupResource
+    public class SaveSessionResource
     {
-        public int Id { get; set; }
         public string Name { get; set; }
+        public int SessionTypeId { get; set; }
     }
 }

@@ -9,6 +9,17 @@ namespace UltimateTeamApi.ExternalTools.Resources
 {
     public class DriveFileResource
     {
-        File file;
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime? CreatedTime { get; set; }
+        public string Extension { get; set; }
+        public string Kind { get; set; }
+        public IList<DriveUserResource> Owners { get; set; }
+        public IList<string> FolderParentsIds { get; set; }
+        public long? Size { get; set; }
+        public long? Version { get; set; }
+        public string DownloadLink { get; set; }
+        public string ViewLink { get; set; }
     }
 }

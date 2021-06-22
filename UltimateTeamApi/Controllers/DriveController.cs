@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UltimateTeamApi.ExternalTools.Domain.Services;
 using UltimateTeamApi.ExternalTools.Resources;
+using System.Web;
+using Microsoft.AspNetCore.Http;
 
 namespace UltimateTeamApi.Controllers
 {
@@ -39,9 +41,9 @@ namespace UltimateTeamApi.Controllers
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         [GoogleScopedAuthorize(DriveService.ScopeConstants.Drive)]
-        public async Task<IActionResult> LoginDriveAccount([FromServices] IGoogleAuthProvider auth)
+        public async Task<IActionResult> LoginDriveAsyncAccount([FromServices] IGoogleAuthProvider auth)
         {
-            var result = await _driveService.AssignGoogleCredential(auth);
+            var result = await _driveService.AssignGoogleCredentialAsync(auth);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -64,7 +66,7 @@ namespace UltimateTeamApi.Controllers
         [HttpGet("logout")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> LogoutDriveAccount()
+        public async Task<IActionResult> LogoutDriveAsyncAccount()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -85,17 +87,42 @@ namespace UltimateTeamApi.Controllers
             Summary = "Get All Drive Files",
             Description = "Get List of All Drive Files",
             OperationId = "GetAllDriveFiles")]
-        [SwaggerResponse(200, "List of Drive Files", typeof(IEnumerable<string>))]
+        [SwaggerResponse(200, "List of Drive Files", typeof(IEnumerable<DriveFileResource>))]
 
-        [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<string>), 200)]
+        [HttpGet("files")]
+        [ProducesResponseType(typeof(IEnumerable<DriveFileResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         [GoogleScopedAuthorize(DriveService.ScopeConstants.Drive)]
-        public async Task<IEnumerable<string>> GetAllDriveFilesAsync([FromServices] IGoogleAuthProvider auth)
+        public async Task<IEnumerable<DriveFileResource>> GetAllDriveFilesAsync([FromServices] IGoogleAuthProvider auth)
         {
-            var result = await _driveService.GetAllDriveFiles(auth);
-            
+            var result = await _driveService.GetAllDriveFilesAsync(auth);
             return result;
+        }
+
+
+
+        /******************************************/
+                /*GET ALL DRIVE FILES ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Get Drive File By Id",
+            Description = "Get a Drive File By Id",
+            OperationId = "GetDriveFileById")]
+        [SwaggerResponse(200, "Get Drive File By Id", typeof(DriveFileResource))]
+
+        [HttpGet("files/{fileId}")]
+        [ProducesResponseType(typeof(DriveFileResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        [GoogleScopedAuthorize(DriveService.ScopeConstants.Drive)]
+        public async Task<IActionResult> GetDriveFileByIdAsync([FromServices] IGoogleAuthProvider auth, string fileId)
+        {
+            var result = await _driveService.GetDriveFileByIdAsync(auth, fileId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
         }
 
 
@@ -110,13 +137,13 @@ namespace UltimateTeamApi.Controllers
             OperationId = "UploadDriveFile")]
         [SwaggerResponse(200, "Drive File Uploaded", typeof(string))]
 
-        [HttpPost]
+        [HttpPost("file")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         [GoogleScopedAuthorize(DriveService.ScopeConstants.Drive)]
-        public async Task<IActionResult> UploadDriveFile([FromServices] IGoogleAuthProvider auth, [FromBody] SaveDriveFileResource resource)
+        public async Task<IActionResult> UploadDriveFileAsync([FromServices] IGoogleAuthProvider auth, [FromBody] SaveDriveFileResource resource)
         {
-            var result = await _driveService.UploadFile(auth, resource.FilePath, resource.FileName, resource.FileExtension);
+            var result = await _driveService.UploadFileAsync(auth, resource);
 
             if (!result.Success)
                 return BadRequest(result.Message);

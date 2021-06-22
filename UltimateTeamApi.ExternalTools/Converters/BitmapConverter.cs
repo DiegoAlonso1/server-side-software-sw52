@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UltimateTeamApi.Converters
+namespace UltimateTeamApi.ExternalTools.Converters
 {
     public static class BitmapConverter
     {

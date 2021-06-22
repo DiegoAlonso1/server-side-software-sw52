@@ -110,14 +110,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
                             "SessionTypeId"});
-                table26.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "1"});
-                table26.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "2"});
 #line 8
- testRunner.When("session required attributes provided to initialize instance", ((string)(null)), table26, "When ");
+ testRunner.When("session required attributes provided to initialize instance", ((string)(null)), table32, "When ");
 #line hidden
 #line 12
  testRunner.Then("assign the session with Id 1 with the functionality with Id 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -166,33 +166,33 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
                             "SessionId",
                             "FunctionalityId",
                             "Count"});
-                table27.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "1",
                             "1",
                             "1"});
-                table27.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "1",
                             "2",
                             "1"});
-                table27.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "1",
                             "3",
                             "1"});
-                table27.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "2",
                             "2",
                             "1"});
-                table27.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "2",
                             "4",
                             "1"});
 #line 21
  testRunner.When("the administrator goes to Functionality Usage Page on session with id 5, the sess" +
-                        "ion stadistics list should return", ((string)(null)), table27, "When ");
+                        "ion stadistics list should return", ((string)(null)), table33, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -226,17 +226,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
                             "SessionId",
                             "FunctionalityId",
                             "Count"});
-                table28.AddRow(new string[] {
+                table34.AddRow(new string[] {
                             "1",
                             "1",
                             "1"});
 #line 32
  testRunner.When("the user uses the functionality with id 1 in the session with id 1, session stadi" +
-                        "stics details should be", ((string)(null)), table28, "When ");
+                        "stics details should be", ((string)(null)), table34, "When ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -6,12 +6,11 @@ using UltimateTeamApi.Domain.Models;
 
 namespace UltimateTeamApi.Domain.Persistance.Repositories
 {
-    public interface ISessionRepostory
+    public interface ISessionRepository
     {
-        Task<IEnumerable<SessionParticipant>> ListByUserIdAsync(int userId);
-        Task<IEnumerable<SessionParticipant>> ListBySessionAsync(int sessionId);
-        Task<SessionParticipant> FindSessionIdandUserAsync(int sessionId, int userId);
-        Task AddAsync(SessionParticipant sessionParticipant);
-        Task AssignSessionParticipantAsync(int sessionId, int userId);
+        Task<IEnumerable<Session>> ListAsync();
+        Task<Session> FindBySessionIdAsync(int sessionId);
+        Task AddAsync(Session session);
+        void Update(Session session);
     }
 }
