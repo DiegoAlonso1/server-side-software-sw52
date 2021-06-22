@@ -10,13 +10,13 @@ namespace UltimateTeamApi.ExternalTools.Resources
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string IdOrganization { get; set; }
-        public DateTime? DateLastActivity { get; set; }
-        public string IdMemberCreator { get; set; }
+        public string OrganizationId { get; set; }
+        //public DateTime DateLastActivity { get; set; }
+        //public string MemberCreatorId { get; set; }
         public string Url { get; set; }
-        public DateTime DateLastView { get; set; }
+        //public DateTime DateLastView { get; set; }
         public string ShortUrl { get; set; }
-        public IEnumerable<TrelloMembershipResource> Memberships { get; set; }
+        //public IEnumerable<TrelloMembershipResource> Memberships { get; set; }
 
     }
 }
