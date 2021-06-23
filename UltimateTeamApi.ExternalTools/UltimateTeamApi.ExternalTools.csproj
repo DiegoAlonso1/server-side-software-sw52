@@ -7,8 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth.AspNetCore3" Version="1.52.0" />
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.52.0.2312" />
-    <PackageReference Include="Google.Apis.Drive.v3" Version="1.52.0.2348" />
-    <PackageReference Include="Nancy" Version="2.0.0" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.52.0.2354" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
   </ItemGroup>
 
