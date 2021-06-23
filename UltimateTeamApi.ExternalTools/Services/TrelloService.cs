@@ -1,11 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Nancy.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using UltimateTeamApi.ExternalTools.Domain.Models.Trello;
+using UltimateTeamApi.ExternalTools.Converters;
 using UltimateTeamApi.ExternalTools.Domain.Services;
 using UltimateTeamApi.ExternalTools.Domain.Services.Communications;
 using UltimateTeamApi.ExternalTools.Resources;
@@ -42,135 +44,68 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        //public async Task<TrelloBoardResponse> GetAllBoardsByMemberId(string memberId)
-        //{
-        //    try
-        //    {
-        //        //var productos = "[{\"codigo\":\"Servilleta\",\"cantidad\":2},{\"codigo\":\"Papelhig\",\"cantidad\":1}]";
-
-        //        //var listProductos = JsonConvert.DeserializeObject<List<Producto>>(productos);
-
-        //        //foreach (Producto prod in listProductos)
-        //        //{
-        //        //    Console.WriteLine("Código: " + prod.Codigo + " - Cantidad: " + prod.Cantidad);
-        //        //}
-        //        var request = await _httpClient.GetAsync($"members/{memberId}/boards?key={_apiKey}&token={_token}");
-
-        //        if (!request.IsSuccessStatusCode)
-        //            throw new Exception();
-
-        //        var model = await request.Content.ReadAsStringAsync();
-        //        List<TrelloBoard> result;
-        //        if (model.StartsWith("[") && model.EndsWith("]"))
-        //        {
-        //            var listboardResponse = JsonConvert.DeserializeObject<List<TrelloBoard>>(model);
-        //            var resource = new List<TrelloBoardResource>();
-        //            foreach (TrelloBoard trelloBoard in listboardResponse)
-        //            {
-                        
-        //            }
-        //            //var resource = new List<TrelloBoardResource>();
-        //            {
-
-        //                for (int i = 0; i < boardResponse.Count; i++)
-        //                {
-        //                    resource.Id[i] = boardResponse[i].id;
-        //                    Name = boardResponse[i].name;
-        //                    IdOrganization = boardResponse[i].idOrganization;
-        //                    DateLastActivity = boardResponse[i].dateLastActivity;
-        //                    IdMemberCreator = boardResponse[i].idMemberCreator;
-        //                    Url = boardResponse[i].url;
-        //                    DateLastView = boardResponse[i].dateLastView;
-        //                    ShortUrl = boardResponse[i].shortUrl;
-        //                    //Memberships = boardResponse.memberships
-        //                }
-
-        //            };
-        //            return new TrelloBoardResponse(resource);
-        //        }
-        //        else
-        //        {
-        //            var boardResponse = JsonConvert.DeserializeObject<TrelloBoard>(model);
-        //            result = new List<TrelloBoard>();
-        //            result.Add(singleResult);
-        //            var resource = new TrelloBoardResource
-        //            {
-        //                Id = boardResponse.id,
-        //                Name = boardResponse.name,
-        //                IdOrganization = boardResponse.idOrganization,
-        //                DateLastActivity = boardResponse.dateLastActivity,
-        //                IdMemberCreator = boardResponse.idMemberCreator,
-        //                Url = boardResponse.url,
-        //                DateLastView = boardResponse.dateLastView,
-        //                ShortUrl = boardResponse.shortUrl
-        //                //Memberships = boardResponse.memberships
-        //            };
-        //            return new TrelloBoardResponse(resource);
-        //        }
-        //        //List<Movimientos> result;
-        //        //var contenido = "[{ \"NumeroOrden\":null,\"Operacion\":null}]";
-
-        //        //if (contenido.StartsWith("[") && contenido.EndsWith("]"))
-        //        //{
-        //        //    result = JsonConvert.DeserializeObject<List<Movimientos>>(contenido);
-        //        //}
-        //        //else
-        //        //{
-        //        //    var singleResult = JsonConvert.DeserializeObject<Movimientos>(contenido);
-        //        //    result = new List<Movimientos>();
-        //        //    result.Add(singleResult);
-        //        //}
-        //        //var resource = new TrelloBoardResource
-        //        //{
-        //        //    Id = boardResponse.id,
-        //        //    Name = boardResponse.name,
-        //        //    IdOrganization = boardResponse.idOrganization,
-        //        //    DateLastActivity = boardResponse.dateLastActivity,
-        //        //    IdMemberCreator = boardResponse.idMemberCreator,
-        //        //    Url = boardResponse.url,
-        //        //    DateLastView = boardResponse.dateLastView,
-        //        //    ShortUrl = boardResponse.shortUrl
-        //        //    //Memberships = boardResponse.memberships
-        //        //};
-
-        //        //return new TrelloBoardResponse(resource);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new TrelloBoardResponse($"An error ocurred while obtaining all TrelloBoards: {ex.Message}");
-        //    }
-        //}
-
-        public async Task<TrelloBoardResponse> GetBoardById(string boardId)
+        public async Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId)
         {
-            try
+          
+            var request = await _httpClient.GetAsync($"members/{memberId}/boards?key={_apiKey}&token={_token}");
+
+            if (!request.IsSuccessStatusCode)
+                throw new Exception();
+
+            var model = await request.Content.ReadAsStringAsync();
+                
+            dynamic listBoardResponse = JsonConvert.DeserializeObject<Object>(model);
+               
+            var resources = new List<TrelloBoardResource>();
+                
+            foreach (var board in listBoardResponse)
             {
-                var request = await _httpClient.GetAsync($"boards/{boardId}?key={_apiKey}&token={_token}");
-
-                if (!request.IsSuccessStatusCode)
-                    throw new Exception();
-
-                var model = await request.Content.ReadAsStringAsync();
-
-                var boardResponse = JsonConvert.DeserializeObject<TrelloBoard>(model);
-                var resource = new TrelloBoardResource
+                resources.Add(new TrelloBoardResource
                 {
-                    Id = boardResponse.id,
-                    Name = boardResponse.name,
-                    IdOrganization = boardResponse.idOrganization,                   
-                    Url = boardResponse.url,                   
-                    ShortUrl = boardResponse.shortUrl                   
-                };
+                    Id = board.id,
+                    Name = board.name,
+                    OrganizationId = board.idOrganization,
+                    //DateLastActivity = (string)boardResponse.dateLastActivity,
+                    //MemberCreatorId = boardResponse.idMemberCreator,
+                    Url = board.url,
+                    ShortUrl = board.shortUrl,
+                    //DateLastView = (string)boardResponse.dateLastView,
+                    //Memberships = boardResponse.memberships,
+                });
+            }
 
-                return new TrelloBoardResponse(resource);
-            }
-            catch (Exception ex)
-            {
-                return new TrelloBoardResponse($"An error ocurred while obtaining TrelloBoard: {ex.Message}");
-            }
+            return resources;
         }
 
-        public async Task<TrelloMemberResponse> GetMemberById(string memberId)
+        public async Task<TrelloBoardResponse> GetBoardByIdAsync(string boardId)
+        {
+            
+            var request = await _httpClient.GetAsync($"boards/{boardId}?key={_apiKey}&token={_token}");
+
+            if (!request.IsSuccessStatusCode)
+                throw new Exception();
+
+            var model = await request.Content.ReadAsStringAsync();
+
+            dynamic boardResponse = JsonConvert.DeserializeObject<Object>(model);
+                
+            var resource = new TrelloBoardResource
+            {
+                Id = boardResponse.id,
+                Name = boardResponse.name,
+                OrganizationId = boardResponse.idOrganization,
+                //DateLastActivity = (string)boardResponse.dateLastActivity,
+                //MemberCreatorId = boardResponse.idMemberCreator,
+                Url = boardResponse.url,                   
+                ShortUrl = boardResponse.shortUrl,
+                //DateLastView = (string)boardResponse.dateLastView,
+                //Memberships = boardResponse.memberships,
+            };
+
+            return new TrelloBoardResponse(resource);          
+        }
+
+        public async Task<TrelloMemberResponse> GetMemberByIdAsync(string memberId)
         {
             try
             {
@@ -181,7 +116,7 @@ namespace UltimateTeamApi.ExternalTools.Services
 
                 var model = await request.Content.ReadAsStringAsync();
 
-                var memberResponse = JsonConvert.DeserializeObject<TrelloMember>(model);
+                dynamic memberResponse = JsonConvert.DeserializeObject<Object>(model);
                 var resource = new TrelloMemberResource
                 {
                     Id = memberResponse.id,
@@ -191,8 +126,8 @@ namespace UltimateTeamApi.ExternalTools.Services
                     MemberType = memberResponse.memberType,
                     ProfileUrl = memberResponse.url,
                     Status = memberResponse.status,
-                    BoardsIds = memberResponse.idBoards,
-                    OrganizationsIds = memberResponse.idOrganizations
+                    BoardsIds = JArrayConverter.JArrayToStringList(memberResponse.idBoards),
+                    OrganizationsIds = JArrayConverter.JArrayToStringList(memberResponse.idOrganizations)
                 };
 
                 return new TrelloMemberResponse(resource);
@@ -200,6 +135,36 @@ namespace UltimateTeamApi.ExternalTools.Services
             catch (Exception ex)
             {
                 return new TrelloMemberResponse($"An error ocurred while obtaining TrelloMember: {ex.Message}");
+            }
+        }
+
+        public async Task<TrelloBoardResponse> SaveBoardAsync(SaveTrelloBoardResource _resource)
+        {
+            try
+            {
+                var request = await _httpClient.PostAsync($"boards/?key={_apiKey}&token={_token}&name={_resource.Name}", null);
+
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception();
+
+                var model = await request.Content.ReadAsStringAsync();
+
+                dynamic boardResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                var resource = new TrelloBoardResource
+                {
+                    Id = boardResponse.id,
+                    Name = boardResponse.name,
+                    OrganizationId = boardResponse.idOrganization,                   
+                    Url = boardResponse.url,
+                    ShortUrl = boardResponse.shortUrl,              
+                };
+                return new TrelloBoardResponse(resource);
+
+            }
+            catch(Exception ex)
+            {
+                return new TrelloBoardResponse($"An error ocurred while saving a Board: {ex.Message}");
             }
         }
 
@@ -214,6 +179,37 @@ namespace UltimateTeamApi.ExternalTools.Services
             catch (Exception ex)
             {
                 return new TrelloAccountResponse($"An error ocurred while logging out in Trello account: {ex.Message}");
+            }
+        }
+
+        public async Task<TrelloBoardResponse> UpdateBoardAsync(string boardId, SaveTrelloBoardResource _resource)
+        {
+            try
+            {
+                var data = new StringContent(JsonConvert.SerializeObject(new { name = _resource.Name }), Encoding.UTF8, "application/json");
+                var request = await _httpClient.PutAsync($"boards/{boardId}?key={_apiKey}&token={_token}", data);
+
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception();
+
+                var model = await request.Content.ReadAsStringAsync();
+
+                dynamic boardResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                var resource = new TrelloBoardResource
+                {
+                    Id = boardResponse.id,
+                    Name = boardResponse.name,
+                    OrganizationId = boardResponse.idOrganization,
+                    Url = boardResponse.url,
+                    ShortUrl = boardResponse.shortUrl,
+                };
+                return new TrelloBoardResponse(resource);
+
+            }
+            catch (Exception ex)
+            {
+                return new TrelloBoardResponse($"An error ocurred while updating a Board: {ex.Message}");
             }
         }
     }

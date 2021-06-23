@@ -8,9 +8,9 @@ namespace UltimateTeamApi.ExternalTools.Resources
 {
     public class TrelloMembershipResource
     {
-        public string id { get; set; }
-        public string idMember { get; set; }
-        public string memberType { get; set; }
-        public bool deactivated { get; set; }
+        public string Id { get; set; }
+        public string MemberId { get; set; }
+        public string MemberType { get; set; }
+        public bool Deactivated { get; set; }
     }
 }

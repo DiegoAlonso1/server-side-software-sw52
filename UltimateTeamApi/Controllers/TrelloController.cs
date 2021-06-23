@@ -83,12 +83,12 @@ namespace UltimateTeamApi.Controllers
             OperationId = "GetATrelloMemberById")]
         [SwaggerResponse(200, "Trello Member By Id", typeof(TrelloMemberResource))]
 
-        [HttpGet]
+        [HttpGet("members/memberId")]
         [ProducesResponseType(typeof(TrelloMemberResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> GetTrelloMemberByIdAsync(string memberId)
         {
-            var result = await _trelloService.GetMemberById(memberId);
+            var result = await _trelloService.GetMemberByIdAsync(memberId);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -98,52 +98,96 @@ namespace UltimateTeamApi.Controllers
 
 
 
-        ///******************************************/
-        ///*GET TRELLO BOARDS BY MEMBER ID ASYNC*/
-        ///******************************************/
+        /******************************************/
+        /*GET TRELLO BOARDS BY MEMBER ID ASYNC*/
+        /******************************************/
 
-        //[SwaggerOperation(
-        //    Summary = "Get Trello Boards By Member Id",
-        //    Description = "Get all Trello Boards By Member Id",
-        //    OperationId = "GetAllTrelloBoardsByMemberId")]
-        //[SwaggerResponse(200, "Trello Boards By Member Id", typeof(TrelloBoardResource))]
+        [SwaggerOperation(
+            Summary = "Get Trello Boards By Member Id",
+            Description = "Get all Trello Boards By Member Id",
+            OperationId = "GetAllTrelloBoardsByMemberId")]
+        [SwaggerResponse(200, "Trello Boards By Member Id", typeof(IEnumerable<TrelloBoardResource>))]
 
-        //[HttpGet]
-        //[ProducesResponseType(typeof(TrelloBoardResource), 200)]
-        //[ProducesResponseType(typeof(BadRequestResult), 404)]
-        //public async Task<IActionResult> GetAllBoardsByMemberIdAsync(string memberId)
-        //{
-        //    var result = await _trelloService.GetAllBoardsByMemberId(memberId);
+        [HttpGet("members/{memberId}/boards")]
+        [ProducesResponseType(typeof(IEnumerable<TrelloBoardResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId)
+        {
+            var boards = await _trelloService.GetAllBoardsByMemberIdAsync(memberId);
+            return boards;
+        }
 
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
 
-        //    return Ok(result.Resource);
-        //}
+        /******************************************/
+        /*GET TRELLO BOARD BY ID ASYNC*/
+        /******************************************/
 
-        //60cd2ed628874b1eb2ba73b2
+        [SwaggerOperation(
+            Summary = "Get Trello Board By Id",
+            Description = "Get a Trello Board By Id",
+            OperationId = "GetATrelloBoardById")]
+        [SwaggerResponse(200, "Trello Board By Id", typeof(TrelloBoardResource))]
 
-        ///******************************************/
-        ///*GET TRELLO BOARD BY ID ASYNC*/
-        ///******************************************/
+        [HttpGet("boards/{boardId}")]
+        [ProducesResponseType(typeof(TrelloBoardResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> GetTrelloBoardByIdAsync(string boardId)
+        {
+            var result = await _trelloService.GetBoardByIdAsync(boardId);
 
-        //[SwaggerOperation(
-        //    Summary = "Get Trello Board By Id",
-        //    Description = "Get a Trello Board By Id",
-        //    OperationId = "GetATrelloBoardById")]
-        //[SwaggerResponse(200, "Trello Board By Id", typeof(TrelloBoardResource))]
+            if (!result.Success)
+                return BadRequest(result.Message);
 
-        //[HttpGet]
-        //[ProducesResponseType(typeof(TrelloBoardResource), 200)]
-        //[ProducesResponseType(typeof(BadRequestResult), 404)]
-        //public async Task<IActionResult> GetTrelloBoardByIdAsync(string boardId)
-        //{
-        //    var result = await _trelloService.GetBoardById(boardId);
+            return Ok(result.Resource);
+        }
 
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
 
-        //    return Ok(result.Resource);
-        //}
+
+        /******************************************/
+        /*POST TRELLO BOARD ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Post Trello Board",
+            Description = "Post a Trello Board",
+            OperationId = "PostTrelloBoard")]
+        [SwaggerResponse(200, "Trello Board Created", typeof(TrelloBoardResource))]
+
+        [HttpPost("boards")]
+        [ProducesResponseType(typeof(TrelloBoardResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> SaveTrelloBoardAsync([FromBody] SaveTrelloBoardResource resource)
+        {
+            var result = await _trelloService.SaveBoardAsync(resource);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+        /******************************************/
+        /*PUT TRELLO BOARD ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Put Trello Board",
+            Description = "Put a Trello Board",
+            OperationId = "PutTrelloBoard")]
+        [SwaggerResponse(200, "Trello Board Updated", typeof(TrelloBoardResource))]
+
+        [HttpPut("boards/{boardId}")]
+        [ProducesResponseType(typeof(TrelloBoardResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> UpdateTrelloBoardAsync(string boardId, [FromBody] SaveTrelloBoardResource resource)
+        {
+            var result = await _trelloService.UpdateBoardAsync(boardId, resource);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
     }
 }
