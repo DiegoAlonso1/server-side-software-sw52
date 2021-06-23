@@ -189,5 +189,146 @@ namespace UltimateTeamApi.Controllers
 
             return Ok(result.Resource);
         }
+
+
+        /******************************************/
+        /*DELETE TRELLO BOARD ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Delete Trello Board",
+            Description = "Delete a Trello Board",
+            OperationId = "DeleteTrelloBoard")]
+        [SwaggerResponse(200, "Trello Board Deleted", typeof(TrelloBoardResource))]
+
+        [HttpDelete("boards/{boardId}")]
+        [ProducesResponseType(typeof(TrelloBoardResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> DeleteTrelloBoardAsync(string boardId)
+        {
+            var result = await _trelloService.DeleteBoardAsync(boardId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+        /******************************************/
+        /*GET TRELLO CARDS BY BOARD ID ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Get Trello Cards By Board Id",
+            Description = "Get all Trello Cards By Board Id",
+            OperationId = "GetAllTrelloCardsByBoardId")]
+        [SwaggerResponse(200, "Trello Cards By Board Id", typeof(IEnumerable<TrelloCardResource>))]
+
+        [HttpGet("boards/{boardId}/cards")]
+        [ProducesResponseType(typeof(IEnumerable<TrelloCardResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IEnumerable<TrelloCardResource>> GetAllCardsByBoardIdAsync(string boardId)
+        {
+            var cards = await _trelloService.GetAllCardsByBoardIdAsync(boardId);
+            return cards;
+        }
+
+
+
+        /******************************************/
+        /*GET TRELLO CARD BY ID ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Get Trello Card By Id",
+            Description = "Get a Trello Card By Id",
+            OperationId = "GetATrelloCardById")]
+        [SwaggerResponse(200, "Trello Card By Id", typeof(TrelloCardResource))]
+
+        [HttpGet("cards/{cardId}")]
+        [ProducesResponseType(typeof(TrelloCardResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> GetTrelloCardByIdAsync(string cardId)
+        {
+            var result = await _trelloService.GetCardByIdAsync(cardId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+
+        ///******************************************/
+        ///*POST TRELLO CARD ASYNC*/
+        ///******************************************/
+
+        //[SwaggerOperation(
+        //    Summary = "Post Trello Card",
+        //    Description = "Post a Trello Card",
+        //    OperationId = "PostTrelloCard")]
+        //[SwaggerResponse(200, "Trello Card Created", typeof(TrelloCardResource))]
+
+        //[HttpPost("cards")]
+        //[ProducesResponseType(typeof(TrelloCardResource), 200)]
+        //[ProducesResponseType(typeof(BadRequestResult), 404)]
+        //public async Task<IActionResult> SaveTrelloCardAsync([FromBody] SaveTrelloCardResource resource)
+        //{
+        //    var result = await _trelloService.SaveCardAsync(resource);
+
+        //    if (!result.Success)
+        //        return BadRequest(result.Message);
+
+        //    return Ok(result.Resource);
+        //}
+
+
+        /******************************************/
+        /*PUT TRELLO CARD ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Put Trello Card",
+            Description = "Put a Trello Card",
+            OperationId = "PutTrelloCard")]
+        [SwaggerResponse(200, "Trello Card Updated", typeof(TrelloCardResource))]
+
+        [HttpPut("cards/{cardId}")]
+        [ProducesResponseType(typeof(TrelloCardResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> UpdateTrelloCardAsync(string cardId, [FromBody] SaveTrelloCardResource resource)
+        {
+            var result = await _trelloService.UpdateCardAsync(cardId, resource);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+        /******************************************/
+        /*DELETE TRELLO CARD ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Delete Trello Card",
+            Description = "Delete a Trello Card",
+            OperationId = "DeleteTrelloCard")]
+        [SwaggerResponse(200, "Trello Card Deleted", typeof(TrelloCardResource))]
+
+        [HttpDelete("cards/{cardId}")]
+        [ProducesResponseType(typeof(TrelloCardResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> DeleteTrelloCardAsync(string cardId)
+        {
+            var result = await _trelloService.DeleteCardAsync(cardId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
     }
 }

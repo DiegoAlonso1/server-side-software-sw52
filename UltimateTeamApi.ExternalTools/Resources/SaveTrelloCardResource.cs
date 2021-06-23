@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UltimateTeamApi.ExternalTools.Resources
+{
+    public class SaveTrelloCardResource
+    {
+        public string Name { get; set; }
+        //public string ListId { get; set; }
+    }
+}
