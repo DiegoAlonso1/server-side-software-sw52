@@ -13,10 +13,19 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services
         Task<TrelloMemberResponse> GetMemberByIdAsync(string memberId);
         Task<TrelloAccountResponse> AssignToken();
         Task<TrelloAccountResponse> UnassignToken();
+
+        // BOARD
         Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId);
         Task<TrelloBoardResponse> GetBoardByIdAsync(string boardId);
-
         Task<TrelloBoardResponse> SaveBoardAsync(SaveTrelloBoardResource resource);
         Task<TrelloBoardResponse> UpdateBoardAsync(string boardId, SaveTrelloBoardResource resource);
+        Task<TrelloBoardResponse> DeleteBoardAsync(string boardId);
+
+        // CARDS
+        Task<IEnumerable<TrelloCardResource>> GetAllCardsByBoardIdAsync(string boardId);
+        Task<TrelloCardResponse> GetCardByIdAsync(string cardId);
+        //Task<TrelloCardResponse> SaveCardAsync(SaveTrelloCardResource resource);
+        Task<TrelloCardResponse> UpdateCardAsync(string cardId, SaveTrelloCardResource resource);
+        Task<TrelloCardResponse> DeleteCardAsync(string cardId);
     }
 }

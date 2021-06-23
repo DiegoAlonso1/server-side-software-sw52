@@ -44,6 +44,72 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
+        public async Task<TrelloBoardResponse> DeleteBoardAsync(string boardId)
+        {           
+            try
+            {
+                var request = await _httpClient.DeleteAsync($"boards/{boardId}?key={_apiKey}&token={_token}");
+
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception();
+
+                var model = await request.Content.ReadAsStringAsync();
+
+                dynamic boardResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                var resource = new TrelloBoardResource
+                {
+                    Id = boardResponse.id,
+                    Name = boardResponse.name,
+                    OrganizationId = boardResponse.idOrganization,
+                    Url = boardResponse.url,
+                    ShortUrl = boardResponse.shortUrl,
+                };
+                return new TrelloBoardResponse(resource);
+
+            }
+            catch (Exception ex)
+            {
+                return new TrelloBoardResponse($"An error ocurred while deleting a Board: {ex.Message}");
+            }
+        }
+
+        public async Task<TrelloCardResponse> DeleteCardAsync(string cardId)
+        {
+            try
+            {
+                var request = await _httpClient.DeleteAsync($"cards/{cardId}?key={_apiKey}&token={_token}");
+
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception();
+
+                var model = await request.Content.ReadAsStringAsync();
+
+                dynamic cardResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                var resource = new TrelloCardResource
+                {
+                    Id = cardResponse.id,
+                    //DateLastActivity = cardResponse.dateLastActivity,
+                    BoardId = cardResponse.idBoard,
+                    ListId = cardResponse.idList,
+                    //ShortId = cardResponse.idShort,
+                    Name = cardResponse.name,
+                    //Pos = cardResponse.pos,
+                    ShortLink = cardResponse.shortLink,
+                    //MembersIds = JArrayConverter.JArrayToObjectList(cardResponse.idMembers),
+                    ShortUrl = cardResponse.shortUrl,
+                    Url = cardResponse.url,
+                };
+                return new TrelloCardResponse(resource);
+
+            }
+            catch (Exception ex)
+            {
+                return new TrelloCardResponse($"An error ocurred while deleting a Card: {ex.Message}");
+            }
+        }
+
         public async Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId)
         {
           
@@ -65,12 +131,45 @@ namespace UltimateTeamApi.ExternalTools.Services
                     Id = board.id,
                     Name = board.name,
                     OrganizationId = board.idOrganization,
-                    //DateLastActivity = (string)boardResponse.dateLastActivity,
-                    //MemberCreatorId = boardResponse.idMemberCreator,
+                    DateLastActivity = board.dateLastActivity,
+                    MemberCreatorId = board.idMemberCreator,
                     Url = board.url,
                     ShortUrl = board.shortUrl,
-                    //DateLastView = (string)boardResponse.dateLastView,
-                    //Memberships = boardResponse.memberships,
+                    DateLastView = board.dateLastView,                    
+                });
+            }
+
+            return resources;
+        }
+
+        public async Task<IEnumerable<TrelloCardResource>> GetAllCardsByBoardIdAsync(string boardId)
+        {
+            var request = await _httpClient.GetAsync($"boards/{boardId}/cards?key={_apiKey}&token={_token}");
+
+            if (!request.IsSuccessStatusCode)
+                throw new Exception();
+
+            var model = await request.Content.ReadAsStringAsync();
+
+            dynamic listCardResponse = JsonConvert.DeserializeObject<Object>(model);
+
+            var resources = new List<TrelloCardResource>();
+
+            foreach (var card in listCardResponse)
+            {
+                resources.Add(new TrelloCardResource
+                {
+                    Id = card.id,
+                    DateLastActivity = card.dateLastActivity,
+                    BoardId = card.idBoard,
+                    ListId = card.idList,
+                    ShortId = card.idShort,
+                    Name = card.name,
+                    Pos = card.pos,
+                    ShortLink = card.shortLink,
+                    MembersIds = JArrayConverter.JArrayToObjectList(card.idMembers),
+                    ShortUrl = card.shortUrl,
+                    Url = card.url,            
                 });
             }
 
@@ -103,6 +202,35 @@ namespace UltimateTeamApi.ExternalTools.Services
             };
 
             return new TrelloBoardResponse(resource);          
+        }
+
+        public async Task<TrelloCardResponse> GetCardByIdAsync(string cardId)
+        {
+            var request = await _httpClient.GetAsync($"cards/{cardId}?key={_apiKey}&token={_token}");
+
+            if (!request.IsSuccessStatusCode)
+                throw new Exception();
+
+            var model = await request.Content.ReadAsStringAsync();
+
+            dynamic cardResponse = JsonConvert.DeserializeObject<Object>(model);
+
+            var resource = new TrelloCardResource
+            {
+                Id = cardResponse.id,
+                DateLastActivity = cardResponse.dateLastActivity,
+                BoardId = cardResponse.idBoard,
+                ListId = cardResponse.idList,
+                ShortId = cardResponse.idShort,
+                Name = cardResponse.name,
+                Pos = cardResponse.pos,
+                ShortLink = cardResponse.shortLink,
+                MembersIds = JArrayConverter.JArrayToObjectList(cardResponse.idMembers),
+                ShortUrl = cardResponse.shortUrl,
+                Url = cardResponse.url,
+            };
+
+            return new TrelloCardResponse(resource);
         }
 
         public async Task<TrelloMemberResponse> GetMemberByIdAsync(string memberId)
@@ -168,6 +296,42 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
+        //public async Task<TrelloCardResponse> SaveCardAsync(SaveTrelloCardResource _resource)
+        //{
+        //    try
+        //    {
+        //        var request = await _httpClient.PostAsync($"cards?key={_apiKey}&token={_token}&idList={_resource.ListId}", null);
+
+        //        if (!request.IsSuccessStatusCode)
+        //            throw new Exception();
+
+        //        var model = await request.Content.ReadAsStringAsync();
+
+        //        dynamic cardResponse = JsonConvert.DeserializeObject<Object>(model);
+
+        //        var resource = new TrelloCardResource
+        //        {
+        //            Id = cardResponse.id,
+        //            DateLastActivity = cardResponse.dateLastActivity,
+        //            BoardId = cardResponse.idBoard,
+        //            ListId = cardResponse.idList,
+        //            ShortId = cardResponse.idShort,
+        //            Name = cardResponse.name,
+        //            Pos = cardResponse.pos,
+        //            ShortLink = cardResponse.shortLink,
+        //            MembersIds = JArrayConverter.JArrayToObjectList(cardResponse.idMembers),
+        //            ShortUrl = cardResponse.shortUrl,
+        //            Url = cardResponse.url,
+        //        };
+        //        return new TrelloCardResponse(resource);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new TrelloCardResponse($"An error ocurred while saving a Card: {ex.Message}");
+        //    }
+        //}
+
         public async Task<TrelloAccountResponse> UnassignToken()
         {
             try
@@ -210,6 +374,43 @@ namespace UltimateTeamApi.ExternalTools.Services
             catch (Exception ex)
             {
                 return new TrelloBoardResponse($"An error ocurred while updating a Board: {ex.Message}");
+            }
+        }
+
+        public async Task<TrelloCardResponse> UpdateCardAsync(string cardId, SaveTrelloCardResource _resource)
+        {
+            try
+            {
+                var data = new StringContent(JsonConvert.SerializeObject(new { name = _resource.Name }), Encoding.UTF8, "application/json");
+                var request = await _httpClient.PutAsync($"cards/{cardId}?key={_apiKey}&token={_token}", data);
+
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception();
+
+                var model = await request.Content.ReadAsStringAsync();
+
+                dynamic cardResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                var resource = new TrelloCardResource
+                {
+                    Id = cardResponse.id,
+                    DateLastActivity = cardResponse.dateLastActivity,
+                    BoardId = cardResponse.idBoard,
+                    ListId = cardResponse.idList,
+                    ShortId = cardResponse.idShort,
+                    Name = cardResponse.name,
+                    Pos = cardResponse.pos,
+                    ShortLink = cardResponse.shortLink,
+                    MembersIds = JArrayConverter.JArrayToObjectList(cardResponse.idMembers),
+                    ShortUrl = cardResponse.shortUrl,
+                    Url = cardResponse.url,
+                };
+                return new TrelloCardResponse(resource);
+
+            }
+            catch (Exception ex)
+            {
+                return new TrelloCardResponse($"An error ocurred while updating a Card: {ex.Message}");
             }
         }
     }
