@@ -31,9 +31,9 @@ namespace UltimateTeamApi.Controllers
         /*****************************************************************/
 
         [SwaggerOperation(
-         Summary = "List Notifications Sent By User Id",
-         Description = "List Notifications Sent By User Id",
-         OperationId = "ListNotificationsSentByUserId")]
+         Summary = "Get All Notifications Sent By User Id",
+         Description = "Get All Notifications Sent By User Id",
+         OperationId = "GetAllNotificationsSentByUserId")]
         [SwaggerResponse(200, "List of Notifications Sent By User Id", typeof(IEnumerable<NotificationResource>))]
 
         [HttpGet("sent")]
@@ -51,9 +51,9 @@ namespace UltimateTeamApi.Controllers
         /*****************************************************************/
 
         [SwaggerOperation(
-         Summary = "List Notifications Received By User Id",
-         Description = "List Notifications Receeived By User Id",
-         OperationId = "ListNotificationsReceivedByUserId")]
+         Summary = "Get All Notifications Received By User Id",
+         Description = "Get All Notifications Receeived By User Id",
+         OperationId = "GetAllNotificationsReceivedByUserId")]
         [SwaggerResponse(200, "List of Notifications Received By User Id", typeof(IEnumerable<NotificationResource>))]
 
         [HttpGet("received")]

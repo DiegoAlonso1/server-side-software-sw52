@@ -30,7 +30,7 @@ namespace UltimateTeamApi.Controllers
         /**********************************************/
 
         [SwaggerOperation(
-           Summary = "Get All Friends By UserId",
+           Summary = "Get All Friends By User Id",
            Description = "Get a List of All Friends By User Id",
            OperationId = "GetAllFriendsByUserId")]
         [SwaggerResponse(200, "Friends By UserId", typeof(IEnumerable<UserResource>))]
