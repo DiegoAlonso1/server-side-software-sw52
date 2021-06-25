@@ -14,6 +14,7 @@ namespace UltimateTeamApi.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
+    [SwaggerTag("To use the following endpoints you must first use the Login link outside the swagger (in your browser) to give Google permissions. Then you can return to this page and make use of the endpoints.")]
     public class CalendarController : ControllerBase
     {
         private readonly ICalendarService _calendarService;

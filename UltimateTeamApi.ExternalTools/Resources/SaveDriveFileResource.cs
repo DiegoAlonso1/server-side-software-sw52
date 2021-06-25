@@ -10,6 +10,6 @@ namespace UltimateTeamApi.ExternalTools.Resources
 {
     public class SaveDriveFileResource
     {
-        public IFormFile File { get; set; }
+        public string FileName { get; set; }
     }
 }
