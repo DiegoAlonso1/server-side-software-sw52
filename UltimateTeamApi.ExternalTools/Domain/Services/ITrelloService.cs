@@ -27,5 +27,13 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services
         //Task<TrelloCardResponse> SaveCardAsync(SaveTrelloCardResource resource);
         Task<TrelloCardResponse> UpdateCardAsync(string cardId, SaveTrelloCardResource resource);
         Task<TrelloCardResponse> DeleteCardAsync(string cardId);
+
+        //LIST
+
+        Task<IEnumerable<TrelloListResource>> GetAllListsByBoardIdAsync(string boardId);
+        Task<TrelloListResponse> GetListByIdAsync(string listId);
+        Task<TrelloListResponse> SaveListOnABoardAsync(SaveTrelloListResource resource, string boardId);
+        Task<TrelloListResponse> UpdateListOnABoardAsync(string listId, SaveTrelloListResource resource);
+        
     }
 }

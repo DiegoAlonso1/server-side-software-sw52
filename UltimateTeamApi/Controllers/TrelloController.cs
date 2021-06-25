@@ -330,5 +330,102 @@ namespace UltimateTeamApi.Controllers
 
             return Ok(result.Resource);
         }
+
+
+
+        /******************************************/
+        /*GET TRELLO LISTS BY BOARD ID ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Get Trello Lists By Board Id",
+            Description = "Get all Trello Lists By Board Id",
+            OperationId = "GetAllTrelloListsByBoardId")]
+        [SwaggerResponse(200, "Trello Lists By Board Id", typeof(IEnumerable<TrelloListResource>))]
+
+        [HttpGet("boards/{boardId}/lists")]
+        [ProducesResponseType(typeof(IEnumerable<TrelloListResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IEnumerable<TrelloListResource>> GetAllListsByBoardIdAsync(string boardId)
+        {
+            var lists = await _trelloService.GetAllListsByBoardIdAsync(boardId);
+            return lists;
+        }
+
+
+
+        /******************************************/
+        /*GET TRELLO LISTS BY ID ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Get Trello List By Id",
+            Description = "Get a Trello List By Id",
+            OperationId = "GetATrelloListById")]
+        [SwaggerResponse(200, "Trello List By Id", typeof(TrelloListResource))]
+
+        [HttpGet("lists/{listId}")]
+        [ProducesResponseType(typeof(TrelloListResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> GetTrelloListByIdAsync(string listId)
+        {
+            var result = await _trelloService.GetListByIdAsync(listId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+
+
+        /******************************************/
+        /*POST TRELLO LIST ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Post Trello List",
+            Description = "Post a Trello List",
+            OperationId = "PostTrelloList")]
+        [SwaggerResponse(200, "Trello List Created", typeof(TrelloListResource))]
+
+        [HttpPost("boards/{boardId}/lists")]
+        [ProducesResponseType(typeof(TrelloListResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> SaveTrelloListOnABoardAsync([FromBody] SaveTrelloListResource resource, string boardId)
+        {
+            var result = await _trelloService.SaveListOnABoardAsync(resource, boardId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+
+        /******************************************/
+        /*PUT TRELLO LIST ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Put Trello List",
+            Description = "Put a Trello List",
+            OperationId = "PutTrelloList")]
+        [SwaggerResponse(200, "Trello List Updated", typeof(TrelloListResource))]
+
+        [HttpPut("lists/{listId}")]
+        [ProducesResponseType(typeof(TrelloListResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> UpdateTrelloListAsync(string listId, [FromBody] SaveTrelloListResource resource)
+        {
+            var result = await _trelloService.UpdateListOnABoardAsync(listId, resource);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
     }
 }
