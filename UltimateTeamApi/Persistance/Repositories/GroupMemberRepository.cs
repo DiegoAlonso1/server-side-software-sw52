@@ -20,19 +20,22 @@ namespace UltimateTeamApi.Persistance.Repositories
             await _context.GroupMembers.AddAsync(groupMember);
         }
 
-        public async Task AssignGroupMemberAsync(int groupId, int userId)
+        public async Task AssignGroupMemberAsync(int groupId, int userId, bool userCreator)
         {
             GroupMember groupMember = await FindByGroupIdAndUserIdAsync(groupId, userId);
             if (groupMember == null)
             {
-                groupMember = new GroupMember { GroupId = groupId, UserId = userId };
+                groupMember = new GroupMember { GroupId = groupId, UserId = userId, UserCreator = userCreator };
                 await AddAsync(groupMember);
             }
         }
 
         public async Task<GroupMember> FindByGroupIdAndUserIdAsync(int groupId, int userId)
         {
-            return await _context.GroupMembers.FindAsync(groupId,userId);
+            return await _context.GroupMembers
+                .Where(gm => gm.GroupId == groupId && gm.UserId == userId)
+                .Include(gm => gm.Group)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<User>> ListUsersByGroupIdAsync(int groupId)

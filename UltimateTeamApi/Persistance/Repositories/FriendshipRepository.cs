@@ -20,32 +20,47 @@ namespace UltimateTeamApi.Persistance.Repositories
             await _context.Friendships.AddAsync(friendship);
         }
 
-        public async Task AssignFriendAsync(int user1Id, int user2Id)
+        public async Task AssignFriendAsync(int principalId, int friendId)
         {
-            var friendship = await FindByUser1IdAndUser2IdAsync(user1Id, user2Id);
+            var friendship = await FindByPrincipalIdAndFriendIdAsync(principalId, friendId);
 
             if (friendship == null)
             {
-                friendship = new Friendship { PrincipalId = user1Id, FriendId = user2Id};
+                friendship = new Friendship { PrincipalId = principalId, FriendId = friendId};
                 await AddAsync(friendship);
             }
 
             else
-                throw new Exception("User 1 and User 2 have already been asigned.");
+                throw new Exception("Both users have already been asigned.");
         }
 
-        public async Task<Friendship> FindByUser1IdAndUser2IdAsync(int user1Id, int user2Id)
+        public async Task<Friendship> FindByPrincipalIdAndFriendIdAsync(int principalId, int friendId)
         {
             return await _context.Friendships
-                .Where(f => f.PrincipalId == user1Id && f.FriendId == user2Id)
+                .Where(f => f.PrincipalId == principalId && f.FriendId == friendId)
+                .Include(f => f.Friend)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Friendship>> ListByUserIdAsync(int userId)
+        public async Task<IEnumerable<User>> ListFriendsByUserIdAsync(int userId)
         {
-            return await _context.Friendships
-                .Where(f => f.PrincipalId == userId)
+            var friendships = await _context.Friendships
+                .Where(f => f.PrincipalId == userId || f.FriendId == userId)
+                .Include(f => f.Friend)
+                .Include(f => f.Principal)
                 .ToListAsync();
+
+            List<User> friends = new List<User>();
+
+            foreach (var friendship in friendships)
+            {
+                if (friendship.FriendId != userId)
+                    friends.Add(friendship.Friend);
+                else
+                    friends.Add(friendship.Principal);
+            }
+
+            return friends;
         }
 
         public void Remove(Friendship friendship)
@@ -53,15 +68,15 @@ namespace UltimateTeamApi.Persistance.Repositories
             _context.Friendships.Remove(friendship);
         }
 
-        public async Task UnassignFriendAsync(int user1Id, int user2Id)
+        public async Task UnassignFriendAsync(int principalId, int friendId)
         {
-            Friendship friendship = await FindByUser1IdAndUser2IdAsync(user1Id, user2Id);
+            Friendship friendship = await FindByPrincipalIdAndFriendIdAsync(principalId, friendId);
 
             if (friendship != null)
                 Remove(friendship);
             
             else
-                throw new Exception("User 1 and User 2 have already been unasigned.");
+                throw new Exception("Both users have already been unasigned.");
         }
     }
 }

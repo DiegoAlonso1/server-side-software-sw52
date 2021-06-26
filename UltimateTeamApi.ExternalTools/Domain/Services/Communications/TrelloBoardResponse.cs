@@ -7,7 +7,7 @@ using UltimateTeamApi.ExternalTools.Resources;
 
 namespace UltimateTeamApi.ExternalTools.Domain.Services.Communications
 {
-    class TrelloBoardResponse : BaseResponse<TrelloBoardResource>
+    public class TrelloBoardResponse : BaseResponse<TrelloBoardResource>
     {
         public TrelloBoardResponse(TrelloBoardResource resource) : base(resource)
         {

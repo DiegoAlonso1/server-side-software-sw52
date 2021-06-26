@@ -11,7 +11,7 @@ using UltimateTeamApi.Resources;
 
 namespace UltimateTeamApi.Controllers
 {
-    [Route("api/users/{user1Id}/friends")]
+    [Route("api/users/{principalId}/friends")]
     [Produces("application/json")]
     [ApiController]
     public class FriendshipsController : ControllerBase
@@ -26,18 +26,26 @@ namespace UltimateTeamApi.Controllers
         }
 
         /**********************************************/
-        /*GET ALL FRIENDSHIPS BY USER ID ASYNC*/
+        /*GET ALL FRIENDS BY USER ID ASYNC*/
         /**********************************************/
+
+        [SwaggerOperation(
+           Summary = "Get All Friends By User Id",
+           Description = "Get a List of All Friends By User Id",
+           OperationId = "GetAllFriendsByUserId")]
+        [SwaggerResponse(200, "Friends By UserId", typeof(IEnumerable<UserResource>))]
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IEnumerable<UserResource>> GetAllByUserIdAsync(int user1Id)
+        public async Task<IEnumerable<UserResource>> GetAllFriendsByUserIdAsync(int principalId)
         {
-            var friendships = await _friendshipService.GetAllByUserIdAsync(user1Id);
-            var resources = _mapper.Map<IEnumerable<Friendship>, IEnumerable<UserResource>>(friendships);
+            var friends = await _friendshipService.GetAllFriendsByUserIdAsync(principalId);
+            var resources = _mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(friends);
             return resources;
         }
+
+
 
         /*****************************************************************/
         /*ASSIGN FRIENDSHIP*/
@@ -49,12 +57,12 @@ namespace UltimateTeamApi.Controllers
            OperationId = "Assign Friendship")]
         [SwaggerResponse(200, "Friendship Assigned", typeof(UserResource))]
 
-        [HttpPost("{user2Id}")]
+        [HttpPost("{friendId}")]
         [ProducesResponseType(typeof(UserResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> AssignFriendAsync(int user1Id, int user2Id)
+        public async Task<IActionResult> AssignFriendAsync(int principalId, int friendId)
         {
-            var result = await _friendshipService.AssignFriendAsync(user1Id, user2Id);
+            var result = await _friendshipService.AssignFriendAsync(principalId, friendId);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -73,16 +81,17 @@ namespace UltimateTeamApi.Controllers
           OperationId = "Unassign Friendship")]
         [SwaggerResponse(200, "Friendship Unassigned", typeof(UserResource))]
 
-        [HttpDelete("{user2Id}")]
+        [HttpDelete("{friendId}")]
         [ProducesResponseType(typeof(UserResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> UnassignFriendAsync(int user1Id, int user2Id)
+        public async Task<IActionResult> UnassignFriendAsync(int principalId, int friendId)
         {
-            var result = await _friendshipService.UnassignFriendAsync(user1Id, user2Id);
+            var result = await _friendshipService.UnassignFriendAsync(principalId, friendId);
+
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var friendshipResource = _mapper.Map<User, UserResource>(result.Resource.Principal);
+            var friendshipResource = _mapper.Map<User, UserResource>(result.Resource.Friend);
             return Ok(friendshipResource);
         }
 

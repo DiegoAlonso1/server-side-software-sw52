@@ -31,10 +31,10 @@ namespace UltimateTeamApi.Controllers
         /******************************************/
 
         [SwaggerOperation(
-            Summary = "Get All Group",
-            Description = "Get List of All Groups",
-            OperationId = "GetAllGroups")]
-        [SwaggerResponse(200, "List of Groups", typeof(IEnumerable<GroupResource>))]
+            Summary = "Get All Groups By User Id",
+            Description = "Get List of All Groups By User Id",
+            OperationId = "GetAllGroupsByUserId")]
+        [SwaggerResponse(200, "List of Groups By User Id", typeof(IEnumerable<GroupResource>))]
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<GroupResource>), 200)]
@@ -60,9 +60,9 @@ namespace UltimateTeamApi.Controllers
         [HttpPost("{groupId}")]
         [ProducesResponseType(typeof(GroupMemberResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> AssignGroupMemberAsync(int groupId, int userId)
+        public async Task<IActionResult> AssignGroupMemberAsync(int groupId, int userId, [FromBody] SaveGroupMemberResource resource)
         {
-            var result = await _groupMemberService.AssignGroupMemberAsync(groupId, userId);
+            var result = await _groupMemberService.AssignGroupMemberAsync(groupId, userId, resource.UserCreator);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -78,10 +78,10 @@ namespace UltimateTeamApi.Controllers
         /*DELETE GROUPMEMBER*/
         /******************************************/
         [SwaggerOperation(
-           Summary = "Delete Group",
-           Description = "Delete a Group",
-           OperationId = "DeleteGroup")]
-        [SwaggerResponse(200, "Group Deleted", typeof(GroupResource))]
+           Summary = "Delete GroupMember",
+           Description = "Delete a GroupMember",
+           OperationId = "DeleteGroupMember")]
+        [SwaggerResponse(200, "GroupMember Deleted", typeof(GroupResource))]
 
         [HttpDelete("{groupId}")]
         [ProducesResponseType(typeof(GroupResource), 200)]

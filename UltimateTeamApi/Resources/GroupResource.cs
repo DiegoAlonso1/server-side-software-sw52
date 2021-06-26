@@ -8,5 +8,6 @@ namespace UltimateTeamApi.Resources
     public class GroupResource
     {
         public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

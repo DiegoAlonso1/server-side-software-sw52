@@ -2,6 +2,7 @@
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
+using Google.Apis.Upload;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -29,19 +30,31 @@ namespace UltimateTeamApi.ExternalTools.Services
                 return new DriveFileResponse("An error ocurred while loggin in");
         }
 
-        public async Task<DriveFileResponse> CreateCarpet(IGoogleAuthProvider auth)
+        public async Task<DriveFileResponse> DeleteDriveFileAsync(IGoogleAuthProvider auth, string fileId)
         {
             try
             {
                 Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
 
-                //var request = driveService.Files.Create()
+                var request = driveService.Files.Get(fileId);
+                request.Fields = "id,name,description,createdTime,fileExtension,kind,owners,parents,size,version,webContentLink,webViewLink";
+                var result = await request.ExecuteAsync();
 
-                return new DriveFileResponse();
+                DeleteRequest deleteRequest = driveService.Files.Delete(fileId);
+                deleteRequest.Fields = "id,name,description,createdTime,fileExtension,kind,owners,parents,size,version,webContentLink,webViewLink";
+
+                var deleteTask = deleteRequest.ExecuteAsync();
+                await deleteTask.ContinueWith(s => s.Dispose());
+
+                if (!deleteTask.IsCompletedSuccessfully)
+                    throw new Exception("Deleting file request error");
+
+                var resource = createResource(result);
+                return new DriveFileResponse(resource);
             }
             catch (Exception ex)
             {
-                return new DriveFileResponse($"An error ocurred while uploading a file: {ex.Message}");
+                return new DriveFileResponse($"An error ocurred while deleting the file: {ex.Message}");
             }
         }
 
@@ -60,32 +73,7 @@ namespace UltimateTeamApi.ExternalTools.Services
 
             foreach(var file in result.Files)
             {
-                var resource = new DriveFileResource
-                {
-                    Id = file.Id,
-                    Name = file.Name,
-                    Description = file.Description,
-                    CreatedTime = file.CreatedTime,
-                    Extension = file.FileExtension,
-                    Kind = file.Kind,
-                    Owners = new List<DriveUserResource>(),
-                    FolderParentsIds = file.Parents,
-                    Size = file.Size,
-                    Version = file.Version,
-                    DownloadLink = file.WebContentLink,
-                    ViewLink = file.WebViewLink
-                };
-
-                foreach (var user in file.Owners)
-                {
-                    resource.Owners.Add(new DriveUserResource
-                    {
-                        Id = user.PermissionId,
-                        Name = user.DisplayName,
-                        Email = user.EmailAddress,
-                        PhotoLink = user.PhotoLink
-                    }) ;
-                }
+                var resource = createResource(file);
 
                 resources.Add(resource);
             }
@@ -100,29 +88,137 @@ namespace UltimateTeamApi.ExternalTools.Services
             if (driveService == null)
                 return new DriveFileResponse("Error D:");
 
-            var request = driveService.Files.Get(fileId);
-            request.Fields = "id,name,description,createdTime,fileExtension,kind,owners,parents,size,version,webContentLink,webViewLink";
+            try
+            {
+                var request = driveService.Files.Get(fileId);
+                request.Fields = "id,name,description,createdTime,fileExtension,kind,owners,parents,size,version,webContentLink,webViewLink";
+                var result = await request.ExecuteAsync();
+
+                var resource = createResource(result);
+
+                return new DriveFileResponse(resource);
+            }
+            catch (Exception ex)
+            {
+                return new DriveFileResponse($"An error ocurred while obtaining the file with Id: {fileId}. {ex.Message}");
+            }
+        }
+
+        public async Task<IEnumerable<DriveFileResource>> GetAllDriveFilesByNameAsync(IGoogleAuthProvider auth, string fileName)
+        {
+            Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+
+            if (driveService == null)
+                return new List<DriveFileResource>();
+
+            var request = driveService.Files.List();
+            request.Fields = "files";
             var result = await request.ExecuteAsync();
 
-            DriveFileResource resource = new DriveFileResource
+            IList<DriveFileResource> resources = new List<DriveFileResource>();
+            var filesWithName = result.Files.Where(f => f.Name == fileName).ToList();
+
+            foreach (var file in filesWithName)
             {
-                Id = result.Id,
-                Name = result.Name,
-                Description = result.Description,
-                CreatedTime = result.CreatedTime,
-                Extension = result.FileExtension,
-                Kind = result.Kind,
+                var resource = createResource(file);
+
+                resources.Add(resource);
+            }
+
+            return resources;
+        }
+
+        public async Task<DriveFileResponse> SaveDriveFileAsync(IGoogleAuthProvider auth, IFormFile file)
+        {
+            try
+            {
+                if (file == null) throw new Exception("The file is empty");
+
+                Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+
+                CreateMediaUpload createRequest = driveService.Files.Create(
+                    new File { Name = file.FileName },
+                    file.OpenReadStream(),
+                    file.ContentType
+                );
+
+                File responseFile = null;
+
+                createRequest.ResponseReceived += ((File file) =>
+                {
+                    responseFile = file;
+                });
+
+                createRequest.Fields = "id,name,description,createdTime,fileExtension,kind,owners,parents,size,version,webContentLink,webViewLink";
+                var saveTask = createRequest.UploadAsync();
+                await saveTask.ContinueWith(s => s.Dispose());
+
+                while (responseFile == null)
+                {
+                    System.Threading.Thread.Sleep(500);
+                }
+
+                var resource = createResource(responseFile);
+
+                return new DriveFileResponse(resource);
+            }
+            catch (Exception ex)
+            {
+                return new DriveFileResponse($"An error ocurred while saving the file: {ex.Message}");
+            }
+        }
+
+        public async Task<DriveFileResponse> UpdateDriveFileAsync(IGoogleAuthProvider auth, string fileId, SaveDriveFileResource resource)
+        {
+            try
+            {
+                Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+
+                var request = driveService.Files.Get(fileId);
+                request.Fields = "name";
+                var result = await request.ExecuteAsync();
+
+                result.Name = resource.FileName;
+
+                UpdateRequest updateRequest = driveService.Files.Update(result, fileId);
+                updateRequest.Fields = "id,name,description,createdTime,fileExtension,kind,owners,parents,size,version,webContentLink,webViewLink";
+
+                var updateTask = updateRequest.ExecuteAsync();
+                await updateTask.ContinueWith(s => s.Dispose());
+
+                var response = updateTask.Result;
+
+                var _resource = createResource(response);
+
+                return new DriveFileResponse(_resource);
+            }
+            catch (Exception ex)
+            {
+                return new DriveFileResponse($"An error ocurred while updating the file: {ex.Message}");
+            }
+        }
+
+        private DriveFileResource createResource(File file)
+        {
+            DriveFileResource _resource = new DriveFileResource
+            {
+                Id = file.Id,
+                Name = file.Name,
+                Description = file.Description,
+                CreatedTime = file.CreatedTime,
+                Extension = file.FileExtension,
+                Kind = file.Kind,
                 Owners = new List<DriveUserResource>(),
-                FolderParentsIds = result.Parents,
-                Size = result.Size,
-                Version = result.Version,
-                DownloadLink = result.WebContentLink,
-                ViewLink = result.WebViewLink
+                FolderParentsIds = file.Parents,
+                Size = file.Size,
+                Version = file.Version,
+                DownloadLink = file.WebContentLink,
+                ViewLink = file.WebViewLink
             };
 
-            foreach (var user in result.Owners)
+            foreach (var user in file.Owners)
             {
-                resource.Owners.Add(new DriveUserResource
+                _resource.Owners.Add(new DriveUserResource
                 {
                     Id = user.PermissionId,
                     Name = user.DisplayName,
@@ -131,30 +227,7 @@ namespace UltimateTeamApi.ExternalTools.Services
                 });
             }
 
-            return new DriveFileResponse(resource);
-        }
-
-        public async Task<DriveFileResponse> UploadFileAsync(IGoogleAuthProvider auth, SaveDriveFileResource resource)
-        {
-            try
-            {
-                Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
-
-                CreateMediaUpload createRequest = driveService.Files.Create(
-                    new File { Name = resource.File.Name },
-                    resource.File.OpenReadStream(),
-                    resource.File.ContentType
-                );
-
-                var uploadTask = createRequest.UploadAsync();
-                await uploadTask.ContinueWith(s => s.Dispose());
-
-                return new DriveFileResponse();
-            }
-            catch (Exception ex)
-            {
-                return new DriveFileResponse($"An error ocurred while uploading a file: {ex.Message}");
-            }
+            return _resource;
         }
 
         private async Task<Google.Apis.Drive.v3.DriveService> GetServiceAsync(IGoogleAuthProvider auth)

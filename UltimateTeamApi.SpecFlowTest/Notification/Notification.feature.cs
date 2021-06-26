@@ -110,7 +110,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "LastName",
                             "UserName",
@@ -120,7 +120,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table25.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "Sam",
                             "Morales",
                             "ElTioSam",
@@ -130,7 +130,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-04-19",
                             "null",
                             "1"});
-                table25.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "Lucia",
                             "Revollar",
                             "Lulu",
@@ -140,7 +140,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-01-20",
                             "null",
                             "1"});
-                table25.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "Maria",
                             "Santillan",
                             "Maria503",
@@ -150,7 +150,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2018-09-12",
                             "null",
                             "1"});
-                table25.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "Lionel",
                             "Messi",
                             "ElMesias",
@@ -160,7 +160,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1219-12-12",
                             "null",
                             "1"});
-                table25.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "Fernando",
                             "Firulais",
                             "FernanElCrack",
@@ -171,7 +171,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 6
- testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table25, "When ");
+ testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table32, "When ");
 #line hidden
             }
             this.ScenarioCleanup();

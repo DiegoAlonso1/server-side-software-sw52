@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UltimateTeamApi.ExternalTools.Converters
 {
-    class ByteArrayConverter
+    public class ByteArrayConverter
     {
         public static Stream ByteArrayToStream(byte[] byteArray)
         {
@@ -16,7 +16,9 @@ namespace UltimateTeamApi.ExternalTools.Converters
 
         public static byte[] StreamToByteArray(Stream stream)
         {
-            return null;
+            MemoryStream ms = new MemoryStream();
+            stream.CopyTo(ms);
+            return ms.ToArray();
         }
     }
 }

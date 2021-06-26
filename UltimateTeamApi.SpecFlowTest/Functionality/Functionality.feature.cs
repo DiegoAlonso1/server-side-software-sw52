@@ -80,16 +80,16 @@ namespace UltimateTeamApi.SpecFlowTest.Functionality
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="0. The administrator wants to see all functionalities")]
+        [Xunit.SkippableFactAttribute(DisplayName="1. The administrator wants to see all functionalities")]
         [Xunit.TraitAttribute("FeatureTitle", "Functionality")]
-        [Xunit.TraitAttribute("Description", "0. The administrator wants to see all functionalities")]
+        [Xunit.TraitAttribute("Description", "1. The administrator wants to see all functionalities")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void _0_TheAdministratorWantsToSeeAllFunctionalities()
+        public virtual void _1_TheAdministratorWantsToSeeAllFunctionalities()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("0. The administrator wants to see all functionalities", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The administrator wants to see all functionalities", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -110,47 +110,60 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table5.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "1",
                             "Stream"});
-                table5.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "2",
                             "Laser Pointer"});
-                table5.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "3",
                             "Boards"});
-                table5.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "4",
                             "Notes"});
-                table5.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "5",
                             "Calendar"});
-                table5.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "6",
                             "Alarm"});
-                table5.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "7",
                             "ToDo List"});
 #line 9
  testRunner.When("the administrator goes to Functionality Usage Page, functionalities list should r" +
-                        "eturn", ((string)(null)), table5, "When ");
+                        "eturn", ((string)(null)), table11, "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name"});
+                table12.AddRow(new string[] {
+                            "TeamUltimate"});
+                table12.AddRow(new string[] {
+                            "Backyardigans"});
+                table12.AddRow(new string[] {
+                            "Pollitos FC"});
+                table12.AddRow(new string[] {
+                            "Roomies"});
+#line 18
+ testRunner.When("groups required attributes provided to initialize instances", ((string)(null)), table12, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="1. The administrator wants to see a functionality details")]
+        [Xunit.SkippableFactAttribute(DisplayName="2. The administrator wants to see a functionality details")]
         [Xunit.TraitAttribute("FeatureTitle", "Functionality")]
-        [Xunit.TraitAttribute("Description", "1. The administrator wants to see a functionality details")]
-        public virtual void _1_TheAdministratorWantsToSeeAFunctionalityDetails()
+        [Xunit.TraitAttribute("Description", "2. The administrator wants to see a functionality details")]
+        public virtual void _2_TheAdministratorWantsToSeeAFunctionalityDetails()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The administrator wants to see a functionality details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 21
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The administrator wants to see a functionality details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 27
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -170,31 +183,31 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 22
+#line 28
  testRunner.When("the administrator select functionality with id 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table6.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "4",
                             "Notes"});
-#line 23
- testRunner.Then("functionality details should be", ((string)(null)), table6, "Then ");
+#line 29
+ testRunner.Then("functionality details should be", ((string)(null)), table13, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="2. The administrator wants to see a functionality stadistics")]
+        [Xunit.SkippableFactAttribute(DisplayName="3. The administrator wants to see a functionality stadistics")]
         [Xunit.TraitAttribute("FeatureTitle", "Functionality")]
-        [Xunit.TraitAttribute("Description", "2. The administrator wants to see a functionality stadistics")]
-        public virtual void _2_TheAdministratorWantsToSeeAFunctionalityStadistics()
+        [Xunit.TraitAttribute("Description", "3. The administrator wants to see a functionality stadistics")]
+        public virtual void _3_TheAdministratorWantsToSeeAFunctionalityStadistics()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The administrator wants to see a functionality stadistics", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 29
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3. The administrator wants to see a functionality stadistics", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 35
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -214,19 +227,19 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 30
+#line 36
  testRunner.When("the administrator select functionality with id 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "SessionId",
                             "FunctionalityId",
                             "Count"});
-                table7.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "1",
                             "4",
                             "8"});
-#line 31
- testRunner.Then("functionality stadistics details should be", ((string)(null)), table7, "Then ");
+#line 37
+ testRunner.Then("functionality stadistics details should be", ((string)(null)), table14, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
