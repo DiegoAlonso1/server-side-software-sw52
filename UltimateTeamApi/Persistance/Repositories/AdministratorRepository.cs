@@ -42,7 +42,7 @@ namespace UltimateTeamApi.Persistance.Repositories
 
         public void Update(Administrator administrator)
         {
-            _context.Administrators.Remove(administrator);
+            _context.Administrators.Update(administrator);
         }
     }
 }

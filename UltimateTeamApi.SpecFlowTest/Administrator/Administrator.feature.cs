@@ -80,17 +80,17 @@ namespace UltimateTeamApi.SpecFlowTest.Administrator
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="1. The administrator wants to register")]
+        [Xunit.SkippableFactAttribute(DisplayName="0. Initialize some Administrator Intances")]
         [Xunit.TraitAttribute("FeatureTitle", "Administrator")]
-        [Xunit.TraitAttribute("Description", "1. The administrator wants to register")]
+        [Xunit.TraitAttribute("Description", "0. Initialize some Administrator Intances")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void _1_TheAdministratorWantsToRegister()
+        public virtual void _0_InitializeSomeAdministratorIntances()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The administrator wants to register", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 15
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("0. Initialize some Administrator Intances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -115,12 +115,67 @@ this.ScenarioInitialize(scenarioInfo);
                             "Password",
                             "Area"});
                 table1.AddRow(new string[] {
+                            "Crsitiano7",
+                            "Madrid13",
+                            "null"});
+                table1.AddRow(new string[] {
+                            "Paolo9",
+                            "Peru2020",
+                            "null"});
+                table1.AddRow(new string[] {
+                            "MarioG",
+                            "Gam264",
+                            "null"});
+                table1.AddRow(new string[] {
+                            "Isabel_2",
+                            "pasword",
+                            "null"});
+#line 6
+ testRunner.When("administrators required attributes provided to initialize instances", ((string)(null)), table1, "When ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="1. The administrator wants to register")]
+        [Xunit.TraitAttribute("FeatureTitle", "Administrator")]
+        [Xunit.TraitAttribute("Description", "1. The administrator wants to register")]
+        public virtual void _1_TheAdministratorWantsToRegister()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The administrator wants to register", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 15
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Password",
+                            "Area"});
+                table2.AddRow(new string[] {
                             "Isak54",
                             "RS0815",
                             "null"});
 #line 16
  testRunner.When("the administrator complete the form with the required fields and click the Regist" +
-                        "er button", ((string)(null)), table1, "When ");
+                        "er button", ((string)(null)), table2, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -154,17 +209,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Password",
                             "Area"});
-                table2.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "ZlatanGod",
                             "ACM05",
                             "null"});
 #line 24
  testRunner.When("the administrator with id 5 complete the form with required fields and click the " +
-                        "Update button", ((string)(null)), table2, "When ");
+                        "Update button", ((string)(null)), table3, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -198,39 +253,39 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "Password",
                             "Area"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "1",
                             "Crsitiano7",
                             "Madrid13",
                             "null"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "2",
                             "Paolo9",
                             "Peru2020",
                             "null"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "3",
                             "MarioG",
                             "Gam264",
                             "null"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "4",
                             "Isabel_2",
                             "pasword",
                             "null"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "5",
                             "ZlatanGod",
                             "ACM05",
                             "null"});
 #line 32
  testRunner.When("the administrator goes to see all the administrators, administrator list should r" +
-                        "eturn", ((string)(null)), table3, "When ");
+                        "eturn", ((string)(null)), table4, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -267,18 +322,18 @@ this.ScenarioInitialize(scenarioInfo);
 #line 43
  testRunner.When("the administrator with id 5 goes to Profile Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "Password",
                             "Area"});
-                table4.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "5",
                             "ZlatanGod",
                             "ACM05",
                             "null"});
 #line 44
- testRunner.Then("administrator details should be", ((string)(null)), table4, "Then ");
+ testRunner.Then("administrator details should be", ((string)(null)), table5, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -315,18 +370,18 @@ this.ScenarioInitialize(scenarioInfo);
 #line 51
  testRunner.When("the administrator with id 5 click the Delete Account button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "Password",
                             "Area"});
-                table5.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "5",
                             "ZlatanGod",
                             "ACM05",
                             "null"});
 #line 52
- testRunner.Then("the administrator with id 5 is removed", ((string)(null)), table5, "Then ");
+ testRunner.Then("the administrator with id 5 is removed", ((string)(null)), table6, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

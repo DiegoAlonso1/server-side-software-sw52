@@ -80,16 +80,16 @@ namespace UltimateTeamApi.SpecFlowTest.Functionality
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="0. The administrator wants to see all functionalities")]
+        [Xunit.SkippableFactAttribute(DisplayName="1. The administrator wants to see all functionalities")]
         [Xunit.TraitAttribute("FeatureTitle", "Functionality")]
-        [Xunit.TraitAttribute("Description", "0. The administrator wants to see all functionalities")]
+        [Xunit.TraitAttribute("Description", "1. The administrator wants to see all functionalities")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void _0_TheAdministratorWantsToSeeAllFunctionalities()
+        public virtual void _1_TheAdministratorWantsToSeeAllFunctionalities()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("0. The administrator wants to see all functionalities", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The administrator wants to see all functionalities", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -110,46 +110,46 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "1",
                             "Stream"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "2",
                             "Laser Pointer"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "3",
                             "Boards"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "4",
                             "Notes"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "5",
                             "Calendar"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "6",
                             "Alarm"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "7",
                             "ToDo List"});
 #line 9
  testRunner.When("the administrator goes to Functionality Usage Page, functionalities list should r" +
-                        "eturn", ((string)(null)), table10, "When ");
+                        "eturn", ((string)(null)), table11, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="1. The administrator wants to see a functionality details")]
+        [Xunit.SkippableFactAttribute(DisplayName="2. The administrator wants to see a functionality details")]
         [Xunit.TraitAttribute("FeatureTitle", "Functionality")]
-        [Xunit.TraitAttribute("Description", "1. The administrator wants to see a functionality details")]
-        public virtual void _1_TheAdministratorWantsToSeeAFunctionalityDetails()
+        [Xunit.TraitAttribute("Description", "2. The administrator wants to see a functionality details")]
+        public virtual void _2_TheAdministratorWantsToSeeAFunctionalityDetails()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The administrator wants to see a functionality details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The administrator wants to see a functionality details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -173,27 +173,27 @@ this.ScenarioInitialize(scenarioInfo);
 #line 22
  testRunner.When("the administrator select functionality with id 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table11.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "4",
                             "Notes"});
 #line 23
- testRunner.Then("functionality details should be", ((string)(null)), table11, "Then ");
+ testRunner.Then("functionality details should be", ((string)(null)), table12, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="2. The administrator wants to see a functionality stadistics")]
+        [Xunit.SkippableFactAttribute(DisplayName="3. The administrator wants to see a functionality stadistics")]
         [Xunit.TraitAttribute("FeatureTitle", "Functionality")]
-        [Xunit.TraitAttribute("Description", "2. The administrator wants to see a functionality stadistics")]
-        public virtual void _2_TheAdministratorWantsToSeeAFunctionalityStadistics()
+        [Xunit.TraitAttribute("Description", "3. The administrator wants to see a functionality stadistics")]
+        public virtual void _3_TheAdministratorWantsToSeeAFunctionalityStadistics()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The administrator wants to see a functionality stadistics", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3. The administrator wants to see a functionality stadistics", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 29
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -217,16 +217,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 30
  testRunner.When("the administrator select functionality with id 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "SessionId",
                             "FunctionalityId",
                             "Count"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "1",
                             "4",
                             "8"});
 #line 31
- testRunner.Then("functionality stadistics details should be", ((string)(null)), table12, "Then ");
+ testRunner.Then("functionality stadistics details should be", ((string)(null)), table13, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -26,20 +26,20 @@ namespace UltimateTeamApi.UnitTest
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
 
             var friendship = new Friendship { PrincipalId = 1, FriendId = 2 };
-            var user1Id = friendship.PrincipalId;
-            var user2Id = friendship.FriendId;
+            var principalId = friendship.PrincipalId;
+            var friendId = friendship.FriendId;
 
-            mockFriendshipRepository.Setup(f => f.AssignFriendAsync(user1Id, user2Id))
+            mockFriendshipRepository.Setup(f => f.AssignFriendAsync(principalId, friendId))
                 .Returns(Task.CompletedTask);
             mockUnitOfWork.Setup(u => u.CompleteAsync())
                 .Returns(Task.CompletedTask);
-            mockFriendshipRepository.Setup(f => f.FindByUser1IdAndUser2IdAsync(user1Id, user2Id))
+            mockFriendshipRepository.Setup(f => f.FindByPrincipalIdAndFriendIdAsync(principalId, friendId))
                 .Returns(Task.FromResult(friendship));
 
             var service = new FriendshipService(mockFriendshipRepository.Object, mockUnitOfWork.Object);
 
             //Act
-            FriendshipResponse result = await service.AssignFriendAsync(user1Id, user2Id);
+            FriendshipResponse result = await service.AssignFriendAsync(principalId, friendId);
             Friendship eventAssistanceResult = result.Resource;
 
             //Assert
@@ -47,16 +47,16 @@ namespace UltimateTeamApi.UnitTest
         }
 
         [Test]
-        public async Task AssignFriendshipWhenInvalidUser1IdOrUser2IdReturnsFriendshipExceptionResponse()
+        public async Task AssignFriendshipWhenInvalidPrincipalIdOrFriendReturnsFriendshipExceptionResponse()
         {
             //Arrange
             var mockFriendshipRepository = GetDefaultIFriendshipRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
 
-            var user1Id = 1;
-            var user2Id = 1;
+            var principalId = 1;
+            var friendId = 1;
 
-            mockFriendshipRepository.Setup(f => f.AssignFriendAsync(user1Id, user2Id))
+            mockFriendshipRepository.Setup(f => f.AssignFriendAsync(principalId, friendId))
                 .Returns(Task.FromResult<Friendship>(null));
             mockUnitOfWork.Setup(f => f.CompleteAsync())
                 .Throws(new Exception());
@@ -64,7 +64,7 @@ namespace UltimateTeamApi.UnitTest
             var service = new FriendshipService(mockFriendshipRepository.Object, mockUnitOfWork.Object);
 
             //Act
-            FriendshipResponse result = await service.AssignFriendAsync(user1Id, user2Id);
+            FriendshipResponse result = await service.AssignFriendAsync(principalId, friendId);
             var message = result.Message;
 
             //Assert
@@ -79,20 +79,20 @@ namespace UltimateTeamApi.UnitTest
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
 
             var friendship = new Friendship { PrincipalId = 1, FriendId = 2};
-            var user1Id = friendship.PrincipalId;
-            var user2Id = friendship.FriendId;
+            var principalId = friendship.PrincipalId;
+            var friendId = friendship.FriendId;
 
-            mockFriendshipRepository.Setup(f => f.UnassignFriendAsync(user1Id, user2Id))
+            mockFriendshipRepository.Setup(f => f.UnassignFriendAsync(principalId, friendId))
                 .Returns(Task.CompletedTask);
             mockUnitOfWork.Setup(u => u.CompleteAsync())
                 .Returns(Task.CompletedTask);
-            mockFriendshipRepository.Setup(f => f.FindByUser1IdAndUser2IdAsync(user1Id, user2Id))
+            mockFriendshipRepository.Setup(f => f.FindByPrincipalIdAndFriendIdAsync(principalId, friendId))
                 .Returns(Task.FromResult(friendship));
 
             var service = new FriendshipService(mockFriendshipRepository.Object, mockUnitOfWork.Object);
 
             //Act
-            FriendshipResponse result = await service.UnassignFriendAsync(user1Id, user2Id);
+            FriendshipResponse result = await service.UnassignFriendAsync(principalId, friendId);
             Friendship eventAssistanceResult = result.Resource;
 
             //Assert
@@ -106,10 +106,10 @@ namespace UltimateTeamApi.UnitTest
             var mockFriendshipRepository = GetDefaultIFriendshipRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
 
-            var user1Id = 1;
-            var user2Id = 2;
+            var principalId = 1;
+            var friendId = 2;
 
-            mockFriendshipRepository.Setup(f => f.UnassignFriendAsync(user1Id, user2Id))
+            mockFriendshipRepository.Setup(f => f.UnassignFriendAsync(principalId, friendId))
                 .Returns(Task.FromResult<Friendship>(null));
             mockUnitOfWork.Setup(u => u.CompleteAsync())
                 .Throws(new Exception());
@@ -117,7 +117,7 @@ namespace UltimateTeamApi.UnitTest
             var service = new FriendshipService(mockFriendshipRepository.Object, mockUnitOfWork.Object);
 
             //Act
-            FriendshipResponse result = await service.UnassignFriendAsync(user1Id, user2Id);
+            FriendshipResponse result = await service.UnassignFriendAsync(principalId, friendId);
             var message = result.Message;
 
             //Assert

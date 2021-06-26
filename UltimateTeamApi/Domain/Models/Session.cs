@@ -8,6 +8,7 @@ namespace UltimateTeamApi.Domain.Models
     public class Session
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public int SessionTypeId { get; set; }
         public SessionType SessionType { get; set; }
         public List<SessionStadistic> SessionStadistics { get;  set; }

@@ -8,11 +8,11 @@ namespace UltimateTeamApi.Domain.Persistance.Repositories
 {
     public interface IFriendshipRepository
     {
-        Task<IEnumerable<Friendship>> ListByUserIdAsync(int userId);
-        Task<Friendship> FindByUser1IdAndUser2IdAsync(int user1Id, int user2Id);
+        Task<IEnumerable<User>> ListFriendsByUserIdAsync(int userId);
+        Task<Friendship> FindByPrincipalIdAndFriendIdAsync(int principalId, int friendId);
         Task AddAsync(Friendship friendship);
         void Remove(Friendship friendship);
-        Task AssignFriendAsync(int user1Id, int user2Id);
-        Task UnassignFriendAsync(int user1Id, int user2Id);
+        Task AssignFriendAsync(int principalId, int friendId);
+        Task UnassignFriendAsync(int principalId, int friendId);
     }
 }
