@@ -27,6 +27,7 @@ namespace UltimateTeamApi.ExternalTools.Services
                 return new CalendarResponse("An error ocurred while loggin in");
         }
 
+
         public async Task<IEnumerable<CalendarResource>> GetAllCalendars(IGoogleAuthProvider auth)
         {
             Google.Apis.Calendar.v3.CalendarService calendarService = await getServiceAsync(auth);
@@ -44,6 +45,7 @@ namespace UltimateTeamApi.ExternalTools.Services
             return resources;
         }
 
+
         public async Task<IEnumerable<CalendarEventResource>> GetAllCalendarEventsByCalendarId(IGoogleAuthProvider auth, string calendarId)
         {
             Google.Apis.Calendar.v3.CalendarService calendarService = await getServiceAsync(auth);
@@ -59,6 +61,7 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
             return resources;
         }
+
 
         public async Task<CalendarResponse> GetCalendarById(IGoogleAuthProvider auth, string calendarId)
         {
@@ -80,6 +83,7 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
+
         public async Task<CalendarResponse> AssignGoogleCredential(IGoogleAuthProvider auth)
         {
             Google.Apis.Calendar.v3.CalendarService calendarService = await getServiceAsync(auth);
@@ -90,6 +94,7 @@ namespace UltimateTeamApi.ExternalTools.Services
             else
                 return new CalendarResponse("An error ocurred while loggin in");
         }
+
 
         public async Task<CalendarEventResponse> DeleteCalendarEventAsync(IGoogleAuthProvider auth, string calendarId, string eventId)
         {
@@ -119,6 +124,7 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
+
         public async Task<CalendarEventResponse> SaveCalendarEventAsync(IGoogleAuthProvider auth, string calendarId, SaveCalendarEventResource resource)
         {
             try
@@ -146,6 +152,41 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
+
+        public async Task<CalendarEventResponse> UpdateCalendarEventAsync(IGoogleAuthProvider auth, string calendarId, string eventId, SaveCalendarEventResource resource)
+        {
+            try
+            {
+                Google.Apis.Calendar.v3.CalendarService calendarService = await getServiceAsync(auth);
+
+                var request = calendarService.Events.Get(calendarId, eventId);
+                request.Fields = "id,summary,start,end,description";
+                var result = await request.ExecuteAsync();
+
+                result.Summary = resource.Title;
+                result.Description = resource.Description;
+                result.Start = new Google.Apis.Calendar.v3.Data.EventDateTime { DateTime = Convert.ToDateTime(resource.StartDate) };
+                result.End = new Google.Apis.Calendar.v3.Data.EventDateTime { DateTime = Convert.ToDateTime(resource.EndDate) };
+
+                Google.Apis.Calendar.v3.EventsResource.UpdateRequest updateRequest = calendarService.Events.Update(result, calendarId, eventId);
+
+                updateRequest.Fields = "id,summary,start,end,description";
+                var updateTask = updateRequest.ExecuteAsync();
+                await updateTask.ContinueWith(s => s.Dispose());
+
+                var response = updateTask.Result;
+
+                var _resource = createCalendarEventResource(response);
+
+                return new CalendarEventResponse(_resource);
+            }
+            catch (Exception ex)
+            {
+                return new CalendarEventResponse($"An error ocurred while updating the event: {ex.Message}");
+            }
+        }
+
+
         public async Task<CalendarResponse> SaveCalendarAsync(IGoogleAuthProvider auth, SaveCalendarResource resource)
         {
             try
@@ -166,6 +207,7 @@ namespace UltimateTeamApi.ExternalTools.Services
                 return new CalendarResponse($"An error ocurred while saving the calendar: {ex.Message}");
             }
         }
+
 
         public async Task<CalendarResponse> DeleteCalendarAsync(IGoogleAuthProvider auth, string calendarId)
         {
@@ -195,6 +237,38 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
+
+        public async Task<CalendarResponse> UpdateCalendarAsync(IGoogleAuthProvider auth, string calendarId, SaveCalendarResource resource)
+        {
+            try
+            {
+                Google.Apis.Calendar.v3.CalendarService calendarService = await getServiceAsync(auth);
+
+                var request = calendarService.Calendars.Get(calendarId);
+                request.Fields = "id,summary";
+                var result = await request.ExecuteAsync();
+
+                result.Summary = resource.Title;
+
+                Google.Apis.Calendar.v3.CalendarsResource.UpdateRequest updateRequest = calendarService.Calendars.Update(result, calendarId);
+
+                updateRequest.Fields = "id,summary";
+                var updateTask = updateRequest.ExecuteAsync();
+                await updateTask.ContinueWith(s => s.Dispose());
+
+                var response = updateTask.Result;
+
+                var _resource = createCalendarResource(response);
+
+                return new CalendarResponse(_resource);
+            }
+            catch (Exception ex)
+            {
+                return new CalendarResponse($"An error ocurred while updating the calendar: {ex.Message}");
+            }
+        }
+
+
         private CalendarEventResource createCalendarEventResource(Google.Apis.Calendar.v3.Data.Event _event)
         {
             return new CalendarEventResource
@@ -207,6 +281,7 @@ namespace UltimateTeamApi.ExternalTools.Services
             };
         }
 
+
         private CalendarResource createCalendarResource(Google.Apis.Calendar.v3.Data.CalendarListEntry calendar)
         {
             return new CalendarResource
@@ -215,6 +290,8 @@ namespace UltimateTeamApi.ExternalTools.Services
                 Title = calendar.Summary
             };
         }
+
+
         private CalendarResource createCalendarResource(Google.Apis.Calendar.v3.Data.Calendar calendar)
         {
             return new CalendarResource
@@ -223,6 +300,7 @@ namespace UltimateTeamApi.ExternalTools.Services
                 Title = calendar.Summary
             };
         }
+
 
         private async Task<Google.Apis.Calendar.v3.CalendarService> getServiceAsync(IGoogleAuthProvider auth)
         {

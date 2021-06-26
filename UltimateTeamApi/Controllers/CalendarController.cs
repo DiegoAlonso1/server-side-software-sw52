@@ -204,6 +204,32 @@ namespace UltimateTeamApi.Controllers
 
 
         /******************************************/
+        /*UPDATE EVENT*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Update Event",
+            Description = "Update a Event",
+            OperationId = "UpdateEvent")]
+        [SwaggerResponse(200, "Event Updated", typeof(CalendarEventResource))]
+
+        [HttpPut("calendars/{calendarId}/events")]
+        [ProducesResponseType(typeof(CalendarEventResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        [GoogleScopedAuthorize(CalendarService.ScopeConstants.Calendar)]
+        public async Task<IActionResult> UpdateCalendarEventAsync([FromServices] IGoogleAuthProvider auth, string calendarId, string eventId , [FromBody] SaveCalendarEventResource resource)
+        {
+            var result = await _calendarService.UpdateCalendarEventAsync(auth,calendarId,eventId,resource);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+
+        /******************************************/
         /*CREATE CALENDAR*/
         /******************************************/
 
@@ -245,6 +271,32 @@ namespace UltimateTeamApi.Controllers
         public async Task<IActionResult> DeleteCalendarAsync([FromServices] IGoogleAuthProvider auth, string calendarId)
         {
             var result = await _calendarService.DeleteCalendarAsync(auth, calendarId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+
+        /******************************************/
+        /*UPDATE CALENDAR*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Update Calendar",
+            Description = "Update a Calendar",
+            OperationId = "UpdateCalendar")]
+        [SwaggerResponse(200, "Calendar Updated", typeof(CalendarResource))]
+
+        [HttpPut("calendars")]
+        [ProducesResponseType(typeof(CalendarResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        [GoogleScopedAuthorize(CalendarService.ScopeConstants.Calendar)]
+        public async Task<IActionResult> UpdateCalendarAsync([FromServices] IGoogleAuthProvider auth, string calendarId, [FromBody] SaveCalendarResource resource)
+        {
+            var result = await _calendarService.UpdateCalendarAsync(auth, calendarId, resource);
 
             if (!result.Success)
                 return BadRequest(result.Message);
