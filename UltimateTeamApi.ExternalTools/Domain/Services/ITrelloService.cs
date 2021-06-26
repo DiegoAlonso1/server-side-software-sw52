@@ -43,8 +43,6 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services
         //ORGANIZATIONS
 
         Task<IEnumerable<TrelloOrganizationResource>> GetAllOrganizationsByMemberIdAsync(string memberId);
-        //Task<TrelloListResponse> GetListByCardIdAsync(string cardId);
-        //Task<TrelloListResponse> GetListByIdAsync(string listId);
         Task<TrelloOrganizationResponse> SaveOrganizationAsync(SaveTrelloOrganizationResource resource);
         Task<TrelloOrganizationResponse> UpdateOrganizationAsync(string organizationId, SaveTrelloOrganizationResource resource);
         Task<TrelloOrganizationResponse> DeleteOrganizationAsync(string organizationId);
