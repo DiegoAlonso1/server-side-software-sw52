@@ -260,6 +260,28 @@ namespace UltimateTeamApi.ExternalTools.Services
             return new TrelloCardResponse(resource);
         }
 
+        public async Task<TrelloListResponse> GetListByCardIdAsync(string cardId)
+        {
+            var request = await _httpClient.GetAsync($"cards/{cardId}/list?key={_apiKey}&token={_token}");
+
+            if (!request.IsSuccessStatusCode)
+                throw new Exception();
+
+            var model = await request.Content.ReadAsStringAsync();
+
+            dynamic listResponse = JsonConvert.DeserializeObject<Object>(model);
+
+            var resource = new TrelloListResource
+            {
+                Id = listResponse.id,
+                Name = listResponse.name,
+                BoardId = listResponse.idBoard,
+                Pos = listResponse.pos,
+            };
+
+            return new TrelloListResponse(resource);
+        }
+
         public async Task<TrelloListResponse> GetListByIdAsync(string listId)
         {
             var request = await _httpClient.GetAsync($"lists/{listId}?key={_apiKey}&token={_token}");
@@ -313,6 +335,33 @@ namespace UltimateTeamApi.ExternalTools.Services
             {
                 return new TrelloMemberResponse($"An error ocurred while obtaining TrelloMember: {ex.Message}");
             }
+        }
+
+        public async Task<IEnumerable<TrelloMemberResource>> GetAllMembersByCardIdAsync(string cardId)
+        {
+            var request = await _httpClient.GetAsync($"cards/{cardId}/members?key={_apiKey}&token={_token}");
+
+            if (!request.IsSuccessStatusCode)
+                throw new Exception();
+
+            var model = await request.Content.ReadAsStringAsync();
+
+            dynamic listMembersResponse = JsonConvert.DeserializeObject<Object>(model);
+
+            var resources = new List<TrelloMemberResource>();
+
+            foreach (var member in listMembersResponse)
+            {
+                resources.Add(new TrelloMemberResource
+                {
+                    Id = member.id,
+                    Username = member.username,
+                    FullName = member.fullName,
+                    Email = member.email,
+                });
+            }
+
+            return resources;
         }
 
         public async Task<TrelloBoardResponse> SaveBoardAsync(SaveTrelloBoardResource _resource)
@@ -520,6 +569,142 @@ namespace UltimateTeamApi.ExternalTools.Services
             catch (Exception ex)
             {
                 return new TrelloListResponse($"An error ocurred while updating a List: {ex.Message}");
+            }
+        }
+
+        public async Task<IEnumerable<TrelloOrganizationResource>> GetAllOrganizationsByMemberIdAsync(string memberId)
+        {
+            var request = await _httpClient.GetAsync($"members/{memberId}/organizations?key={_apiKey}&token={_token}");
+
+            if (!request.IsSuccessStatusCode)
+                throw new Exception();
+
+            var model = await request.Content.ReadAsStringAsync();
+
+            dynamic listOrganizationResponse = JsonConvert.DeserializeObject<Object>(model);
+
+            var resources = new List<TrelloOrganizationResource>();
+
+            foreach (var organization in listOrganizationResponse)
+            {
+                resources.Add(new TrelloOrganizationResource
+                {
+                    Id = organization.id,
+                    Name = organization.name,
+                    DisplayName = organization.displayName,
+                    TeamType = organization.teamType,
+                    MemberCreatorId = organization.memberCreatorId,
+                    Url = organization.url,
+                    IxUpdate = organization.ixUpdate,
+                    BillableMemberCount = organization.billableMemberCount,
+                    ActiveBillableMemberCount = organization.activeBillableMemberCount,
+                    BoardsIds= JArrayConverter.JArrayToStringList(organization.idBoards),
+                });
+            }
+
+            return resources;
+        }
+
+        public async Task<TrelloOrganizationResponse> SaveOrganizationAsync(SaveTrelloOrganizationResource _resource)
+        {
+            try
+            {
+                var request = await _httpClient.PostAsync($"organizations?key={_apiKey}&token={_token}&displayName={_resource.DisplayName}", null);
+
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception();
+
+                var model = await request.Content.ReadAsStringAsync();
+
+                dynamic organizationResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                var resource = new TrelloOrganizationResource
+                {
+                    Id = organizationResponse.id,
+                    Name = organizationResponse.name,
+                    DisplayName = organizationResponse.displayName,
+                    TeamType = organizationResponse.teamType,
+                    MemberCreatorId = organizationResponse.memberCreatorId,
+                    Url = organizationResponse.url,
+                    IxUpdate = organizationResponse.ixUpdate,
+                    //BillableMemberCount = organizationResponse.billableMemberCount,
+                    //ActiveBillableMemberCount = organizationResponse.activeBillableMemberCount,
+                    //BoardsIds = JArrayConverter.JArrayToStringList(organizationResponse.idBoards),
+                };
+                return new TrelloOrganizationResponse(resource);
+
+            }
+            catch (Exception ex)
+            {
+                return new TrelloOrganizationResponse($"An error ocurred while saving an Organization: {ex.Message}");
+            }
+        }
+
+        public async Task<TrelloOrganizationResponse> UpdateOrganizationAsync(string organizationId, SaveTrelloOrganizationResource _resource)
+        {
+            try
+            {
+                var data = new StringContent(JsonConvert.SerializeObject(new { displayName = _resource.DisplayName }), Encoding.UTF8, "application/json");
+                var request = await _httpClient.PutAsync($"organizations/{organizationId}?key={_apiKey}&token={_token}", data);
+
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception();
+
+                var model = await request.Content.ReadAsStringAsync();
+
+                dynamic organizationResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                var resource = new TrelloOrganizationResource
+                {
+                    Id = organizationResponse.id,
+                    Name = organizationResponse.name,
+                    DisplayName = organizationResponse.displayName,
+                    TeamType = organizationResponse.teamType,
+                    MemberCreatorId = organizationResponse.memberCreatorId,
+                    Url = organizationResponse.url,
+                    IxUpdate = organizationResponse.ixUpdate,
+                    //BillableMemberCount = organizationResponse.billableMemberCount,
+                    //ActiveBillableMemberCount = organizationResponse.activeBillableMemberCount,
+                    //BoardsIds = JArrayConverter.JArrayToStringList(organizationResponse.idBoards),
+                };
+                return new TrelloOrganizationResponse(resource);
+
+            }
+            catch (Exception ex)
+            {
+                return new TrelloOrganizationResponse($"An error ocurred while updating an Organization: {ex.Message}");
+            }
+        }
+
+        public async Task<TrelloOrganizationResponse> DeleteOrganizationAsync(string organizationId)
+        {
+            try
+            {
+                var request = await _httpClient.DeleteAsync($"organizations/{organizationId}?key={_apiKey}&token={_token}");
+
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception();
+
+                var model = await request.Content.ReadAsStringAsync();
+
+                dynamic organizationResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                var resource = new TrelloOrganizationResource
+                {
+                    Id = organizationResponse.id,
+                    Name = organizationResponse.name,
+                    DisplayName = organizationResponse.displayName,
+                    TeamType = organizationResponse.teamType,
+                    MemberCreatorId = organizationResponse.memberCreatorId,
+                    Url = organizationResponse.url,
+                    IxUpdate = organizationResponse.ixUpdate,
+                };
+                return new TrelloOrganizationResponse(resource);
+
+            }
+            catch (Exception ex)
+            {
+                return new TrelloOrganizationResponse($"An error ocurred while deleting an Organization: {ex.Message}");
             }
         }
     }

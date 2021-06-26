@@ -99,6 +99,27 @@ namespace UltimateTeamApi.Controllers
 
 
         /******************************************/
+        /*GET TRELLO MEMBERS BY CARD ID ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Get Trello Members By Card Id",
+            Description = "Get all Trello Members By Card Id",
+            OperationId = "GetAllTrelloMembersByCardId")]
+        [SwaggerResponse(200, "Trello Members By Card Id", typeof(IEnumerable<TrelloMemberResource>))]
+
+        [HttpGet("cards/{cardId}/members")]
+        [ProducesResponseType(typeof(IEnumerable<TrelloMemberResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IEnumerable<TrelloMemberResource>> GetAllMembersByCardIdAsync(string cardId)
+        {
+            var members = await _trelloService.GetAllMembersByCardIdAsync(cardId);
+            return members;
+        }
+
+
+
+        /******************************************/
         /*GET TRELLO BOARDS BY MEMBER ID ASYNC*/
         /******************************************/
 
@@ -353,6 +374,30 @@ namespace UltimateTeamApi.Controllers
         }
 
 
+        /******************************************/
+        /*GET TRELLO LISTS BY CARD ID ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Get Trello List By Card Id",
+            Description = "Get a Trello List By Card Id",
+            OperationId = "GetATrelloListByCardId")]
+        [SwaggerResponse(200, "Trello List By Card Id", typeof(TrelloListResource))]
+
+        [HttpGet("cards/{cardId}/list")]
+        [ProducesResponseType(typeof(TrelloListResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> GetTrelloListByCardIdAsync(string cardId)
+        {
+            var result = await _trelloService.GetListByCardIdAsync(cardId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
 
         /******************************************/
         /*GET TRELLO LISTS BY ID ASYNC*/
@@ -421,6 +466,102 @@ namespace UltimateTeamApi.Controllers
         public async Task<IActionResult> UpdateTrelloListAsync(string listId, [FromBody] SaveTrelloListResource resource)
         {
             var result = await _trelloService.UpdateListOnABoardAsync(listId, resource);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+
+        /******************************************/
+        /*GET TRELLO ORGANIZATIONS BY MEMBER ID ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Get Trello Organizations By Member Id",
+            Description = "Get all Trello Organizations By Member Id",
+            OperationId = "GetAllTrelloOrganizationsByMemberId")]
+        [SwaggerResponse(200, "Trello Organizations By Member Id", typeof(IEnumerable<TrelloOrganizationResource>))]
+
+        [HttpGet("members/{memberId}/organizations")]
+        [ProducesResponseType(typeof(IEnumerable<TrelloOrganizationResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IEnumerable<TrelloOrganizationResource>> GetAllOrganizationsByMemberIdAsync(string memberId)
+        {
+            var organizations = await _trelloService.GetAllOrganizationsByMemberIdAsync(memberId);
+            return organizations;
+        }
+
+
+
+        /******************************************/
+        /*POST TRELLO ORGANIZATION ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Post Trello Organization",
+            Description = "Post a Trello Organization",
+            OperationId = "PostTrelloOrganization")]
+        [SwaggerResponse(200, "Trello Organization Created", typeof(TrelloOrganizationResource))]
+
+        [HttpPost("organizations")]
+        [ProducesResponseType(typeof(TrelloOrganizationResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> SaveTrelloOrganizationAsync([FromBody] SaveTrelloOrganizationResource resource)
+        {
+            var result = await _trelloService.SaveOrganizationAsync(resource);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+
+        /******************************************/
+        /*PUT TRELLO ORGANIZATION ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Put Trello Organization",
+            Description = "Put a Trello Organization",
+            OperationId = "PutTrelloOrganization")]
+        [SwaggerResponse(200, "Trello Organization Updated", typeof(TrelloOrganizationResource))]
+
+        [HttpPut("organizations/{organizationId}")]
+        [ProducesResponseType(typeof(TrelloOrganizationResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> UpdateTrelloOrganizationAsync(string organizationId, [FromBody] SaveTrelloOrganizationResource resource)
+        {
+            var result = await _trelloService.UpdateOrganizationAsync(organizationId, resource);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Resource);
+        }
+
+
+
+        /******************************************/
+        /*DELETE TRELLO ORGANIZATION ASYNC*/
+        /******************************************/
+
+        [SwaggerOperation(
+            Summary = "Delete Trello Organization",
+            Description = "Delete a Trello Organization",
+            OperationId = "DeleteTrelloOrganization")]
+        [SwaggerResponse(200, "Trello Organization Deleted", typeof(TrelloOrganizationResource))]
+
+        [HttpDelete("organizations/{organizationId}")]
+        [ProducesResponseType(typeof(TrelloOrganizationResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> DeleteTrelloOrganizationAsync(string organizationId)
+        {
+            var result = await _trelloService.DeleteOrganizationAsync(organizationId);
 
             if (!result.Success)
                 return BadRequest(result.Message);

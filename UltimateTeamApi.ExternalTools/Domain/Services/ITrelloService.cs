@@ -9,10 +9,14 @@ using UltimateTeamApi.ExternalTools.Resources;
 namespace UltimateTeamApi.ExternalTools.Domain.Services
 {
     public interface ITrelloService
-    {
-        Task<TrelloMemberResponse> GetMemberByIdAsync(string memberId);
+    {  
         Task<TrelloAccountResponse> AssignToken();
         Task<TrelloAccountResponse> UnassignToken();
+
+
+        //MEMBER
+        Task<TrelloMemberResponse> GetMemberByIdAsync(string memberId);
+        Task<IEnumerable<TrelloMemberResource>> GetAllMembersByCardIdAsync(string cardId);
 
         // BOARD
         Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId);
@@ -31,9 +35,18 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services
         //LIST
 
         Task<IEnumerable<TrelloListResource>> GetAllListsByBoardIdAsync(string boardId);
+        Task<TrelloListResponse> GetListByCardIdAsync(string cardId);
         Task<TrelloListResponse> GetListByIdAsync(string listId);
         Task<TrelloListResponse> SaveListOnABoardAsync(SaveTrelloListResource resource, string boardId);
         Task<TrelloListResponse> UpdateListOnABoardAsync(string listId, SaveTrelloListResource resource);
-        
+
+        //ORGANIZATIONS
+
+        Task<IEnumerable<TrelloOrganizationResource>> GetAllOrganizationsByMemberIdAsync(string memberId);
+        //Task<TrelloListResponse> GetListByCardIdAsync(string cardId);
+        //Task<TrelloListResponse> GetListByIdAsync(string listId);
+        Task<TrelloOrganizationResponse> SaveOrganizationAsync(SaveTrelloOrganizationResource resource);
+        Task<TrelloOrganizationResponse> UpdateOrganizationAsync(string organizationId, SaveTrelloOrganizationResource resource);
+        Task<TrelloOrganizationResponse> DeleteOrganizationAsync(string organizationId);
     }
 }
