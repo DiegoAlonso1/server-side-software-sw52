@@ -202,9 +202,9 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     /*SESSIONTYPE ENTITY*/
             /******************************************/
             builder.Entity<SessionType>().ToTable("SessionTypes");
-            builder.Entity<SessionType>().HasKey(f => f.Id);
-            builder.Entity<SessionType>().Property(f => f.Id).IsRequired();
-            builder.Entity<SessionType>().Property(f => f.Type).IsRequired().HasMaxLength(15);
+            builder.Entity<SessionType>().HasKey(st => st.Id);
+            builder.Entity<SessionType>().Property(st => st.Id).IsRequired();
+            builder.Entity<SessionType>().Property(st => st.Type).IsRequired().HasMaxLength(15);
             builder.Entity<SessionType>().HasData
                 (
                     new SessionType { Id = 1, Type = "Collaborative" },

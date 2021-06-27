@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
 /*****************************************************************************/
-/*INSTRUCTIONS*/
+                                /*INSTRUCTIONS*/
 /*****************************************************************************/
 
 /*1-You must have run the main project at least once. 

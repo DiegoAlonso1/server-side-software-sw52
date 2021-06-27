@@ -110,23 +110,23 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "SessionTypeId"});
-                table45.AddRow(new string[] {
+                table47.AddRow(new string[] {
                             "UltimateTeam",
                             "1"});
-                table45.AddRow(new string[] {
+                table47.AddRow(new string[] {
                             "Clase de fisica",
                             "2"});
-                table45.AddRow(new string[] {
+                table47.AddRow(new string[] {
                             "Reunión",
                             "1"});
-                table45.AddRow(new string[] {
+                table47.AddRow(new string[] {
                             "Hola que hace",
                             "2"});
 #line 8
- testRunner.When("sessions required attributes provided to initialize instances", ((string)(null)), table45, "When ");
+ testRunner.When("sessions required attributes provided to initialize instances", ((string)(null)), table47, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -160,15 +160,15 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "SessionTypeId"});
-                table46.AddRow(new string[] {
+                table48.AddRow(new string[] {
                             "Nueva Sesion",
                             "2"});
 #line 18
  testRunner.When("the user complete the form with the required fields and click the Create Session " +
-                        "button", ((string)(null)), table46, "When ");
+                        "button", ((string)(null)), table48, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -202,15 +202,15 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "SessionTypeId"});
-                table47.AddRow(new string[] {
+                table49.AddRow(new string[] {
                             "Session SSS",
                             "2"});
 #line 25
  testRunner.When("the user complete the form with required fields of the session with id 5 and clic" +
-                        "k the Update Session button", ((string)(null)), table47, "When ");
+                        "k the Update Session button", ((string)(null)), table49, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -244,32 +244,32 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "SessionTypeId"});
-                table48.AddRow(new string[] {
+                table50.AddRow(new string[] {
                             "1",
                             "UltimateTeam",
                             "1"});
-                table48.AddRow(new string[] {
+                table50.AddRow(new string[] {
                             "2",
                             "Clase de fisica",
                             "2"});
-                table48.AddRow(new string[] {
+                table50.AddRow(new string[] {
                             "3",
                             "Reunión",
                             "1"});
-                table48.AddRow(new string[] {
+                table50.AddRow(new string[] {
                             "4",
                             "Hola que hace",
                             "2"});
-                table48.AddRow(new string[] {
+                table50.AddRow(new string[] {
                             "5",
                             "Session SSS",
                             "2"});
 #line 32
- testRunner.When("the administrator goes to Sessions Page, session list should return", ((string)(null)), table48, "When ");
+ testRunner.When("the administrator goes to Sessions Page, session list should return", ((string)(null)), table50, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -306,16 +306,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 43
  testRunner.When("the user enters to the session with id 5 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "SessionTypeId"});
-                table49.AddRow(new string[] {
+                table51.AddRow(new string[] {
                             "5",
                             "Session SSS",
                             "2"});
 #line 44
- testRunner.Then("session details should be", ((string)(null)), table49, "Then ");
+ testRunner.Then("session details should be", ((string)(null)), table51, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -352,62 +352,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 51
  testRunner.When("the administrator goes to Sessions Page, and filter by \"Session SSS\" name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name",
                             "SessionTypeId"});
-                table50.AddRow(new string[] {
+                table52.AddRow(new string[] {
                             "5",
                             "Session SSS",
                             "2"});
 #line 52
- testRunner.Then("the receiving session with name \"Session SSS\" details should be", ((string)(null)), table50, "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="6. The user wants to see the session members list")]
-        [Xunit.TraitAttribute("FeatureTitle", "Session")]
-        [Xunit.TraitAttribute("Description", "6. The user wants to see the session members list")]
-        public virtual void _6_TheUserWantsToSeeTheSessionMembersList()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("6. The user wants to see the session members list", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 58
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 59
- testRunner.When("the administrator goes to session members section of session with id 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
-                            "UserId",
-                            "SessionId",
-                            "Creator"});
-                table51.AddRow(new string[] {
-                            "1",
-                            "2",
-                            "true"});
-#line 60
- testRunner.Then("the session member list of session with id 2 should be", ((string)(null)), table51, "Then ");
+ testRunner.Then("the receiving session with name \"Session SSS\" details should be", ((string)(null)), table52, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -59,6 +59,7 @@ namespace UltimateTeamApi
             services.AddScoped<IFriendshipRepository, FriendshipRepository>();
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<ISessionParticipantRepository, SessionParticipantRepository>();
+            services.AddScoped<ISessionTypeRepository, SessionTypeRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -73,6 +74,7 @@ namespace UltimateTeamApi
             services.AddScoped<IFriendshipService, FriendshipService>();
             services.AddScoped<ISessionService, SessionService>();
             services.AddScoped<ISessionParticipantService, SessionParticipantService>();
+            services.AddScoped<ISessionTypeService, SessionTypeService>();
             services.AddScoped<IDriveService, ExternalTools.Services.DriveService>();
             services.AddScoped<ITrelloService, ExternalTools.Services.TrelloService>(); 
             services.AddScoped<ICalendarService, ExternalTools.Services.CalendarService>();

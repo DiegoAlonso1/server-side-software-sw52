@@ -15,14 +15,14 @@ namespace UltimateTeamApi.Persistance.Repositories
         {
         }
 
-        public Task<SessionType> FindByIdAsync(int sessionTypeId)
+        public async Task<SessionType> FindByIdAsync(int sessionTypeId)
         {
-            throw new NotImplementedException();
+            return await _context.SessionTypes.FindAsync(sessionTypeId);
         }
 
-        public Task<IEnumerable<SessionType>> ListAsync()
+        public async Task<IEnumerable<SessionType>> ListAsync()
         {
-            throw new NotImplementedException();
+            return await _context.SessionTypes.ToListAsync();
         }
     }
 }

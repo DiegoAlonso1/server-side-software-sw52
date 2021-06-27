@@ -6,6 +6,18 @@ using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
+/*****************************************************************************/
+                                /*INSTRUCTIONS*/
+/*****************************************************************************/
+
+/*1-You must have run the main project at least once without creating any entity. 
+    Otherwise, if you have created any entity, you must delete the database, recreate 
+    it and rerun the project so that the IDs match the IDs of these tests. */
+
+/*2-First run the test that initializes some entities instances. Then run 1 test at 
+    time. In order as the scenarios have been created. Scenario 1 first, then Scenario 
+    2, and so on. */
+
 namespace UltimateTeamApi.SpecFlowTest.SessionParticipant
 {
     [Binding]
