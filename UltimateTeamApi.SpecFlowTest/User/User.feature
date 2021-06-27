@@ -42,8 +42,8 @@ Scenario: 3. The administrator wants to see all users
 Scenario: 4. The user wants to see his profile data 
 	When the user with id 5 goes to Profile Page
 	Then user details should be
-	| Id | Name     | LastName  | UserName      | Email                 | Password        | Birthdate           | LastConnection          | ProfilePicture | AdministratorId |
-	| 5  | Fernando | Firulais  | FernanElCrack | fernan@elcrack.es     | NuevaContraseña | 1999-05-21T00:00:00 | 2020-05-20T00:00:00     | null			  | 1               |
+		| Id | Name     | LastName  | UserName      | Email                 | Password        | Birthdate           | LastConnection          | ProfilePicture | AdministratorId |
+		| 5  | Fernando | Firulais  | FernanElCrack | fernan@elcrack.es     | NuevaContraseña | 1999-05-21T00:00:00 | 2020-05-20T00:00:00     | null			  | 1               |
 
 
 #5 - Get user by email

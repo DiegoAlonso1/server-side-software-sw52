@@ -57,6 +57,8 @@ namespace UltimateTeamApi
             services.AddScoped<ISubscriptionBillRepository, SubscriptionBillRepository>();
             services.AddScoped<ISubscriptionTypeRepository, SubscriptionTypeRepository>();
             services.AddScoped<IFriendshipRepository, FriendshipRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<ISessionParticipantRepository, SessionParticipantRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -69,8 +71,10 @@ namespace UltimateTeamApi
             services.AddScoped<ISubscriptionBillService, SubscriptionBillService>();
             services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
             services.AddScoped<IFriendshipService, FriendshipService>();
+            services.AddScoped<ISessionService, SessionService>();
+            services.AddScoped<ISessionParticipantService, SessionParticipantService>();
             services.AddScoped<IDriveService, ExternalTools.Services.DriveService>();
-            services.AddScoped<ITrelloService, ExternalTools.Services.TrelloService>();
+            services.AddScoped<ITrelloService, ExternalTools.Services.TrelloService>(); 
             services.AddScoped<ICalendarService, ExternalTools.Services.CalendarService>();
 
             //Apply Endpoints Naming Convention

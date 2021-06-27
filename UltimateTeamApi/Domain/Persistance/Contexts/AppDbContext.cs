@@ -23,7 +23,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
-        public DbSet<Session> Sesssions { get; set; }
+        public DbSet<Session> Sessions { get; set; }
         public DbSet<SessionParticipant> SessionParticipants { get; set; }
         public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
         public DbSet<SubscriptionBill> SubscriptionBills { get; set; }
@@ -165,11 +165,19 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                 .WithMany(u => u.GroupMembers)
                 .HasForeignKey(gm => gm.UserId);
 
-            
+
 
             /******************************************/
-                        /*SESSIONPAR ENTITY*/
+                        /*SESSION ENTITY*/
             /******************************************/
+            builder.Entity<Session>().ToTable("Sessions");
+            builder.Entity<Session>().HasKey(s => s.Id);
+            builder.Entity<Session>().Property(s => s.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Session>().Property(s => s.Name).IsRequired().HasMaxLength(20);
+            builder.Entity<Session>()
+                .HasOne(s => s.SessionType)
+                .WithMany(st => st.Sessions)
+                .HasForeignKey(s => s.SessionTypeId);
 
 
 
@@ -177,21 +185,21 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     /*SESSIONPARTICIPANT ENTITY*/
             /******************************************/
             builder.Entity<SessionParticipant>().ToTable("SessionParticipants");
-            builder.Entity<SessionParticipant>().HasKey(s => new { s.SessionsId, s.UserId });
-            builder.Entity<SessionParticipant>().Property(s => s.Creator).IsRequired();
+            builder.Entity<SessionParticipant>().HasKey(sp => new { sp.SessionId, sp.UserId });
+            builder.Entity<SessionParticipant>().Property(sp => sp.Creator).IsRequired();
             builder.Entity<SessionParticipant>()
-                .HasOne(s => s.Session)
+                .HasOne(sp => sp.Session)
                 .WithMany(s => s.SessionParticipants)
-                .HasForeignKey(s => s.SessionsId);
+                .HasForeignKey(sp => sp.SessionId);
             builder.Entity<SessionParticipant>()
-                .HasOne(s => s.User)
+                .HasOne(sp => sp.User)
                 .WithMany(u => u.SessionsParticipated)
-                .HasForeignKey(s => s.UserId);
+                .HasForeignKey(sp => sp.UserId);
 
 
 
             /******************************************/
-            /*SESSIONTYPE ENTITY*/
+                    /*SESSIONTYPE ENTITY*/
             /******************************************/
             builder.Entity<SessionType>().ToTable("SessionTypes");
             builder.Entity<SessionType>().HasKey(f => f.Id);

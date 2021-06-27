@@ -50,7 +50,7 @@ namespace UltimateTeamApi.SpecFlowTest.GroupMember
 
 
         /**************************************************/
-        /*SCENARY 1*/
+                            /*SCENARY 1*/
         /**************************************************/
 
         [When(@"the user with id (.*) goes to Profile Page and click on the groups list")]
@@ -73,7 +73,7 @@ namespace UltimateTeamApi.SpecFlowTest.GroupMember
 
 
         /**************************************************/
-        /*SCENARY 2*/
+                            /*SCENARY 2*/
         /**************************************************/
 
         //[When(@"the user complete the form with the required fields and click the Create button")]
@@ -98,7 +98,7 @@ namespace UltimateTeamApi.SpecFlowTest.GroupMember
 
 
         /**************************************************/
-        /*SCENARY 3*/
+                            /*SCENARY 3*/
         /**************************************************/
 
         [When(@"the user with id (.*) click the Leave Group button")]

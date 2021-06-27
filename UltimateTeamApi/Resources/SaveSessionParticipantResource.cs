@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace UltimateTeamApi.Resources
 {
-	public class SessionParticipantResource
-	{
-        public int UserId { get; set; }
-        public int SessionId { get; set; }
+    public class SaveSessionParticipantResource
+    {
         public bool Creator { get; set; }
     }
 }
