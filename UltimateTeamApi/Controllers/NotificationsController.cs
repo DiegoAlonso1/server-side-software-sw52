@@ -17,7 +17,7 @@ namespace UltimateTeamApi.Controllers
     {
         private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
-        
+
         public NotificationsController(INotificationService notificationService, IMapper mapper)
         {
             _notificationService = notificationService;
@@ -25,7 +25,7 @@ namespace UltimateTeamApi.Controllers
         }
 
         /******************************************/
-                     /*GET ALL ASYNC*/
+        /*GET ALL ASYNC*/
         /******************************************/
 
         [SwaggerOperation(
