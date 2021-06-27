@@ -110,19 +110,19 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "SessionTypeId"});
-                table33.AddRow(new string[] {
+                table34.AddRow(new string[] {
                             "UltimateTeam",
                             "1"});
-                table33.AddRow(new string[] {
+                table34.AddRow(new string[] {
                             "Clase de fisica",
                             "2"});
 #line 8
- testRunner.When("sessions required attributes provided to initialize instances", ((string)(null)), table33, "When ");
+ testRunner.When("sessions required attributes provided to initialize instances", ((string)(null)), table34, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "LastName",
                             "UserName",
@@ -132,7 +132,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "LastConnection",
                             "ProfilePicture",
                             "AdministratorId"});
-                table34.AddRow(new string[] {
+                table35.AddRow(new string[] {
                             "Sam",
                             "Morales",
                             "ElTioSam",
@@ -142,7 +142,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-04-19",
                             "null",
                             "1"});
-                table34.AddRow(new string[] {
+                table35.AddRow(new string[] {
                             "Lucia",
                             "Revollar",
                             "Lulu",
@@ -152,7 +152,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-01-20",
                             "null",
                             "1"});
-                table34.AddRow(new string[] {
+                table35.AddRow(new string[] {
                             "Maria",
                             "Santillan",
                             "Maria503",
@@ -162,7 +162,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2018-09-12",
                             "null",
                             "1"});
-                table34.AddRow(new string[] {
+                table35.AddRow(new string[] {
                             "Lionel",
                             "Messi",
                             "ElMeias",
@@ -173,35 +173,35 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 12
- testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table34, "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Creator"});
-                table35.AddRow(new string[] {
-                            "true"});
-#line 18
- testRunner.Then("assign the user with id 1 with the session with id 1", ((string)(null)), table35, "Then ");
+ testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table35, "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
                             "Creator"});
                 table36.AddRow(new string[] {
-                            "false"});
-#line 21
- testRunner.Then("assign the user with id 2 with the session with id 1", ((string)(null)), table36, "Then ");
+                            "true"});
+#line 18
+ testRunner.Then("assign the user with id 1 with the session with id 1", ((string)(null)), table36, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
                             "Creator"});
                 table37.AddRow(new string[] {
-                            "true"});
-#line 24
- testRunner.Then("assign the user with id 3 with the session with id 2", ((string)(null)), table37, "Then ");
+                            "false"});
+#line 21
+ testRunner.Then("assign the user with id 2 with the session with id 1", ((string)(null)), table37, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
                             "Creator"});
                 table38.AddRow(new string[] {
+                            "true"});
+#line 24
+ testRunner.Then("assign the user with id 3 with the session with id 2", ((string)(null)), table38, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Creator"});
+                table39.AddRow(new string[] {
                             "false"});
 #line 27
- testRunner.Then("assign the user with id 2 with the session with id 2", ((string)(null)), table38, "Then ");
+ testRunner.Then("assign the user with id 2 with the session with id 2", ((string)(null)), table39, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -238,12 +238,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 34
  testRunner.When("the user with id 4 click the Join Session button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
                             "Creator"});
-                table39.AddRow(new string[] {
+                table40.AddRow(new string[] {
                             "false"});
 #line 35
- testRunner.Then("assign the user with id 4 with the session with id 1", ((string)(null)), table39, "Then ");
+ testRunner.Then("assign the user with id 4 with the session with id 1", ((string)(null)), table40, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -277,21 +277,21 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
                             "UserId",
                             "SessionId",
                             "Creator"});
-                table40.AddRow(new string[] {
+                table41.AddRow(new string[] {
                             "2",
                             "1",
                             "false"});
-                table40.AddRow(new string[] {
+                table41.AddRow(new string[] {
                             "2",
                             "2",
                             "false"});
 #line 42
  testRunner.When("the user with id 2 goes to Sessions History section, session participants list sh" +
-                        "ould return", ((string)(null)), table40, "When ");
+                        "ould return", ((string)(null)), table41, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -325,17 +325,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                             "UserId",
                             "SessionId",
                             "Creator"});
-                table41.AddRow(new string[] {
+                table42.AddRow(new string[] {
                             "1",
                             "1",
                             "true"});
 #line 49
  testRunner.When("the user with id 1 goes to Sessions History section and filter sessions created, " +
-                        "session participants list should return", ((string)(null)), table41, "When ");
+                        "session participants list should return", ((string)(null)), table42, "When ");
 #line hidden
             }
             this.ScenarioCleanup();

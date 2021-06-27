@@ -110,17 +110,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Type"});
-                table45.AddRow(new string[] {
+                table46.AddRow(new string[] {
                             "1",
                             "Collaborative"});
-                table45.AddRow(new string[] {
+                table46.AddRow(new string[] {
                             "2",
                             "Laser Individual"});
 #line 9
- testRunner.When("the user goes to Create Session Page, session types options list should return", ((string)(null)), table45, "When ");
+ testRunner.When("the user goes to Create Session Page, session types options list should return", ((string)(null)), table46, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -157,14 +157,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 17
  testRunner.When("the user select session type with id 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Type"});
-                table46.AddRow(new string[] {
+                table47.AddRow(new string[] {
                             "1",
                             "Collaborative"});
 #line 18
- testRunner.Then("session type details should be", ((string)(null)), table46, "Then ");
+ testRunner.Then("session type details should be", ((string)(null)), table47, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

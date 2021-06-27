@@ -161,14 +161,14 @@ this.ScenarioInitialize(scenarioInfo);
                 table17.AddRow(new string[] {
                             "True"});
 #line 19
- testRunner.Then("assign the group with Id 1 with the user with Id 2", ((string)(null)), table17, "Then ");
+ testRunner.Then("assign the user with Id 2 on the group with Id 1", ((string)(null)), table17, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "UserCreator"});
                 table18.AddRow(new string[] {
                             "True"});
 #line 22
- testRunner.Then("assign the group with Id 2 with the user with Id 2", ((string)(null)), table18, "Then ");
+ testRunner.Then("assign the user with Id 2 on the group with Id 2", ((string)(null)), table18, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -249,24 +249,28 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 37
- testRunner.When("the user complete the form with the required fields and click the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
                 TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
                             "Name"});
                 table20.AddRow(new string[] {
+                            "Bichotas"});
+#line 37
+ testRunner.When("the user complete the form with the required fields and click the Create button", ((string)(null)), table20, "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "Name"});
+                table21.AddRow(new string[] {
                             "1",
                             "TeamUltimate"});
-                table20.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             "2",
                             "Backyardigans"});
-                table20.AddRow(new string[] {
-                            "3",
-                            "Pollitos FC"});
-#line 38
- testRunner.Then("it is assigned to the user with Id 2 on the group with Id 3 and list groups shoul" +
-                        "d be", ((string)(null)), table20, "Then ");
+                table21.AddRow(new string[] {
+                            "5",
+                            "Bichotas"});
+#line 40
+ testRunner.Then("it is assigned to the user with Id 2 on the group with Id 5 and list groups shoul" +
+                        "d be", ((string)(null)), table21, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -280,7 +284,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3. The user wants to leave his group", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 47
+#line 49
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -300,17 +304,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 48
+#line 50
  testRunner.When("the user with id 2 click the Leave Group button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table21.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "2",
                             "Backyardigans"});
-#line 49
- testRunner.Then("the user with id 2 leaves the group and removed group details should be", ((string)(null)), table21, "Then ");
+#line 51
+ testRunner.Then("the user with id 2 leaves the group and removed group details should be", ((string)(null)), table22, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

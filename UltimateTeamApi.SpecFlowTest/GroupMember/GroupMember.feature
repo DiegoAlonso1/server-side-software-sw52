@@ -16,10 +16,10 @@ Scenario: 0. Initialize some GroupMember Intances
 		| Name   | LastName  | UserName | Email					| Password		  | Birthdate  | LastConnection | ProfilePicture | AdministratorId |
 		| Sam	 | Morales   | ElTioSam | sam@hotmail.com		| TresNodos		  | 2002-04-19 | 2020-04-19     | null			 | 1			   |
 		| Lucia	 | Revollar  | Lulu     | lulu@gmail.com		| CrusUpc#3		  | 2003-01-09 | 2020-01-20     | null			 | 1			   |
-	Then assign the group with Id 1 with the user with Id 2
+	Then assign the user with Id 2 on the group with Id 1
 		| UserCreator   |
 		| True			|
-	Then assign the group with Id 2 with the user with Id 2
+	Then assign the user with Id 2 on the group with Id 2
 		| UserCreator   |
 		| True			|
 
@@ -35,11 +35,13 @@ Scenario: 1. The user wants to see the groups list of his profile data
 #2 - Assign a group with the user
 Scenario: 2. The user wants to create a group
 	When the user complete the form with the required fields and click the Create button
-	Then it is assigned to the user with Id 2 on the group with Id 3 and list groups should be
+		| Name     |
+		| Bichotas |
+	Then it is assigned to the user with Id 2 on the group with Id 5 and list groups should be
 		| Id   | Name			 |
 		| 1	   | TeamUltimate	 |
 		| 2	   | Backyardigans	 |
-		| 3	   | Pollitos FC	 |
+		| 5	   | Bichotas		 |
 
 
 
