@@ -9,7 +9,7 @@ namespace UltimateTeamApi.Domain.Models
     {
         public int UserId { get; set; }
         public User User { get; set; }
-        public int SessionsId { get; set; }
+        public int SessionId { get; set; }
         public Session Session { get; set; }
         public bool Creator { get; set; }
     }

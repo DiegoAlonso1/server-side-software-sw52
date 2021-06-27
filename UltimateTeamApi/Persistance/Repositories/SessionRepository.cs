@@ -17,22 +17,27 @@ namespace UltimateTeamApi.Persistance.Repositories
 
         public async Task AddAsync(Session session)
         {
-            await _context.Sesssions.AddAsync(session);
+            await _context.Sessions.AddAsync(session);
         }
 
-        public async Task<Session> FindBySessionIdAsync(int sessionId)
+        public async Task<Session> FindByIdAsync(int sessionId)
         {
-            return await _context.Sesssions.FindAsync(sessionId);
+            return await _context.Sessions.FindAsync(sessionId);
         }
 
         public async Task<IEnumerable<Session>> ListAsync()
         {
-            return await _context.Sesssions.ToListAsync();
+            return await _context.Sessions.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Session>> ListByNameAsync(string sessionName)
+        {
+            return await _context.Sessions.Where(s => s.Name == sessionName).ToListAsync();
         }
 
         public void Update(Session session)
         {
-            _context.Sesssions.Update(session);
+            _context.Sessions.Update(session);
         }
     }
 }

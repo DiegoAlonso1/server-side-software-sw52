@@ -82,12 +82,12 @@ namespace UltimateTeamApi.Controllers
             OperationId = "GetByEmail")]
         [SwaggerResponse(200, "User By Email", typeof(UserResource))]
 
-        [HttpGet("email/{email}")]
+        [HttpGet("email/{userEmail}")]
         [ProducesResponseType(typeof(UserResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetByEmailAsync(string email)
+        public async Task<IActionResult> GetByEmailAsync(string userEmail)
         {
-            var result = await _userService.GetByEmailAsync(email);
+            var result = await _userService.GetByEmailAsync(userEmail);
 
             if (!result.Success)
                 return BadRequest(result.Message);

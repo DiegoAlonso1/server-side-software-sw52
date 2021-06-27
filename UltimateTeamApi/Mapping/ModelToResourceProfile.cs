@@ -20,6 +20,8 @@ namespace UltimateTeamApi.Mapping
             CreateMap<Administrator, AdministratorResource>();
             CreateMap<SubscriptionBill, SubscriptionBillResource>();
             CreateMap<SubscriptionType, SubscriptionTypeResource>();
+            CreateMap<Session, SessionResource>();
+            CreateMap<SessionParticipant, SessionParticipantResource>();
         }
     }
 }

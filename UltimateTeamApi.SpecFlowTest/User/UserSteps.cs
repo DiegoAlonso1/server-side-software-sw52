@@ -7,17 +7,17 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UltimateTeamApi.Domain.Models;
 
-/*****************************************************************************/
-                            /*INSTRUCTIONS*/
-/*****************************************************************************/
+    /*****************************************************************************/
+                                /*INSTRUCTIONS*/
+    /*****************************************************************************/
 
-/*1-You must have run the main project at least once without creating any entity. 
-    Otherwise, if you have created any entity, you must delete the database, recreate 
-    it and rerun the project so that the IDs match the IDs of these tests. */
+    /*1-You must have run the main project at least once without creating any entity. 
+        Otherwise, if you have created any entity, you must delete the database, recreate 
+        it and rerun the project so that the IDs match the IDs of these tests. */
 
-/*2-First run the test that initializes some entities instances. Then run 1 test at 
-    time. In order as the scenarios have been created. Scenario 1 first, then Scenario 
-    2, and so on. */
+    /*2-First run the test that initializes some entities instances. Then run 1 test at 
+        time. In order as the scenarios have been created. Scenario 1 first, then Scenario 
+        2, and so on. */
 
 namespace UltimateTeamApi.SpecFlowTest.User
 {
@@ -167,9 +167,9 @@ namespace UltimateTeamApi.SpecFlowTest.User
         /**************************************************/
 
         [When(@"the user send a friend request to email ""(.*)""")]
-        public void WhenTheUserSendAFriendRequestToEmail(string email)
+        public void WhenTheUserSendAFriendRequestToEmail(string userEmail)
         {
-            var result = Task.Run(async () => await Client.GetAsync($"{UserEndpoint}/email={email}")).Result;
+            var result = Task.Run(async () => await Client.GetAsync($"{UserEndpoint}/email/{userEmail}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get User by Email Integration Test Completed");
         }
 
