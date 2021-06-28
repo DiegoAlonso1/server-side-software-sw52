@@ -8,12 +8,13 @@ using UltimateTeamApi.ExternalTools.Domain.Services.Communications;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using UltimateTeamApi.ExternalTools.Resources;
+using Newtonsoft.Json;
 
 namespace UltimateTeamApi.ExternalTools.Services
 { 
     public class PayPalService : IPayPalService
     {
-        public  async Task<HttpResponseMessage> GetToken()
+        public  async Task<PayPalTokenResponse> GetToken()
         {
             var httpClient = new HttpClient();
             var request = new HttpRequestMessage(new HttpMethod("POST"), "https://api-m.sandbox.paypal.com/v1/oauth2/token");
@@ -26,13 +27,28 @@ namespace UltimateTeamApi.ExternalTools.Services
 
             request.Content = new StringContent("grant_type=client_credentials");
             request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");
+            try
+            {
+                HttpResponseMessage response = await httpClient.SendAsync(request);
 
-            HttpResponseMessage response = await httpClient.SendAsync(request);
-            
-            return response;
+                var model = await response.Content.ReadAsStringAsync();
+                dynamic tokenResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                var resource = new PayPalTokenResource
+                {
+                    AccessToken = tokenResponse.access_token
+                };
+                return new PayPalTokenResponse($"{resource.AccessToken}");
+            }
+            catch (Exception ex)
+            {
+                return new PayPalTokenResponse($"An error ocurred while getting de Pay Pal Token: {ex.Message}");
+            }           
+
+
         }
 
-        public async Task<HttpResponseMessage> SuscribeToAPlan(SaveSuscription resource)
+        public async Task<PayPalSubscriptionResponse> SuscribeToAPlan(SaveSuscription resource)
         {
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (requestMessage, certificate, chain, policyErrors) => true;
@@ -52,11 +68,22 @@ namespace UltimateTeamApi.ExternalTools.Services
             request.Content = new StringContent(dataString);
             request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
 
-            var response = await httpClient.SendAsync(request);
-            return response;
+            HttpResponseMessage response = await httpClient.SendAsync(request);
+
+            var model = await response.Content.ReadAsStringAsync();
+            dynamic subscriptionResponse = JsonConvert.DeserializeObject<Object>(model);
+
+
+            var item = new PayPalSubscriptionResource
+            {
+                PlanId = subscriptionResponse.plan_id,
+                StartTime = subscriptionResponse.start_time,
+                Link = subscriptionResponse.links[0].href,
+            };
+            return new PayPalSubscriptionResponse(item);
         }
 
-        public DateTime GetDate()
+        public static DateTime GetDate()
         {
             DateTime currentDate = DateTime.Now;
             return currentDate;
