@@ -7,8 +7,8 @@ namespace UltimateTeamApi.Resources
 {
     public class GroupMemberResource
     {
-        public int UserId { get; set; }
+        public int PersonId { get; set; }
         public int GroupId { get; set; }
-        public bool UserCreator { get; set; }
+        public bool PersonCreator { get; set; }
     }
 }

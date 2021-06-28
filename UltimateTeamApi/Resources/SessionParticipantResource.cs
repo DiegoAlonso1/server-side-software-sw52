@@ -7,7 +7,7 @@ namespace UltimateTeamApi.Resources
 {
 	public class SessionParticipantResource
 	{
-        public int UserId { get; set; }
+        public int PersonId { get; set; }
         public int SessionId { get; set; }
         public bool Creator { get; set; }
     }

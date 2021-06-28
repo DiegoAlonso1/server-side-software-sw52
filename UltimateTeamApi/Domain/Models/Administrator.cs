@@ -12,7 +12,7 @@ namespace UltimateTeamApi.Domain.Models
         public string Password { get; set; }
         public string Area { get; set; }
 
-        public List<User> Users { get; set; }
+        public List<Person> Persons { get; set; }
 
     }
 }

@@ -48,7 +48,7 @@ namespace UltimateTeamApi
 
             //Dependency Injection Configuration
 
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IFunctionalityRepository, FunctionalityRepository>();
             services.AddScoped<ISessionStadisticRepository, SessionStadisticRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();
@@ -63,7 +63,7 @@ namespace UltimateTeamApi
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IFunctionalityService, FunctionalityService>();
             services.AddScoped<ISessionStadisticService, SessionStadisticService>();
             services.AddScoped<IGroupService, GroupService>();

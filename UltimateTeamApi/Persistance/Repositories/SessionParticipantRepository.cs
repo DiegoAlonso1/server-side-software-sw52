@@ -20,24 +20,24 @@ namespace UltimateTeamApi.Persistance.Repositories
             await _context.SessionParticipants.AddAsync(sessionParticipant);
         }
 
-        public async Task AssignSessionParticipantAsync(int sessionId, int userId, bool creator)
+        public async Task AssignSessionParticipantAsync(int sessionId, int personId, bool creator)
         {
-            var sessionParticipant = await FindBySessionIdAndUserIdAsync(sessionId, userId);
+            var sessionParticipant = await FindBySessionIdAndPersonIdAsync(sessionId, personId);
 
             if (sessionParticipant == null)
             {
-                sessionParticipant = new SessionParticipant { SessionId = sessionId, UserId = userId, Creator = creator };
+                sessionParticipant = new SessionParticipant { SessionId = sessionId, PersonId = personId, Creator = creator };
                 await AddAsync(sessionParticipant);
             }
 
             else
-                throw new Exception("Session and User have already been asigned.");
+                throw new Exception("Session and Person have already been asigned.");
         }
 
-        public async Task<SessionParticipant> FindBySessionIdAndUserIdAsync(int sessionId, int userId)
+        public async Task<SessionParticipant> FindBySessionIdAndPersonIdAsync(int sessionId, int personId)
         {
             return await _context.SessionParticipants
-                .Where(sp => sp.SessionId == sessionId && sp.UserId == userId)
+                .Where(sp => sp.SessionId == sessionId && sp.PersonId == personId)
                 .Include(sp => sp.Session)
                 .FirstOrDefaultAsync();
         }
@@ -49,18 +49,18 @@ namespace UltimateTeamApi.Persistance.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<SessionParticipant>> ListByUserCreatorIdAsync(int userId)
+        public async Task<IEnumerable<SessionParticipant>> ListByPersonCreatorIdAsync(int personId)
         {
             return await _context.SessionParticipants
-                .Where(sp => sp.UserId == userId && sp.Creator)
+                .Where(sp => sp.PersonId == personId && sp.Creator)
                 .Include(sp => sp.Session)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<SessionParticipant>> ListByUserIdAsync(int userId)
+        public async Task<IEnumerable<SessionParticipant>> ListByPersonIdAsync(int personId)
         {
             return await _context.SessionParticipants
-                .Where(sp => sp.UserId == userId)
+                .Where(sp => sp.PersonId == personId)
                 .Include(sp => sp.Session)
                 .ToListAsync();
         }

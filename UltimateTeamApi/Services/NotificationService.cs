@@ -13,17 +13,17 @@ namespace UltimateTeamApi.Services
     {
         private readonly INotificationRepository _notificationRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserRepository _userRepository;
-        public NotificationService(INotificationRepository notificationRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
+        private readonly IPersonRepository _personRepository;
+        public NotificationService(INotificationRepository notificationRepository, IUnitOfWork unitOfWork, IPersonRepository personRepository)
         {
             _notificationRepository = notificationRepository;
             _unitOfWork = unitOfWork;
-            _userRepository = userRepository;
+            _personRepository = personRepository;
         }
 
-        public async Task<NotificationResponse> DeleteAsync(int notificationId, int userId)
+        public async Task<NotificationResponse> DeleteAsync(int notificationId, int personId)
         {
-            var existingNotification = await _notificationRepository.FindByIdAsync(userId);
+            var existingNotification = await _notificationRepository.FindByIdAsync(personId);
 
             if (existingNotification == null)
                 return new NotificationResponse("Notification not found");
@@ -56,24 +56,28 @@ namespace UltimateTeamApi.Services
             return await _notificationRepository.ListBySenderIdAsync(senderId);
         }
 
-        public async Task<NotificationResponse> GetByIdAndUserIdAsync(int notificationId, int userId)
+        public async Task<NotificationResponse> GetByIdAndPersonIdAsync(int notificationId, int personId)
         {
-            var existingUser = await _userRepository.FindByIdAsync(userId);
-            if (existingUser == null)
-                return new NotificationResponse("User not found");
+            var existingPerson = await _personRepository.FindByIdAsync(personId);
+            if (existingPerson == null)
+                return new NotificationResponse("Person not found");
 
             var existingNotification = await _notificationRepository.FindByIdAsync(notificationId);
             if (existingNotification == null)
                 return new NotificationResponse("Notification not found");
 
-            if (!existingUser.NotificationsReceived.Contains(existingNotification))
-                return new NotificationResponse("Notification not found by User with Id: " + userId);
+            if (!existingPerson.NotificationsReceived.Contains(existingNotification))
+                return new NotificationResponse("Notification not found by Person with Id: " + personId);
 
             return new NotificationResponse(existingNotification);
         }
 
-        public async Task<NotificationResponse> SaveAsync(int userId, Notification notification)
+        public async Task<NotificationResponse> SaveAsync(int personId, Notification notification)
         {
+            var existingPerson = await _personRepository.FindByIdAsync(personId);
+            if (existingPerson == null)
+                return new NotificationResponse("Person not found");
+
             try
             {
                 await _notificationRepository.AddAsync(notification);

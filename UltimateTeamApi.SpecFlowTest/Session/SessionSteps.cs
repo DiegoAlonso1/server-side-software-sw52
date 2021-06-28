@@ -33,7 +33,7 @@ namespace UltimateTeamApi.SpecFlowTest.Session
 
 
         /**************************************************/
-          /*INITIALIZING TEST WITH SOME USERS INSTANCES*/
+          /*INITIALIZING TEST WITH SOME PERSONS INSTANCES*/
         /**************************************************/
 
         [When(@"sessions required attributes provided to initialize instances")]
@@ -61,8 +61,8 @@ namespace UltimateTeamApi.SpecFlowTest.Session
                             /*SCENARY 1*/
         /**************************************************/
         
-        [When(@"the user complete the form with the required fields and click the Create Session button")]
-        public void WhenTheUserCompleteTheFormWithTheRequiredFieldsAndClickTheCreateSessionButton(Table dto)
+        [When(@"the person complete the form with the required fields and click the Create Session button")]
+        public void WhenThePersonCompleteTheFormWithTheRequiredFieldsAndClickTheCreateSessionButton(Table dto)
         {
             try
             {
@@ -83,8 +83,8 @@ namespace UltimateTeamApi.SpecFlowTest.Session
                             /*SCENARY 2*/
         /**************************************************/
         
-        [When(@"the user complete the form with required fields of the session with id (.*) and click the Update Session button")]
-        public void WhenTheUserCompleteTheFormWithRequiredFieldsOfTheSessionWithIdAndClickTheUpdateSessionButton(int sessionId, Table dto)
+        [When(@"the person complete the form with required fields of the session with id (.*) and click the Update Session button")]
+        public void WhenThePersonCompleteTheFormWithRequiredFieldsOfTheSessionWithIdAndClickTheUpdateSessionButton(int sessionId, Table dto)
         {
             try
             {
@@ -122,8 +122,8 @@ namespace UltimateTeamApi.SpecFlowTest.Session
                             /*SCENARY 4*/
         /**************************************************/
         
-        [When(@"the user enters to the session with id (.*) Page")]
-        public void WhenTheUserEntersToTheSessionWithIdPage(int sessionId)
+        [When(@"the person enters to the session with id (.*) Page")]
+        public void WhenThePersonEntersToTheSessionWithIdPage(int sessionId)
         {
             var result = Task.Run(async () => await Client.GetAsync($"{SessionEndpoint}/{sessionId}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get Sessin by Id Integration Test Completed");

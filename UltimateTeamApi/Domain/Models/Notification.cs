@@ -9,9 +9,9 @@ namespace UltimateTeamApi.Domain.Models
     {
         public int Id { get; set; }
         public int SenderId { get; set; }
-        public User Sender { get; set; }
+        public Person Sender { get; set; }
         public int RemitendId { get; set; }
-        public User Remitend { get; set; }
+        public Person Remitend { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
     }

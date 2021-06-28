@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UltimateTeamApi.Resources
 {
-    public class UserResource
+    public class PersonResource
     {
         public int Id { get; set; }
         public string Name { get; set; }

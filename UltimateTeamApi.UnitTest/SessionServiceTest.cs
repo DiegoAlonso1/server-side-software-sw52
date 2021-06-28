@@ -22,7 +22,7 @@ namespace UltimateTeamApi.UnitTest
 
         //GET SESSION BY ID ASYNC WHEN VALID SESSION
         [Test]
-        public async Task GetByIdAsyncWhenValidUserReturnsUser()
+        public async Task GetByIdAsyncWhenValidPersonReturnsPerson()
         {
             //Arrange
             var mockSessionRepository = GetDefaultISessionRepositoryInstance();
@@ -47,7 +47,7 @@ namespace UltimateTeamApi.UnitTest
 
         //GET SESSION BY ID ASYNC WHEN NO SESSION FOUND
         [Test]
-        public async Task GetByIdAsyncWhenNoUserFoundReturnsUserNotFoundResponse()
+        public async Task GetByIdAsyncWhenNoPersonFoundReturnsPersonNotFoundResponse()
         {
             //Arrange
             var mockSessionRepository = GetDefaultISessionRepositoryInstance();

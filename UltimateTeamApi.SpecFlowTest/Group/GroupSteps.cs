@@ -27,20 +27,20 @@ namespace UltimateTeamApi.SpecFlowTest.Group
     [Binding]
     public class GroupSteps : BaseTest
     {
-        private string UserEndpoint { get; set; }
+        private string PersonEndpoint { get; set; }
         private string GroupEndpoint { get; set; }
 
         public GroupSteps()
         {
-            UserEndpoint = $"{ApiUri}api/users";
+            PersonEndpoint = $"{ApiUri}api/persons";
             GroupEndpoint = $"{ApiUri}api/groups";
         }
 
         
 
-        /**********************************************************************/
-        /*INITIALIZING TEST WITH SOME GROUPS, USERS AND GROUPMEMBERS INSTANCES*/
-        /**********************************************************************/
+        /************************************************************************/
+        /*INITIALIZING TEST WITH SOME GROUPS, PERSONS AND GROUPMEMBERS INSTANCES*/
+        /************************************************************************/
 
         [When(@"groups required attributes provided to initialize instances")]
         public void WhenGroupsRequiredAttributesProvidedToInitializeInstances(Table dtos)
@@ -62,17 +62,17 @@ namespace UltimateTeamApi.SpecFlowTest.Group
             }
         }
         
-        //[When(@"users required attributes provided to initialize instances")]
-        //This function is on the UserSteps.cs
+        //[When(@"persons required attributes provided to initialize instances")]
+        //This function is on the PersonSteps.cs
 
-        [Then(@"assign the user with Id (.*) on the group with Id (.*)")]
-        public void ThenAssignTheUserWithIdOnTheGroupWithId(int userId, int groupId, Table dto)
+        [Then(@"assign the person with Id (.*) on the group with Id (.*)")]
+        public void ThenAssignThePersonWithIdOnTheGroupWithId(int personId, int groupId, Table dto)
         {
             try
             {
                 var groupMemberResource = dto.CreateInstance<Resources.SaveGroupMemberResource>();
                 var data = JsonData(groupMemberResource);
-                var result = Task.Run(async () => await Client.PostAsync($"{GroupMemberEndpoint(userId)}/{groupId}", data)).Result;
+                var result = Task.Run(async () => await Client.PostAsync($"{GroupMemberEndpoint(personId)}/{groupId}", data)).Result;
                 Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Save GroupMember Integration Test Completed");
             }
             catch (Exception ex)
@@ -84,11 +84,11 @@ namespace UltimateTeamApi.SpecFlowTest.Group
 
 
         /**************************************************/
-        /*SCENARY 1*/
+                        /*SCENARY 1*/
         /**************************************************/
         
-        [When(@"the user complete the form with the required fields and click the Create button")]
-        public void WhenTheUserCompleteTheFormWithTheRequiredFieldsAndClickTheCreateButton(Table dto)
+        [When(@"the person complete the form with the required fields and click the Create button")]
+        public void WhenThePersonCompleteTheFormWithTheRequiredFieldsAndClickTheCreateButton(Table dto)
         {
             try
             {
@@ -108,10 +108,10 @@ namespace UltimateTeamApi.SpecFlowTest.Group
 
 
         /**************************************************/
-        /*SCENARY 2*/
+                            /*SCENARY 2*/
         /**************************************************/
-        [When(@"the user complete the form to update the group with Id (.*) and click the Update button")]
-        public void WhenTheUserCompleteTheFormToUpdateTheGroupWithIdAndClickTheUpdateButton(int groupId, Table dto)
+        [When(@"the person complete the form to update the group with Id (.*) and click the Update button")]
+        public void WhenThePersonCompleteTheFormToUpdateTheGroupWithIdAndClickTheUpdateButton(int groupId, Table dto)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace UltimateTeamApi.SpecFlowTest.Group
 
 
         /**************************************************/
-        /*SCENARY 3*/
+                            /*SCENARY 3*/
         /**************************************************/
         
         [When(@"the administrator goes to Groups Page, group list should return")]
@@ -146,11 +146,11 @@ namespace UltimateTeamApi.SpecFlowTest.Group
 
 
         /**************************************************/
-        /*SCENARY 4*/
+                            /*SCENARY 4*/
         /**************************************************/
 
-        [When(@"the user goes to Group Lists and click on group with id (.*)")]
-        public void WhenTheUserGoesToGroupListsAndClickOnGroupWithId(int groupId)
+        [When(@"the person goes to Group Lists and click on group with id (.*)")]
+        public void WhenThePersonGoesToGroupListsAndClickOnGroupWithId(int groupId)
         {
             var result = Task.Run(async () => await Client.GetAsync($"{GroupEndpoint}/{groupId}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get Group by Id Integration Test Completed");
@@ -169,10 +169,10 @@ namespace UltimateTeamApi.SpecFlowTest.Group
 
 
         /**************************************************/
-        /*SCENARY 5*/
+                            /*SCENARY 5*/
         /**************************************************/
-        [When(@"the user goes to Group Lists and click on the group with Id (.*) and go to Member List Section")]
-        public void WhenTheUserGoesToGroupListsAndClickOnTheGroupWithId(int groupId)
+        [When(@"the person goes to Group Lists and click on the group with Id (.*) and go to Member List Section")]
+        public void WhenThePersonGoesToGroupListsAndClickOnTheGroupWithId(int groupId)
         {
             var result = Task.Run(async () => await Client.GetAsync($"{GroupEndpoint}/{groupId}/groupMembers")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get Members by GroupId Integration Test Completed");
@@ -181,11 +181,11 @@ namespace UltimateTeamApi.SpecFlowTest.Group
         [Then(@"the member list of group with Id (.*) should be")]
         public void ThenTheMemberListOfGroupWithIdShouldBe(int groupId, Table dto)
         {
-            var users = dto.CreateInstance<List<Domain.Models.User>>();
+            var persons = dto.CreateInstance<List<Domain.Models.Person>>();
             var result = Task.Run(async () => await Client.GetAsync($"{GroupEndpoint}/{groupId}/groupMembers")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Members Details Integration Test Completed");
-            //var usersToCompare = ObjectData<List<Domain.Models.User>>(result.Content.ReadAsStringAsync().Result);
-            //Assert.IsTrue(dto.IsEquivalentToInstance(usersToCompare));
+            //var personsToCompare = ObjectData<List<Domain.Models.Person>>(result.Content.ReadAsStringAsync().Result);
+            //Assert.IsTrue(dto.IsEquivalentToInstance(personsToCompare));
         }
 
 
@@ -194,15 +194,15 @@ namespace UltimateTeamApi.SpecFlowTest.Group
         /*SCENARY 6*/
         /**************************************************/
 
-        [When(@"the user with id (.*) click the Delete Group button")]
-        public void WhenTheUserWithIdClickTheDeleteGroupButton(int groupId)
+        [When(@"the person with id (.*) click the Delete Group button")]
+        public void WhenThePersonWithIdClickTheDeleteGroupButton(int groupId)
         {
             var result = Task.Run(async () => await Client.GetAsync($"{GroupEndpoint}/{groupId}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK);
         }
 
-        [Then(@"the user with id (.*) is removed and removed group details should be")]
-        public void ThenTheUserWithIdIsRemovedAndRemovedGroupDetailsShouldBe(int groupId, Table dto)
+        [Then(@"the person with id (.*) is removed and removed group details should be")]
+        public void ThenThePersonWithIdIsRemovedAndRemovedGroupDetailsShouldBe(int groupId, Table dto)
         {
             try
             {
@@ -219,9 +219,9 @@ namespace UltimateTeamApi.SpecFlowTest.Group
 
 
 
-        private string GroupMemberEndpoint(int userId)
+        private string GroupMemberEndpoint(int personId)
         {
-            return $"{ApiUri}api/users/{userId}/groups";
+            return $"{ApiUri}api/persons/{personId}/groups";
         }
     }
 }

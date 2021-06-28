@@ -9,9 +9,9 @@ namespace UltimateTeamApi.Domain.Services
 {
     public interface ISessionParticipantService
     {
-        Task<IEnumerable<SessionParticipant>> GetAllByUserIdAsync(int userId);
+        Task<IEnumerable<SessionParticipant>> GetAllByPersonIdAsync(int personId);
         Task<IEnumerable<SessionParticipant>> GetAllBySessionIdAsync(int sessionId);
-        Task<IEnumerable<SessionParticipant>> GetAllByUserCreatorIdAsync(int userId);
-        Task<SessionParticipantResponse> AssignSessionParticipantAsync(int sessionId, int userId, bool creator);
+        Task<IEnumerable<SessionParticipant>> GetAllByPersonCreatorIdAsync(int personId);
+        Task<SessionParticipantResponse> AssignSessionParticipantAsync(int sessionId, int personId, bool creator);
     }
 }

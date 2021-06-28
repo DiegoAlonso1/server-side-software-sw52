@@ -20,44 +20,44 @@ namespace UltimateTeamApi.Persistance.Repositories
             await _context.GroupMembers.AddAsync(groupMember);
         }
 
-        public async Task AssignGroupMemberAsync(int groupId, int userId, bool userCreator)
+        public async Task AssignGroupMemberAsync(int groupId, int personId, bool personCreator)
         {
-            GroupMember groupMember = await FindByGroupIdAndUserIdAsync(groupId, userId);
+            GroupMember groupMember = await FindByGroupIdAndPersonIdAsync(groupId, personId);
             if (groupMember == null)
             {
-                groupMember = new GroupMember { GroupId = groupId, UserId = userId, UserCreator = userCreator };
+                groupMember = new GroupMember { GroupId = groupId, PersonId = personId, PersonCreator = personCreator };
                 await AddAsync(groupMember);
             }
         }
 
-        public async Task<GroupMember> FindByGroupIdAndUserIdAsync(int groupId, int userId)
+        public async Task<GroupMember> FindByGroupIdAndPersonIdAsync(int groupId, int personId)
         {
             return await _context.GroupMembers
-                .Where(gm => gm.GroupId == groupId && gm.UserId == userId)
+                .Where(gm => gm.GroupId == groupId && gm.PersonId == personId)
                 .Include(gm => gm.Group)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<User>> ListUsersByGroupIdAsync(int groupId)
+        public async Task<IEnumerable<Person>> ListPersonsByGroupIdAsync(int groupId)
         {
-            var usersId = await _context.GroupMembers
+            var personsId = await _context.GroupMembers
                 .Where(pt => pt.GroupId == groupId)
-                .Select(pt => pt.UserId)
+                .Select(pt => pt.PersonId)
                 .ToListAsync();
 
-            List<User> users = new List<User>();
-            foreach(int userId in usersId)
+            List<Person> persons = new List<Person>();
+            foreach(int personId in personsId)
             {
-                var user = await _context.Users.FindAsync(userId);
-                users.Add(user);
+                var person = await _context.Persons.FindAsync(personId);
+                persons.Add(person);
             }
-            return users;
+            return persons;
         }
 
-        public async Task<IEnumerable<Group>> ListGroupsByUserIdAsync(int userId)
+        public async Task<IEnumerable<Group>> ListGroupsByPersonIdAsync(int personId)
         {
             var groupsId = await _context.GroupMembers
-                .Where(pt => pt.UserId == userId)
+                .Where(pt => pt.PersonId == personId)
                 .Select(pt => pt.GroupId)
                 .ToListAsync();
 
@@ -75,9 +75,9 @@ namespace UltimateTeamApi.Persistance.Repositories
             _context.GroupMembers.Remove(groupMember);
         }
 
-        public async Task UnassignGroupMemberAsync(int groupId, int userId)
+        public async Task UnassignGroupMemberAsync(int groupId, int personId)
         {
-            GroupMember groupMember = await FindByGroupIdAndUserIdAsync(groupId, userId);
+            GroupMember groupMember = await FindByGroupIdAndPersonIdAsync(groupId, personId);
             if (groupMember != null)
                 Remove(groupMember);
         }

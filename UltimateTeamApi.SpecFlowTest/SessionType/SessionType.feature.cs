@@ -80,16 +80,16 @@ namespace UltimateTeamApi.SpecFlowTest.SessionType
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="1. The user wants to see all session types options")]
+        [Xunit.SkippableFactAttribute(DisplayName="1. The person wants to see all session types options")]
         [Xunit.TraitAttribute("FeatureTitle", "SessionType")]
-        [Xunit.TraitAttribute("Description", "1. The user wants to see all session types options")]
+        [Xunit.TraitAttribute("Description", "1. The person wants to see all session types options")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void _1_TheUserWantsToSeeAllSessionTypesOptions()
+        public virtual void _1_ThePersonWantsToSeeAllSessionTypesOptions()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The user wants to see all session types options", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. The person wants to see all session types options", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -110,30 +110,30 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Type"});
-                table46.AddRow(new string[] {
+                table53.AddRow(new string[] {
                             "1",
                             "Collaborative"});
-                table46.AddRow(new string[] {
+                table53.AddRow(new string[] {
                             "2",
                             "Laser Individual"});
 #line 9
- testRunner.When("the user goes to Create Session Page, session types options list should return", ((string)(null)), table46, "When ");
+ testRunner.When("the person goes to Create Session Page, session types options list should return", ((string)(null)), table53, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="2. The user wants to see a session type details")]
+        [Xunit.SkippableFactAttribute(DisplayName="2. The person wants to see a session type details")]
         [Xunit.TraitAttribute("FeatureTitle", "SessionType")]
-        [Xunit.TraitAttribute("Description", "2. The user wants to see a session type details")]
-        public virtual void _2_TheUserWantsToSeeASessionTypeDetails()
+        [Xunit.TraitAttribute("Description", "2. The person wants to see a session type details")]
+        public virtual void _2_ThePersonWantsToSeeASessionTypeDetails()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The user wants to see a session type details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The person wants to see a session type details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 16
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -155,16 +155,16 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 17
- testRunner.When("the user select session type with id 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("the persom select session type with id 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table54 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Type"});
-                table47.AddRow(new string[] {
+                table54.AddRow(new string[] {
                             "1",
                             "Collaborative"});
 #line 18
- testRunner.Then("session type details should be", ((string)(null)), table47, "Then ");
+ testRunner.Then("session type details should be", ((string)(null)), table54, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

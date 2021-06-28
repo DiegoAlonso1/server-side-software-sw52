@@ -6,13 +6,13 @@ using UltimateTeamApi.Domain.Models;
 
 namespace UltimateTeamApi.Domain.Services.Communications
 {
-    public class UserResponse : BaseResponse<User>
+    public class PersonResponse : BaseResponse<Person>
     {
-        public UserResponse(User resource) : base(resource)
+        public PersonResponse(Person resource) : base(resource)
         {
         }
 
-        public UserResponse(string message) : base(message)
+        public PersonResponse(string message) : base(message)
         {
         }
     }

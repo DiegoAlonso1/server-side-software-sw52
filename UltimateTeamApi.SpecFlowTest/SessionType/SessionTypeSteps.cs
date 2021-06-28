@@ -35,8 +35,8 @@ namespace UltimateTeamApi.SpecFlowTest.SessionType
                             /*SCENARY 1*/
         /**************************************************/
 
-        [When(@"the user goes to Create Session Page, session types options list should return")]
-        public void WhenTheUserGoesToCreateSessionPageSessionTypesOptionsListShouldReturn(Table dto)
+        [When(@"the person goes to Create Session Page, session types options list should return")]
+        public void WhenThePersonGoesToCreateSessionPageSessionTypesOptionsListShouldReturn(Table dto)
         {
             var result = Task.Run(async () => await Client.GetAsync(SessionTypeEndpoint)).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get All Session Types Integration Test Completed");
@@ -50,8 +50,8 @@ namespace UltimateTeamApi.SpecFlowTest.SessionType
                             /*SCENARY 2*/
         /**************************************************/
         
-        [When(@"the user select session type with id (.*)")]
-        public void WhenTheUserSelectSessionTypeWithId(int sessionTypeId)
+        [When(@"the person select session type with id (.*)")]
+        public void WhenThePersonSelectSessionTypeWithId(int sessionTypeId)
         {
             var result = Task.Run(async () => await Client.GetAsync($"{SessionTypeEndpoint}/{sessionTypeId}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get Session Type by Id Integration Test Completed");

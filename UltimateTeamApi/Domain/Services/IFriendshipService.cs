@@ -9,7 +9,7 @@ namespace UltimateTeamApi.Domain.Services
 {
     public interface IFriendshipService
     {
-        Task<IEnumerable<User>> GetAllFriendsByUserIdAsync(int userId);
+        Task<IEnumerable<Person>> GetAllFriendsByPersonIdAsync(int personId);
         Task<FriendshipResponse> AssignFriendAsync(int principalId, int friendId);
         Task<FriendshipResponse> UnassignFriendAsync(int principalId, int friendId);
     }

@@ -15,7 +15,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         {
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Person> Persons { get; set; }
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Functionality> Functionalities { get; set; }
         public DbSet<SessionStadistic> SessionStadistics { get; set; }
@@ -36,25 +36,25 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
 
 
             /******************************************/
-                            /*USER ENTITY*/
+                            /*PERSON ENTITY*/
             /******************************************/
-            builder.Entity<User>().ToTable("Users");
-            builder.Entity<User>().HasKey(u => u.Id);
-            builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<User>().Property(u => u.Name).IsRequired().HasMaxLength(20);
-            builder.Entity<User>().Property(u => u.LastName).IsRequired().HasMaxLength(20);
-            builder.Entity<User>().Property(u => u.UserName).IsRequired().HasMaxLength(20);
-            builder.Entity<User>().Property(u => u.Email).IsRequired().HasMaxLength(60);
-            builder.Entity<User>().Property(u => u.Password).IsRequired().HasMaxLength(15);
-            builder.Entity<User>().Property(u => u.Birthdate).IsRequired();
-            builder.Entity<User>().Property(u => u.LastConnection).IsRequired();
-            builder.Entity<User>().Property(u => u.ProfilePicture).HasConversion(
+            builder.Entity<Person>().ToTable("Persons");
+            builder.Entity<Person>().HasKey(p => p.Id);
+            builder.Entity<Person>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Person>().Property(p => p.Name).IsRequired().HasMaxLength(20);
+            builder.Entity<Person>().Property(p => p.LastName).IsRequired().HasMaxLength(20);
+            builder.Entity<Person>().Property(p => p.UserName).IsRequired().HasMaxLength(20);
+            builder.Entity<Person>().Property(p => p.Email).IsRequired().HasMaxLength(60);
+            builder.Entity<Person>().Property(p => p.Password).IsRequired().HasMaxLength(15);
+            builder.Entity<Person>().Property(p => p.Birthdate).IsRequired();
+            builder.Entity<Person>().Property(p => p.LastConnection).IsRequired();
+            builder.Entity<Person>().Property(p => p.ProfilePicture).HasConversion(
                 picture => BitmapConverter.BitmapToByteArray(picture),          //Save as Byte Array
                 byteArr => BitmapConverter.ByteArrayToBitmap(byteArr));         //Get as Bitmap
-            builder.Entity<User>()
-            .HasOne(u => u.Administrator)
-            .WithMany(a => a.Users)
-            .HasForeignKey(u => u.AdministratorId);
+            builder.Entity<Person>()
+            .HasOne(p => p.Administrator)
+            .WithMany(a => a.Persons)
+            .HasForeignKey(p => p.AdministratorId);
 
 
 
@@ -67,10 +67,6 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Administrator>().Property(a => a.Name).IsRequired();
             builder.Entity<Administrator>().Property(a => a.Password).IsRequired();
             builder.Entity<Administrator>().Property(a => a.Area).IsRequired();
-            builder.Entity<Administrator>()
-                .HasMany(a => a.Users)
-                .WithOne(u => u.Administrator)
-                .HasForeignKey( u => u.AdministratorId);
 
 
 
@@ -119,8 +115,8 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Notification>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Notification>().Property(n => n.Date).IsRequired();
             builder.Entity<Notification>().Property(n => n.Description).IsRequired().HasMaxLength(200);
-            builder.Entity<Notification>().HasOne(n => n.Sender).WithMany(u => u.NotificationsSent).HasForeignKey(n => n.SenderId);
-            builder.Entity<Notification>().HasOne(n => n.Remitend).WithMany(u => u.NotificationsReceived).HasForeignKey(n => n.RemitendId);
+            builder.Entity<Notification>().HasOne(n => n.Sender).WithMany(p => p.NotificationsSent).HasForeignKey(n => n.SenderId);
+            builder.Entity<Notification>().HasOne(n => n.Remitend).WithMany(p => p.NotificationsReceived).HasForeignKey(n => n.RemitendId);
 
 
 
@@ -131,11 +127,11 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Friendship>().HasKey(f => new { f.PrincipalId, f.FriendId});
             builder.Entity<Friendship>()
                 .HasOne(f => f.Principal)
-                .WithMany(u => u.FriendShipsAsPrincipal)
+                .WithMany(p => p.FriendShipsAsPrincipal)
                 .HasForeignKey(f => f.PrincipalId);
             builder.Entity<Friendship>()
                 .HasOne(f => f.Friend)
-                .WithMany(u => u.FriendShipsAsFriend)
+                .WithMany(p => p.FriendShipsAsFriend)
                 .HasForeignKey(f => f.FriendId);
 
 
@@ -154,16 +150,16 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     /*GROUPMEMBER ENTITY*/
             /******************************************/
             builder.Entity<GroupMember>().ToTable("GroupMembers");
-            builder.Entity<GroupMember>().HasKey(gm => new { gm.UserId, gm.GroupId });
-            builder.Entity<GroupMember>().Property(gm => gm.UserCreator).IsRequired();
+            builder.Entity<GroupMember>().HasKey(gm => new { gm.PersonId, gm.GroupId });
+            builder.Entity<GroupMember>().Property(gm => gm.PersonCreator).IsRequired();
             builder.Entity<GroupMember>()
                 .HasOne(gm => gm.Group)
                 .WithMany(g => g.GroupMembers)
                 .HasForeignKey(gm => gm.GroupId);
             builder.Entity<GroupMember>()
-                .HasOne(gm => gm.User)
-                .WithMany(u => u.GroupMembers)
-                .HasForeignKey(gm => gm.UserId);
+                .HasOne(gm => gm.Person)
+                .WithMany(p => p.GroupMembers)
+                .HasForeignKey(gm => gm.PersonId);
 
 
 
@@ -185,16 +181,16 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
                     /*SESSIONPARTICIPANT ENTITY*/
             /******************************************/
             builder.Entity<SessionParticipant>().ToTable("SessionParticipants");
-            builder.Entity<SessionParticipant>().HasKey(sp => new { sp.SessionId, sp.UserId });
+            builder.Entity<SessionParticipant>().HasKey(sp => new { sp.SessionId, sp.PersonId });
             builder.Entity<SessionParticipant>().Property(sp => sp.Creator).IsRequired();
             builder.Entity<SessionParticipant>()
                 .HasOne(sp => sp.Session)
                 .WithMany(s => s.SessionParticipants)
                 .HasForeignKey(sp => sp.SessionId);
             builder.Entity<SessionParticipant>()
-                .HasOne(sp => sp.User)
-                .WithMany(u => u.SessionsParticipated)
-                .HasForeignKey(sp => sp.UserId);
+                .HasOne(sp => sp.Person)
+                .WithMany(p => p.SessionsParticipated)
+                .HasForeignKey(sp => sp.PersonId);
 
 
 

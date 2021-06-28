@@ -14,15 +14,15 @@ Scenario: 0. Initialize some Session Intances
 
 
 #1 - Create a session
-Scenario: 1. The user wants to create a session
-	When the user complete the form with the required fields and click the Create Session button
+Scenario: 1. The person wants to create a session
+	When the person complete the form with the required fields and click the Create Session button
 		| Name            | SessionTypeId |
 		| Nueva Sesion    | 2             |
 
 
 #2 - Update a session
-Scenario: 2. The user wants to update their session data
-	When the user complete the form with required fields of the session with id 5 and click the Update Session button
+Scenario: 2. The person wants to update their session data
+	When the person complete the form with required fields of the session with id 5 and click the Update Session button
 		| Name            | SessionTypeId |
 		| Session SSS     | 2             |
 
@@ -39,8 +39,8 @@ Scenario: 3. The administrator wants to see all sessions
 
 
 #4 - Get session by id
-Scenario: 4. The user wants to see the session data 
-	When the user enters to the session with id 5 Page
+Scenario: 4. The person wants to see the session data 
+	When the person enters to the session with id 5 Page
 	Then session details should be
 		| Id | Name            | SessionTypeId |
 		| 5  | Session SSS     | 2             |

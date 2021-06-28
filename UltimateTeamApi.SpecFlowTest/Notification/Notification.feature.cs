@@ -171,7 +171,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "null",
                             "1"});
 #line 6
- testRunner.When("users required attributes provided to initialize instances", ((string)(null)), table33, "When ");
+ testRunner.When("persons required attributes provided to initialize instances", ((string)(null)), table33, "When ");
 #line hidden
             }
             this.ScenarioCleanup();

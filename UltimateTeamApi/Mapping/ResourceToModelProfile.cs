@@ -12,7 +12,7 @@ namespace UltimateTeamApi.Mapping
     {
         public ResourceToModelProfile()
         {
-            CreateMap<SaveUserResource, User>();
+            CreateMap<SavePersonResource, Person>();
             CreateMap<SaveGroupResource, Group>();
             CreateMap<SaveGroupMemberResource, Group>();
             CreateMap<SaveAdministratorResource, Administrator>();

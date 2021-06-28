@@ -35,9 +35,9 @@ namespace UltimateTeamApi.Services
             }
         }
 
-        public async Task<IEnumerable<User>> GetAllFriendsByUserIdAsync(int userId)
+        public async Task<IEnumerable<Person>> GetAllFriendsByPersonIdAsync(int personId)
         {
-            return await _friendshipRepository.ListFriendsByUserIdAsync(userId);
+            return await _friendshipRepository.ListFriendsByPersonIdAsync(personId);
         }
 
         public async Task<FriendshipResponse> UnassignFriendAsync(int principalId, int friendId)

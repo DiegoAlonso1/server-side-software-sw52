@@ -107,7 +107,7 @@ namespace UltimateTeamApi.Controllers
             OperationId = "GetAllSessionParticipantsBySessionId")]
         [SwaggerResponse(200, "List of SessionParticipants By Session Id", typeof(IEnumerable<SessionParticipantResource>))]
 
-        [HttpGet("{sessionId}/users")]
+        [HttpGet("{sessionId}/persons")]
         [ProducesResponseType(typeof(IEnumerable<SessionParticipantResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IEnumerable<SessionParticipantResource>> GetByAllNameAsync(int sessionId)

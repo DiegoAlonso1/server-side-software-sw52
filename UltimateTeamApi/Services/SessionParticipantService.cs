@@ -20,13 +20,13 @@ namespace UltimateTeamApi.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<SessionParticipantResponse> AssignSessionParticipantAsync(int sessionId, int userId, bool creator)
+        public async Task<SessionParticipantResponse> AssignSessionParticipantAsync(int sessionId, int personId, bool creator)
         {
             try
             {
-                await _sessionParticipantRepository.AssignSessionParticipantAsync(sessionId, userId, creator);
+                await _sessionParticipantRepository.AssignSessionParticipantAsync(sessionId, personId, creator);
                 await _unitOfWork.CompleteAsync();
-                var sessionParticipant = await _sessionParticipantRepository.FindBySessionIdAndUserIdAsync(sessionId, userId);
+                var sessionParticipant = await _sessionParticipantRepository.FindBySessionIdAndPersonIdAsync(sessionId, personId);
                 return new SessionParticipantResponse(sessionParticipant);
             }
             catch (Exception ex)
@@ -40,14 +40,14 @@ namespace UltimateTeamApi.Services
             return await _sessionParticipantRepository.ListBySessionIdAsync(sessionId);
         }
 
-        public async Task<IEnumerable<SessionParticipant>> GetAllByUserCreatorIdAsync(int userId)
+        public async Task<IEnumerable<SessionParticipant>> GetAllByPersonCreatorIdAsync(int personId)
         {
-            return await _sessionParticipantRepository.ListByUserCreatorIdAsync(userId);
+            return await _sessionParticipantRepository.ListByPersonCreatorIdAsync(personId);
         }
 
-        public async Task<IEnumerable<SessionParticipant>> GetAllByUserIdAsync(int userId)
+        public async Task<IEnumerable<SessionParticipant>> GetAllByPersonIdAsync(int personId)
         {
-            return await _sessionParticipantRepository.ListByUserIdAsync(userId);
+            return await _sessionParticipantRepository.ListByPersonIdAsync(personId);
         }
     }
 }

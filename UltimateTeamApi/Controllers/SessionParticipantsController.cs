@@ -11,7 +11,7 @@ using UltimateTeamApi.Resources;
 
 namespace UltimateTeamApi.Controllers
 {
-    [Route("api/users/{userId}/sessions")]
+    [Route("api/persons/{personId}/sessions")]
     [Produces("application/json")]
     [ApiController]
     public class SessionParticipantsController : ControllerBase
@@ -28,43 +28,43 @@ namespace UltimateTeamApi.Controllers
 
 
         /*************************************************/
-          /*GET ALL SESSIONPARTICIPANTS BY USER ID ASYNC*/
+          /*GET ALL SESSIONPARTICIPANTS BY PERSON ID ASYNC*/
         /*************************************************/
 
         [SwaggerOperation(
-            Summary = "Get All SessionParticipants By User Id",
-            Description = "Get List of All SessionParticipants By User Id",
-            OperationId = "GetAllSessionParticipantsByUserId")]
-        [SwaggerResponse(200, "SessionParticipants By User Id", typeof(IEnumerable<SessionParticipantResource>))]
+            Summary = "Get All SessionParticipants By Person Id",
+            Description = "Get List of All SessionParticipants By Person Id",
+            OperationId = "GetAllSessionParticipantsByPersonId")]
+        [SwaggerResponse(200, "SessionParticipants By Person Id", typeof(IEnumerable<SessionParticipantResource>))]
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<SessionParticipantResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IEnumerable<SessionParticipantResource>> GetAllSessionParticipantsByUserIdAsync(int userId)
+        public async Task<IEnumerable<SessionParticipantResource>> GetAllSessionParticipantsByPersonIdAsync(int personId)
         {
-            var sessionParticipants = await _sessionParticipantService.GetAllByUserIdAsync(userId);
+            var sessionParticipants = await _sessionParticipantService.GetAllByPersonIdAsync(personId);
             var resources = _mapper.Map<IEnumerable<SessionParticipant>, IEnumerable<SessionParticipantResource>>(sessionParticipants);
             return resources;
         }
 
 
 
-        /******************************************************/
-        /*GET ALL SESSIONPARTICIPANTS BY USER CREATOR ID ASYNC*/
-        /******************************************************/
+        /********************************************************/
+        /*GET ALL SESSIONPARTICIPANTS BY PERSON CREATOR ID ASYNC*/
+        /********************************************************/
 
         [SwaggerOperation(
-            Summary = "Get All SessionParticipants By User Creator Id",
-            Description = "Get List of All SessionParticipants By User Creator Id",
-            OperationId = "GetAllSessionParticipantsByUserCreatorId")]
-        [SwaggerResponse(200, "SessionParticipants By User Creator Id", typeof(IEnumerable<SessionParticipantResource>))]
+            Summary = "Get All SessionParticipants By Person Creator Id",
+            Description = "Get List of All SessionParticipants By Person Creator Id",
+            OperationId = "GetAllSessionParticipantsByPersonCreatorId")]
+        [SwaggerResponse(200, "SessionParticipants By Person Creator Id", typeof(IEnumerable<SessionParticipantResource>))]
 
         [HttpGet("creator")]
         [ProducesResponseType(typeof(IEnumerable<SessionParticipantResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IEnumerable<SessionParticipantResource>> GetAllSessionParticipantsByUserCreatorIdAsync(int userId)
+        public async Task<IEnumerable<SessionParticipantResource>> GetAllSessionParticipantsByPersonCreatorIdAsync(int personId)
         {
-            var sessionParticipants = await _sessionParticipantService.GetAllByUserCreatorIdAsync(userId);
+            var sessionParticipants = await _sessionParticipantService.GetAllByPersonCreatorIdAsync(personId);
             var resources = _mapper.Map<IEnumerable<SessionParticipant>, IEnumerable<SessionParticipantResource>>(sessionParticipants);
             return resources;
         }
@@ -76,16 +76,16 @@ namespace UltimateTeamApi.Controllers
         /******************************************/
         [SwaggerOperation(
             Summary = "Assign SessionParticipant",
-            Description = "Assign a Session with a User",
+            Description = "Assign a Session with a Person",
             OperationId = "AssignSessionParticipant")]
         [SwaggerResponse(200, "SessionParticipant Assigned", typeof(SessionParticipantResource))]
 
         [HttpPost("{sessionId}")]
         [ProducesResponseType(typeof(SessionParticipantResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> AssignSessionStadisticAsync(int sessionId, int userId, [FromBody] SaveSessionParticipantResource resource)
+        public async Task<IActionResult> AssignSessionStadisticAsync(int sessionId, int personId, [FromBody] SaveSessionParticipantResource resource)
         {
-            var result = await _sessionParticipantService.AssignSessionParticipantAsync(sessionId, userId, resource.Creator);
+            var result = await _sessionParticipantService.AssignSessionParticipantAsync(sessionId, personId, resource.Creator);
 
             if (!result.Success)
                 return BadRequest(result.Message);

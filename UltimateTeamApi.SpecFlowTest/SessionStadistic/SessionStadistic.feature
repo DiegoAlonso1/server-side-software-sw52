@@ -29,6 +29,6 @@ Scenario: 1. The administrator wants see the session stadistics of a session
 
 #2 - Assign session stadistic
 Scenario: 2. The administrator wants to see session stadistics
-	When the user uses the functionality with id 1 in the session with id 1, session stadistics details should be
+	When the person uses the functionality with id 1 in the session with id 1, session stadistics details should be
 		| SessionId | FunctionalityId | Count |
 		| 1         | 1               | 1     |

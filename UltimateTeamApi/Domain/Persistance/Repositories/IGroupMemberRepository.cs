@@ -8,12 +8,12 @@ namespace UltimateTeamApi.Domain.Persistance.Repositories
 {
     public interface IGroupMemberRepository
     {
-		Task<IEnumerable<Group>> ListGroupsByUserIdAsync(int userId);
-		Task<IEnumerable<User>> ListUsersByGroupIdAsync(int groupId);
-		Task<GroupMember> FindByGroupIdAndUserIdAsync(int groupId, int userId);
+		Task<IEnumerable<Group>> ListGroupsByPersonIdAsync(int personId);
+		Task<IEnumerable<Person>> ListPersonsByGroupIdAsync(int groupId);
+		Task<GroupMember> FindByGroupIdAndPersonIdAsync(int groupId, int personId);
 		Task AddAsync(GroupMember groupMember);
 		void Remove(GroupMember groupMember);
-		Task AssignGroupMemberAsync(int groupId, int userId, bool userCreator);
-		Task UnassignGroupMemberAsync(int groupId, int userId);
+		Task AssignGroupMemberAsync(int groupId, int personId, bool personCreator);
+		Task UnassignGroupMemberAsync(int groupId, int personId);
 	}
 }

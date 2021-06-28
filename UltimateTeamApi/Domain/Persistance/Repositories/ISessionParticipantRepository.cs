@@ -8,11 +8,11 @@ namespace UltimateTeamApi.Domain.Persistance.Repositories
 {
     public interface ISessionParticipantRepository
     {
-        Task<IEnumerable<SessionParticipant>> ListByUserIdAsync(int userId);
+        Task<IEnumerable<SessionParticipant>> ListByPersonIdAsync(int personId);
         Task<IEnumerable<SessionParticipant>> ListBySessionIdAsync(int sessionId);
-        Task<IEnumerable<SessionParticipant>> ListByUserCreatorIdAsync(int userId);
-        Task<SessionParticipant> FindBySessionIdAndUserIdAsync(int sessionId, int userId);
+        Task<IEnumerable<SessionParticipant>> ListByPersonCreatorIdAsync(int personId);
+        Task<SessionParticipant> FindBySessionIdAndPersonIdAsync(int sessionId, int personId);
         Task AddAsync(SessionParticipant sessionParticipant);
-        Task AssignSessionParticipantAsync(int sessionId, int userId, bool creator);
+        Task AssignSessionParticipantAsync(int sessionId, int personId, bool creator);
     }
 }

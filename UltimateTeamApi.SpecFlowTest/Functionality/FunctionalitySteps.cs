@@ -41,7 +41,7 @@ namespace UltimateTeamApi.SpecFlowTest.Functionality
             var result = Task.Run(async () => await Client.GetAsync(FunctionalityEndpoint)).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get All Functionalities Integration Test Completed");
             var functionalities = ObjectData<List<Domain.Models.Functionality>>(result.Content.ReadAsStringAsync().Result);
-            Assert.IsTrue(dto.RowCount == functionalities.Count, "Input and Out user count matched");
+            Assert.IsTrue(dto.RowCount == functionalities.Count, "Input and Out person count matched");
         }
 
 
