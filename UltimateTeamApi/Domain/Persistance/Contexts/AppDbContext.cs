@@ -15,6 +15,7 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
         {
         }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Functionality> Functionalities { get; set; }
@@ -34,9 +35,20 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             base.OnModelCreating(builder);
 
 
+            /******************************************/
+                            /*USER ENTITY*/
+            /******************************************/
+            builder.Entity<User>().ToTable("Users");
+            builder.Entity<User>().HasKey(u => u.Id);
+            builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<User>().Property(u => u.Username).IsRequired().HasMaxLength(100);
+            builder.Entity<User>().Property(u => u.Password).IsRequired();
+            builder.Entity<User>().Ignore(u => u.Token);
+
+
 
             /******************************************/
-                            /*PERSON ENTITY*/
+            /*PERSON ENTITY*/
             /******************************************/
             builder.Entity<Person>().ToTable("Persons");
             builder.Entity<Person>().HasKey(p => p.Id);
@@ -45,7 +57,6 @@ namespace UltimateTeamApi.Domain.Persistance.Contexts
             builder.Entity<Person>().Property(p => p.LastName).IsRequired().HasMaxLength(20);
             builder.Entity<Person>().Property(p => p.UserName).IsRequired().HasMaxLength(20);
             builder.Entity<Person>().Property(p => p.Email).IsRequired().HasMaxLength(60);
-            builder.Entity<Person>().Property(p => p.Password).IsRequired().HasMaxLength(15);
             builder.Entity<Person>().Property(p => p.Birthdate).IsRequired();
             builder.Entity<Person>().Property(p => p.LastConnection).IsRequired();
             builder.Entity<Person>().Property(p => p.ProfilePicture).HasConversion(

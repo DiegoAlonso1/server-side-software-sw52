@@ -96,7 +96,6 @@ namespace UltimateTeamApi.Services
             existingPerson.LastName = personRequest.LastName;
             existingPerson.UserName = personRequest.UserName;
             existingPerson.Email = personRequest.Email;
-            existingPerson.Password = personRequest.Password;
             existingPerson.Birthdate = personRequest.Birthdate;
             existingPerson.LastConnection = personRequest.LastConnection;
             existingPerson.ProfilePicture = personRequest.ProfilePicture;

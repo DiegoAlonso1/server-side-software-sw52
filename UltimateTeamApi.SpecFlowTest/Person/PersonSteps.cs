@@ -177,7 +177,7 @@ namespace UltimateTeamApi.SpecFlowTest.Person
         public void ThenTheReceivingPersonDetailsShouldBe(Table dto)
         {
             var person = dto.CreateInstance<Domain.Models.Person>();
-            var result = Task.Run(async () => await Client.GetAsync($"{PersonEndpoint}/email={person.Email}")).Result;
+            var result = Task.Run(async () => await Client.GetAsync($"{PersonEndpoint}/email/{person.Email}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Person Details Integration Test Completed");
             //var personToCompare = ObjectData<Domain.Models.Person>(result.Content.ReadAsStringAsync().Result);
             //Assert.IsTrue(dto.IsEquivalentToInstance(personToCompare));

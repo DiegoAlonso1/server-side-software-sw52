@@ -111,10 +111,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
                 TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
                             "SessionTypeId"});
                 table50.AddRow(new string[] {
+                            "UltimateTeam",
                             "1"});
                 table50.AddRow(new string[] {
+                            "Clase de fisica",
                             "2"});
 #line 8
  testRunner.When("session required attributes provided to initialize instance", ((string)(null)), table50, "When ");
@@ -182,16 +185,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "1",
                             "3",
                             "1"});
-                table51.AddRow(new string[] {
-                            "2",
-                            "2",
-                            "1"});
-                table51.AddRow(new string[] {
-                            "2",
-                            "4",
-                            "1"});
 #line 21
- testRunner.When("the administrator goes to Functionality Usage Page on session with id 5, the sess" +
+ testRunner.When("the administrator goes to Functionality Usage Page on session with id 1, the sess" +
                         "ion stadistics list should return", ((string)(null)), table51, "When ");
 #line hidden
             }
@@ -206,7 +201,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. The administrator wants to see session stadistics", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 31
+#line 29
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -232,10 +227,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "Count"});
                 table52.AddRow(new string[] {
                             "1",
-                            "1",
+                            "5",
                             "1"});
-#line 32
- testRunner.When("the person uses the functionality with id 1 in the session with id 1, session sta" +
+#line 30
+ testRunner.When("the person uses the functionality with id 5 in the session with id 1, session sta" +
                         "distics details should be", ((string)(null)), table52, "When ");
 #line hidden
             }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UltimateTeamApi.Domain.Models;
+using UltimateTeamApi.Domain.Services.Communications;
 using UltimateTeamApi.Resources;
 
 namespace UltimateTeamApi.Mapping
@@ -20,6 +21,7 @@ namespace UltimateTeamApi.Mapping
             CreateMap<SaveSubscriptionTypeResource, SubscriptionType>();
             CreateMap<SaveSessionResource, Session>();
             CreateMap<SaveSessionParticipantResource, SessionParticipant>();
+            CreateMap<RegisterRequest, User>();
         }
     }
 }

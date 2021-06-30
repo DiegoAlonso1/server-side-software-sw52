@@ -1,26 +1,24 @@
 using Google.Apis.Auth.AspNetCore3;
-using Google.Apis.Drive.v3;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using UltimateTeamApi.Domain.Persistance.Contexts;
 using UltimateTeamApi.Domain.Persistance.Repositories;
 using UltimateTeamApi.Domain.Services;
+using UltimateTeamApi.Exceptions;
 using UltimateTeamApi.ExternalTools.Domain.Services;
 using UltimateTeamApi.Persistance.Repositories;
 using UltimateTeamApi.Services;
+using UltimateTeamApi.Settings;
 
 namespace UltimateTeamApi
 {
@@ -36,18 +34,45 @@ namespace UltimateTeamApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //CORS Support
+            services.AddCors();
 
             services.AddControllers();
 
+            //App Settings Section Reference
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            //JSON Web Token Authentication Configuration
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            //Authentication Service Configuration
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+
             //Database
-            
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             //Dependency Injection Configuration
-
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IFunctionalityRepository, FunctionalityRepository>();
             services.AddScoped<ISessionStadisticRepository, SessionStadisticRepository>();
@@ -60,6 +85,7 @@ namespace UltimateTeamApi
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<ISessionParticipantRepository, SessionParticipantRepository>();
             services.AddScoped<ISessionTypeRepository, SessionTypeRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -75,6 +101,7 @@ namespace UltimateTeamApi
             services.AddScoped<ISessionService, SessionService>();
             services.AddScoped<ISessionParticipantService, SessionParticipantService>();
             services.AddScoped<ISessionTypeService, SessionTypeService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDriveService, ExternalTools.Services.DriveService>();
             services.AddScoped<ITrelloService, ExternalTools.Services.TrelloService>(); 
             services.AddScoped<ICalendarService, ExternalTools.Services.CalendarService>();
@@ -122,8 +149,17 @@ namespace UltimateTeamApi
 
             app.UseRouting();
 
+            //CORS Configuration
+            app.UseCors(x => x.SetIsOriginAllowed(origin => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+
+            //Authentication Support
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
