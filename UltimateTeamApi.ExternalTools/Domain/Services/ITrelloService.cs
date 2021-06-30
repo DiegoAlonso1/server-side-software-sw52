@@ -10,41 +10,39 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services
 {
     public interface ITrelloService
     {  
-        Task<TrelloAccountResponse> AssignToken();
-        Task<TrelloAccountResponse> UnassignToken();
-
+        TrelloAuthenticationResponse AssignToken(string accessToken);
 
         //MEMBER
-        Task<TrelloMemberResponse> GetMemberByIdAsync(string memberId);
-        Task<IEnumerable<TrelloMemberResource>> GetAllMembersByCardIdAsync(string cardId);
+        Task<TrelloMemberResponse> GetMemberByIdAsync(string memberId, string accessToken);
+        Task<IEnumerable<TrelloMemberResource>> GetAllMembersByCardIdAsync(string cardId, string accessToken);
 
         // BOARD
-        Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId);
-        Task<TrelloBoardResponse> GetBoardByIdAsync(string boardId);
-        Task<TrelloBoardResponse> SaveBoardAsync(SaveTrelloBoardResource resource);
-        Task<TrelloBoardResponse> UpdateBoardAsync(string boardId, SaveTrelloBoardResource resource);
-        Task<TrelloBoardResponse> DeleteBoardAsync(string boardId);
+        Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId, string accessToken);
+        Task<TrelloBoardResponse> GetBoardByIdAsync(string boardId, string accessToken);
+        Task<TrelloBoardResponse> SaveBoardAsync(SaveTrelloBoardResource resource, string accessToken);
+        Task<TrelloBoardResponse> UpdateBoardAsync(string boardId, SaveTrelloBoardResource resource, string accessToken);
+        Task<TrelloBoardResponse> DeleteBoardAsync(string boardId, string accessToken);
 
         // CARDS
-        Task<IEnumerable<TrelloCardResource>> GetAllCardsByBoardIdAsync(string boardId);
-        Task<TrelloCardResponse> GetCardByIdAsync(string cardId);
+        Task<IEnumerable<TrelloCardResource>> GetAllCardsByBoardIdAsync(string boardId, string accessToken);
+        Task<TrelloCardResponse> GetCardByIdAsync(string cardId, string accessToken);
         //Task<TrelloCardResponse> SaveCardAsync(SaveTrelloCardResource resource);
-        Task<TrelloCardResponse> UpdateCardAsync(string cardId, SaveTrelloCardResource resource);
-        Task<TrelloCardResponse> DeleteCardAsync(string cardId);
+        Task<TrelloCardResponse> UpdateCardAsync(string cardId, SaveTrelloCardResource resource, string accessToken);
+        Task<TrelloCardResponse> DeleteCardAsync(string cardId, string accessToken);
 
         //LIST
 
-        Task<IEnumerable<TrelloListResource>> GetAllListsByBoardIdAsync(string boardId);
-        Task<TrelloListResponse> GetListByCardIdAsync(string cardId);
-        Task<TrelloListResponse> GetListByIdAsync(string listId);
-        Task<TrelloListResponse> SaveListOnABoardAsync(SaveTrelloListResource resource, string boardId);
-        Task<TrelloListResponse> UpdateListOnABoardAsync(string listId, SaveTrelloListResource resource);
+        Task<IEnumerable<TrelloListResource>> GetAllListsByBoardIdAsync(string boardId, string accessToken);
+        Task<TrelloListResponse> GetListByCardIdAsync(string cardId, string accessToken);
+        Task<TrelloListResponse> GetListByIdAsync(string listId, string accessToken);
+        Task<TrelloListResponse> SaveListOnABoardAsync(SaveTrelloListResource resource, string boardId, string accessToken);
+        Task<TrelloListResponse> UpdateListOnABoardAsync(string listId, SaveTrelloListResource resource, string accessToken);
 
         //ORGANIZATIONS
 
-        Task<IEnumerable<TrelloOrganizationResource>> GetAllOrganizationsByMemberIdAsync(string memberId);
-        Task<TrelloOrganizationResponse> SaveOrganizationAsync(SaveTrelloOrganizationResource resource);
-        Task<TrelloOrganizationResponse> UpdateOrganizationAsync(string organizationId, SaveTrelloOrganizationResource resource);
-        Task<TrelloOrganizationResponse> DeleteOrganizationAsync(string organizationId);
+        Task<IEnumerable<TrelloOrganizationResource>> GetAllOrganizationsByMemberIdAsync(string memberId, string accessToken);
+        Task<TrelloOrganizationResponse> SaveOrganizationAsync(SaveTrelloOrganizationResource resource, string accessToken);
+        Task<TrelloOrganizationResponse> UpdateOrganizationAsync(string organizationId, SaveTrelloOrganizationResource resource, string accessToken);
+        Task<TrelloOrganizationResponse> DeleteOrganizationAsync(string organizationId, string accessToken);
     }
 }

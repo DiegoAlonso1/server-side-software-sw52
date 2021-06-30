@@ -17,7 +17,7 @@ namespace UltimateTeamApi.ExternalTools.Services
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiKey;
-        private readonly string _token;
+        private string _token;
 
         public TrelloService()
         {
@@ -29,24 +29,21 @@ namespace UltimateTeamApi.ExternalTools.Services
             };
         }
 
-        public async Task<TrelloAccountResponse> AssignToken()
+        public TrelloAuthenticationResponse AssignToken(string accessToken)
         {
-           try
+            var response = new TrelloAuthenticationResponse
             {
-                var request = await _httpClient.GetAsync($"authorize?expiration=never&callback_method=postMessage&return_url&name=UltimateTeam&scope=read,write,account&response_type=token&key={_apiKey}");
-                return new TrelloAccountResponse();
-
-            }
-            catch(Exception ex)
-            {
-                return new TrelloAccountResponse($"An error ocurred while logging in Trello account: {ex.Message}");
-            }
+                AccessToken = accessToken
+            };
+            return response;
         }
 
-        public async Task<TrelloBoardResponse> DeleteBoardAsync(string boardId)
+        public async Task<TrelloBoardResponse> DeleteBoardAsync(string boardId, string accessToken)
         {           
             try
             {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var request = await _httpClient.DeleteAsync($"boards/{boardId}?key={_apiKey}&token={_token}");
 
                 if (!request.IsSuccessStatusCode)
@@ -73,10 +70,12 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        public async Task<TrelloCardResponse> DeleteCardAsync(string cardId)
+        public async Task<TrelloCardResponse> DeleteCardAsync(string cardId, string accessToken)
         {
             try
             {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var request = await _httpClient.DeleteAsync($"cards/{cardId}?key={_apiKey}&token={_token}");
 
                 if (!request.IsSuccessStatusCode)
@@ -109,9 +108,10 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        public async Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId)
+        public async Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId, string accessToken)
         {
-          
+            if (accessToken != null && accessToken.Length > 0)
+                _token = accessToken;
             var request = await _httpClient.GetAsync($"members/{memberId}/boards?key={_apiKey}&token={_token}");
 
             if (!request.IsSuccessStatusCode)
@@ -141,8 +141,10 @@ namespace UltimateTeamApi.ExternalTools.Services
             return resources;
         }
 
-        public async Task<IEnumerable<TrelloCardResource>> GetAllCardsByBoardIdAsync(string boardId)
+        public async Task<IEnumerable<TrelloCardResource>> GetAllCardsByBoardIdAsync(string boardId, string accessToken)
         {
+            if (accessToken != null && accessToken.Length > 0)
+                _token = accessToken;
             var request = await _httpClient.GetAsync($"boards/{boardId}/cards?key={_apiKey}&token={_token}");
 
             if (!request.IsSuccessStatusCode)
@@ -175,8 +177,10 @@ namespace UltimateTeamApi.ExternalTools.Services
             return resources;
         }
 
-        public async Task<IEnumerable<TrelloListResource>> GetAllListsByBoardIdAsync(string boardId)
+        public async Task<IEnumerable<TrelloListResource>> GetAllListsByBoardIdAsync(string boardId, string accessToken)
         {
+            if (accessToken != null && accessToken.Length > 0)
+                _token = accessToken;
             var request = await _httpClient.GetAsync($"boards/{boardId}/lists?key={_apiKey}&token={_token}");
 
             if (!request.IsSuccessStatusCode)
@@ -202,9 +206,10 @@ namespace UltimateTeamApi.ExternalTools.Services
             return resources;
         }
 
-        public async Task<TrelloBoardResponse> GetBoardByIdAsync(string boardId)
+        public async Task<TrelloBoardResponse> GetBoardByIdAsync(string boardId, string accessToken)
         {
-            
+            if (accessToken != null && accessToken.Length > 0)
+                _token = accessToken;
             var request = await _httpClient.GetAsync($"boards/{boardId}?key={_apiKey}&token={_token}");
 
             if (!request.IsSuccessStatusCode)
@@ -230,8 +235,10 @@ namespace UltimateTeamApi.ExternalTools.Services
             return new TrelloBoardResponse(resource);          
         }
 
-        public async Task<TrelloCardResponse> GetCardByIdAsync(string cardId)
+        public async Task<TrelloCardResponse> GetCardByIdAsync(string cardId, string accessToken)
         {
+            if (accessToken != null && accessToken.Length > 0)
+                _token = accessToken;
             var request = await _httpClient.GetAsync($"cards/{cardId}?key={_apiKey}&token={_token}");
 
             if (!request.IsSuccessStatusCode)
@@ -259,8 +266,10 @@ namespace UltimateTeamApi.ExternalTools.Services
             return new TrelloCardResponse(resource);
         }
 
-        public async Task<TrelloListResponse> GetListByCardIdAsync(string cardId)
+        public async Task<TrelloListResponse> GetListByCardIdAsync(string cardId, string accessToken)
         {
+            if (accessToken != null && accessToken.Length > 0)
+                _token = accessToken;
             var request = await _httpClient.GetAsync($"cards/{cardId}/list?key={_apiKey}&token={_token}");
 
             if (!request.IsSuccessStatusCode)
@@ -281,8 +290,10 @@ namespace UltimateTeamApi.ExternalTools.Services
             return new TrelloListResponse(resource);
         }
 
-        public async Task<TrelloListResponse> GetListByIdAsync(string listId)
+        public async Task<TrelloListResponse> GetListByIdAsync(string listId, string accessToken)
         {
+            if (accessToken != null && accessToken.Length > 0)
+                _token = accessToken;
             var request = await _httpClient.GetAsync($"lists/{listId}?key={_apiKey}&token={_token}");
 
             if (!request.IsSuccessStatusCode)
@@ -303,11 +314,12 @@ namespace UltimateTeamApi.ExternalTools.Services
             return new TrelloListResponse(resource);
         }
 
-        public async Task<TrelloMemberResponse> GetMemberByIdAsync(string memberId)
+        public async Task<TrelloMemberResponse> GetMemberByIdAsync(string memberId, string accessToken)
         {
             try
             {
-
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var request = await _httpClient.GetAsync($"members/{memberId}/?key={_apiKey}&token={_token}");
                 if (!request.IsSuccessStatusCode)
                     throw new Exception();
@@ -336,8 +348,10 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        public async Task<IEnumerable<TrelloMemberResource>> GetAllMembersByCardIdAsync(string cardId)
+        public async Task<IEnumerable<TrelloMemberResource>> GetAllMembersByCardIdAsync(string cardId, string accessToken)
         {
+            if (accessToken != null && accessToken.Length > 0)
+                _token = accessToken;
             var request = await _httpClient.GetAsync($"cards/{cardId}/members?key={_apiKey}&token={_token}");
 
             if (!request.IsSuccessStatusCode)
@@ -363,10 +377,12 @@ namespace UltimateTeamApi.ExternalTools.Services
             return resources;
         }
 
-        public async Task<TrelloBoardResponse> SaveBoardAsync(SaveTrelloBoardResource _resource)
+        public async Task<TrelloBoardResponse> SaveBoardAsync(SaveTrelloBoardResource _resource, string accessToken)
         {
             try
             {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var request = await _httpClient.PostAsync($"boards/?key={_apiKey}&token={_token}&name={_resource.Name}", null);
 
                 if (!request.IsSuccessStatusCode)
@@ -393,10 +409,12 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        public async Task<TrelloListResponse> SaveListOnABoardAsync(SaveTrelloListResource _resource, string boardId)
+        public async Task<TrelloListResponse> SaveListOnABoardAsync(SaveTrelloListResource _resource, string boardId, string accessToken)
         {
             try
             {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var request = await _httpClient.PostAsync($"boards/{boardId}/lists?key={_apiKey}&token={_token}&name={_resource.Name}", null);
 
                 if (!request.IsSuccessStatusCode)
@@ -459,24 +477,12 @@ namespace UltimateTeamApi.ExternalTools.Services
         //    }
         //}
 
-        public async Task<TrelloAccountResponse> UnassignToken()
+        public async Task<TrelloBoardResponse> UpdateBoardAsync(string boardId, SaveTrelloBoardResource _resource, string accessToken)
         {
             try
             {
-                var request = await _httpClient.GetAsync($"tokens/{_token}/?key={_apiKey}&token={_token}");
-                return new TrelloAccountResponse();
-
-            }
-            catch (Exception ex)
-            {
-                return new TrelloAccountResponse($"An error ocurred while logging out in Trello account: {ex.Message}");
-            }
-        }
-
-        public async Task<TrelloBoardResponse> UpdateBoardAsync(string boardId, SaveTrelloBoardResource _resource)
-        {
-            try
-            {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var data = new StringContent(JsonConvert.SerializeObject(new { name = _resource.Name }), Encoding.UTF8, "application/json");
                 var request = await _httpClient.PutAsync($"boards/{boardId}?key={_apiKey}&token={_token}", data);
 
@@ -504,10 +510,12 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        public async Task<TrelloCardResponse> UpdateCardAsync(string cardId, SaveTrelloCardResource _resource)
+        public async Task<TrelloCardResponse> UpdateCardAsync(string cardId, SaveTrelloCardResource _resource, string accessToken)
         {
             try
             {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var data = new StringContent(JsonConvert.SerializeObject(new { name = _resource.Name }), Encoding.UTF8, "application/json");
                 var request = await _httpClient.PutAsync($"cards/{cardId}?key={_apiKey}&token={_token}", data);
 
@@ -541,10 +549,12 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        public async Task<TrelloListResponse> UpdateListOnABoardAsync(string listId, SaveTrelloListResource _resource)
+        public async Task<TrelloListResponse> UpdateListOnABoardAsync(string listId, SaveTrelloListResource _resource, string accessToken)
         {
             try
             {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var data = new StringContent(JsonConvert.SerializeObject(new { name = _resource.Name }), Encoding.UTF8, "application/json");
                 var request = await _httpClient.PutAsync($"lists/{listId}?key={_apiKey}&token={_token}", data);
 
@@ -571,8 +581,10 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        public async Task<IEnumerable<TrelloOrganizationResource>> GetAllOrganizationsByMemberIdAsync(string memberId)
+        public async Task<IEnumerable<TrelloOrganizationResource>> GetAllOrganizationsByMemberIdAsync(string memberId, string accessToken)
         {
+            if (accessToken != null && accessToken.Length > 0)
+                _token = accessToken;
             var request = await _httpClient.GetAsync($"members/{memberId}/organizations?key={_apiKey}&token={_token}");
 
             if (!request.IsSuccessStatusCode)
@@ -604,10 +616,12 @@ namespace UltimateTeamApi.ExternalTools.Services
             return resources;
         }
 
-        public async Task<TrelloOrganizationResponse> SaveOrganizationAsync(SaveTrelloOrganizationResource _resource)
+        public async Task<TrelloOrganizationResponse> SaveOrganizationAsync(SaveTrelloOrganizationResource _resource, string accessToken)
         {
             try
             {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var request = await _httpClient.PostAsync($"organizations?key={_apiKey}&token={_token}&displayName={_resource.DisplayName}", null);
 
                 if (!request.IsSuccessStatusCode)
@@ -639,10 +653,12 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        public async Task<TrelloOrganizationResponse> UpdateOrganizationAsync(string organizationId, SaveTrelloOrganizationResource _resource)
+        public async Task<TrelloOrganizationResponse> UpdateOrganizationAsync(string organizationId, SaveTrelloOrganizationResource _resource, string accessToken)
         {
             try
             {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var data = new StringContent(JsonConvert.SerializeObject(new { displayName = _resource.DisplayName }), Encoding.UTF8, "application/json");
                 var request = await _httpClient.PutAsync($"organizations/{organizationId}?key={_apiKey}&token={_token}", data);
 
@@ -675,10 +691,12 @@ namespace UltimateTeamApi.ExternalTools.Services
             }
         }
 
-        public async Task<TrelloOrganizationResponse> DeleteOrganizationAsync(string organizationId)
+        public async Task<TrelloOrganizationResponse> DeleteOrganizationAsync(string organizationId, string accessToken)
         {
             try
             {
+                if (accessToken != null && accessToken.Length > 0)
+                    _token = accessToken;
                 var request = await _httpClient.DeleteAsync($"organizations/{organizationId}?key={_apiKey}&token={_token}");
 
                 if (!request.IsSuccessStatusCode)

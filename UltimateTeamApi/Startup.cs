@@ -166,6 +166,11 @@ namespace UltimateTeamApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    "Default",
+                    "{controller}/{action}/#{detail}",
+                    new { controller = "Trello", action = "login", detail = "" }
+                );
             });
         }
     }

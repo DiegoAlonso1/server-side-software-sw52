@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using UltimateTeamApi.ExternalTools.Domain.Services;
 using UltimateTeamApi.ExternalTools.Domain.Services.Communications;
@@ -13,7 +11,7 @@ namespace UltimateTeamApi.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    [SwaggerTag("For the usage of the following endpoints you have to follow two steps. The First is to log in into your Miro Account and join our team with this url => https://miro.com/welcome/VVFnb3pQaDU4bTdhU2MyZ3h0TGlhV2Vid2NYNTFmZXRWeTVIckpwQXB6Q0ZIdE1lNVVNbFozS2ljb2pBdVMxZnwzMDc0NDU3MzU5NDkwMDgzNTI5 The Second step is to reclaim you access token with this url => https://miro.com/oauth/authorize/?response_type=code&client_id=3074457359489952586&redirect_uri=https://localhost:44345/api/miro/login")]
+    [SwaggerTag("For the use of the following endpoints, you must follow two steps: It is first log into your account Miro and join our team with this url => https://miro.com/welcome/VVFnb3pQaDU4bTdhU2MyZ3h0TGlhV2Vid2NYNTFmZXRWeTVIckpwQXB6Q0ZIdE1lNV2dlVDMDM2ZIdE1lNV2dlVMDM2ZIdE1lNV2DlVBMDM2ZIdE1lNV2DlVMDM2. | The second step is to get your access token with this url => https://miro.com/oauth/authorize/?response_type=code&client_id=3074457359489952586&redirect_uri=https://localhost:44345/api/miro/login")]
     public class MiroController : ControllerBase
     {
         private readonly IMiroService _miroService;
@@ -21,6 +19,12 @@ namespace UltimateTeamApi.Controllers
         {
             _miroService = miroService;
         }
+
+
+
+        /******************************************/
+                /*LOGIN MIRO ACCOUNT*/
+        /******************************************/
 
         [SwaggerOperation(
             Summary = "Login Miro Account (Don´t use this endpoint and Use the url to log in)",
@@ -37,8 +41,10 @@ namespace UltimateTeamApi.Controllers
             return Ok(result);
         }
 
+
+
         /******************************************/
-        /*CREATE MIROM BOARD*/
+                /*CREATE MIRO BOARD*/
         /******************************************/
 
         [SwaggerOperation(
@@ -60,8 +66,10 @@ namespace UltimateTeamApi.Controllers
             return Ok(result.Resource);
         }
 
+
+
         /******************************************/
-        /*GET MIRO BOARD*/
+                /*GET MIRO BOARD*/
         /******************************************/
 
         [SwaggerOperation(
@@ -83,8 +91,10 @@ namespace UltimateTeamApi.Controllers
             return Ok(result.Resource);
         }
 
+
+
         /******************************************/
-        /*Share MIRO BOARD*/
+                /*SHARE MIRO BOARD*/
         /******************************************/
 
         [SwaggerOperation(
@@ -103,8 +113,10 @@ namespace UltimateTeamApi.Controllers
             return result;
         }
 
+
+
         /******************************************/
-        /*UPDATE MIRO BOARD*/
+                /*UPDATE MIRO BOARD*/
         /******************************************/
 
         [SwaggerOperation(
@@ -126,8 +138,10 @@ namespace UltimateTeamApi.Controllers
             return Ok(result.Resource);
         }
 
+
+
         /******************************************/
-        /*DELETE MIRO BOARD*/
+                /*DELETE MIRO BOARD*/
         /******************************************/
 
         [SwaggerOperation(
@@ -149,8 +163,10 @@ namespace UltimateTeamApi.Controllers
             return Ok(result.Resource);
         }
 
+
+
         /******************************************/
-        /*GET USER BY ID*/
+                /*GET USER BY ID*/
         /******************************************/
 
         [SwaggerOperation(
@@ -172,8 +188,10 @@ namespace UltimateTeamApi.Controllers
             return Ok(result.Resource);
         }
 
+
+
         /******************************************/
-        /*GET MY USER*/
+                /*GET MY USER*/
         /******************************************/
 
         [SwaggerOperation(
