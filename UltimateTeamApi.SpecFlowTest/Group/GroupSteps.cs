@@ -101,7 +101,6 @@ namespace UltimateTeamApi.SpecFlowTest.Group
             {
                 Assert.IsTrue(false, ex.Message);
             }
-
         }
         
        

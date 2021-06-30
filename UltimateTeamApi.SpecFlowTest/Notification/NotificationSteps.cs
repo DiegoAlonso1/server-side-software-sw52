@@ -12,10 +12,12 @@ namespace UltimateTeamApi.SpecFlowTest.Notification
     public class NotificationSteps : BaseTest
     {
         private string UserEndpoint { get; set; }
+        private string NotificationEndpoint { get; set; }
 
         public NotificationSteps()
         {
-            UserEndpoint = $"{ApiUri}api/notifications";
+            UserEndpoint = $"{ApiUri}api/users";
+            NotificationEndpoint = $"{ApiUri}api/notifications";
         }
 
         /**************************************************/
@@ -27,7 +29,7 @@ namespace UltimateTeamApi.SpecFlowTest.Notification
         {
             try
             {
-                var result = Task.Run(async () => await Client.PostAsync($"{NotificationEndpoint(senderId)}/{remitendId}", null)).Result;
+                var result = Task.Run(async () => await Client.PostAsync($"{UserNotificationEndpoint(senderId)}/{remitendId}", null)).Result;
                 Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Assign Notification Integration Test Completed");
             }
             catch (Exception ex)
@@ -48,7 +50,7 @@ namespace UltimateTeamApi.SpecFlowTest.Notification
         {
             try
             {
-                var result = Task.Run(async () => await Client.GetAsync($"{NotificationEndpoint(senderId)}/{remitendId}")).Result;
+                var result = Task.Run(async () => await Client.GetAsync($"{UserNotificationEndpoint(senderId)}/{remitendId}")).Result;
                 Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get Notification Integration Test Completed");
             }
             catch (Exception ex)
@@ -75,13 +77,13 @@ namespace UltimateTeamApi.SpecFlowTest.Notification
         public void ThenTheNotificationListOfTheUserWithIdShouldBe(int userId, Table dto)
         {
             var notifications = dto.CreateInstance<List<Domain.Models.Notification>>();
-            var result = Task.Run(async () => await Client.GetAsync($"{NotificationEndpoint(userId)}")).Result;
+            var result = Task.Run(async () => await Client.GetAsync($"{UserNotificationEndpoint(userId)}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Notifications Details Integration Test Completed");
         }
 
 
 
-        private string NotificationEndpoint(int userId)
+        private string UserNotificationEndpoint(int userId)
         {
             return $"{ApiUri}api/users/{userId}/notifications";
         }
