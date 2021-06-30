@@ -73,6 +73,8 @@ namespace UltimateTeamApi
             services.AddScoped<ITrelloService, ExternalTools.Services.TrelloService>();
             services.AddScoped<ICalendarService, ExternalTools.Services.CalendarService>();
 
+            services.AddScoped<IMiroService, ExternalTools.Services.MiroService>();
+
             //Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
 

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace UltimateTeamApi.ExternalTools.Resources
 {
-    class SaveMiroBoardResource
+    public class SaveMiroBoardResource
     {
-
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string SharingPolicyAccess { get; set; }
+        public string SharingPolicyTeamAccess { get; set; }
     }
 }

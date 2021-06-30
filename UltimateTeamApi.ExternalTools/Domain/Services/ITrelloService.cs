@@ -15,7 +15,6 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services
         Task<TrelloAccountResponse> UnassignToken();
         Task<IEnumerable<TrelloBoardResource>> GetAllBoardsByMemberIdAsync(string memberId);
         Task<TrelloBoardResponse> GetBoardByIdAsync(string boardId);
-
         Task<TrelloBoardResponse> SaveBoardAsync(SaveTrelloBoardResource resource);
         Task<TrelloBoardResponse> UpdateBoardAsync(string boardId, SaveTrelloBoardResource resource);
     }

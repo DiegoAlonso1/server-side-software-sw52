@@ -18,7 +18,6 @@ namespace UltimateTeamApi.ExternalTools.Resources
         public string Name { get; set; }
         public string Description { get; set; }
         public string ViewLink{ get; set; }
-        public object SharingPolicy { get; set; }
         public string SharingPolicyAccess { get; set; }
         public string SharingPolicyTeamAccess { get; set; }
         public MiroUserConnectionResource currentUserConnection { get; set; }
