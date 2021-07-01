@@ -86,6 +86,7 @@ namespace UltimateTeamApi
             services.AddScoped<ISessionParticipantRepository, SessionParticipantRepository>();
             services.AddScoped<ISessionTypeRepository, SessionTypeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -105,7 +106,7 @@ namespace UltimateTeamApi
             services.AddScoped<IDriveService, ExternalTools.Services.DriveService>();
             services.AddScoped<ITrelloService, ExternalTools.Services.TrelloService>(); 
             services.AddScoped<ICalendarService, ExternalTools.Services.CalendarService>();
-
+            services.AddScoped<IPayPalService, ExternalTools.Services.PayPalService>();
             services.AddScoped<IMiroService, ExternalTools.Services.MiroService>();
 
             //Apply Endpoints Naming Convention

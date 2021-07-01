@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace UltimateTeamApi.ExternalTools.Resources
 {
-    public class SaveSuscriptionResource
+    public class SavePaypalSuscriptionResource
     {
         public string PlanId { get; set; }
+        public string StartDate { get; set; }
 
     }
 }

@@ -25,114 +25,106 @@ namespace UltimateTeamApi.ExternalTools.Services
             _secret = "EP-qEsR7ChSjjlwX-gCMgeIZS4chcsDBgRC1NkvMEX55LkuXdhGe0RkxATqOXx38AFerbK7jGd_WH7XO";
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://api-m.sandbox.paypal.com/v1/oauth2/token")
+                BaseAddress = new Uri("https://api-m.sandbox.paypal.com/v1/")
             };
+
         }
 
-        public async Task<PayPalTokenResponse> GetToken()
+        public async Task<PayPalTokenResponse> GetTokenAsync()
         {
-
-            var url = "https://api-m.sandbox.paypal.com/v1/oauth2/token";
-
-            var httpRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpRequest.Method = "POST";
-
-            httpRequest.Accept = "application/json";
-            httpRequest.Headers["Accept-Language"] = "en_US";
-            httpRequest.ContentType = "application/x-www-form-urlencoded";
-            httpRequest.Headers["Authorization"] = "Basic QWQwUnhBOE9HeFhWcmJJRDU5NUFIVC1MM2t6RzFWTFNLVkgyalZDMUNuaHJoc3lfdlZ5Y0JpT09HQnVUNExpRGtiakNxWmE5S2l4U1YxUmQ6RVAtcUVzUjdDaFNqamx3WC1nQ01nZUlaUzRjaGNzREJnUkMxTmt2TUVYNTVMa3VYZGhHZTBSa3hBVHFPWHgzOEFGZXJiSzdqR2RfV0g3WE8=";
-
-            var data = "grant_type=client_credentials";
-
-            using (var streamWriter = new StreamWriter(httpRequest.GetRequestStream()))
-            {
-                streamWriter.Write(data);
-            }
-
-            var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-            }
-
-            return new PayPalTokenResponse($"{httpResponse}");
-            /*var httpClient = new HttpClient();
-            var request = new HttpRequestMessage(new HttpMethod("POST"), "https://api-m.sandbox.paypal.com/v1/oauth2/token");
-
-            request.Headers.TryAddWithoutValidation("Accept", "application/json");
-            request.Headers.TryAddWithoutValidation("Accept-Language", "en_US");
-
-            var base64authorization = Convert.ToBase64String(Encoding.ASCII.GetBytes("Ad0RxA8OGxXVrbID595AHT-L3kzG1VLSKVH2jVC1Cnhrhsy_vVycBiOOGBuT4LiDkbjCqZa9KixSV1Rd:EP-qEsR7ChSjjlwX-gCMgeIZS4chcsDBgRC1NkvMEX55LkuXdhGe0RkxATqOXx38AFerbK7jGd_WH7XO"));
-            request.Headers.TryAddWithoutValidation("Authorization", $"Basic {base64authorization}");
-
-            request.Content = new StringContent("grant_type=client_credentials");
-            request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");
             try
             {
-                HttpResponseMessage response = await httpClient.SendAsync(request);
+                _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+                _httpClient.DefaultRequestHeaders.Add("Accept-Language", "es_XC");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", $"{_clientId}:{_secret}");
 
-                var model = await response.Content.ReadAsStringAsync();
+
+                var data = JsonConvert.SerializeObject("grant_type=client_credentials");
+                var content = new StringContent(data, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+                var request = await _httpClient.PostAsync("oauth2/token ", content);
+
+
+
+                var model = await request.Content.ReadAsStringAsync();
+
                 dynamic tokenResponse = JsonConvert.DeserializeObject<Object>(model);
 
-                var resource = new PayPalTokenResource
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception("PayPal operation result was bad request");
+
+
+                var _resource = new PayPalTokenResource
                 {
                     AccessToken = tokenResponse.access_token,
+                    AppId = tokenResponse.app_id,
                     Scope = tokenResponse.scope,
                     TokenType = tokenResponse.token_type,
-                    AppId = tokenResponse.app_id,
                     ExpiresIn = tokenResponse.expires_in,
-                    Nonce = tokenResponse.nonce                    
+                    Nonce = tokenResponse.nonce
                 };
-                return new PayPalTokenResponse(resource);
+
+                return new PayPalTokenResponse(_resource);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                return new PayPalTokenResponse($"An error ocurred while getting de Pay Pal Token: {ex.Message}");
-            }         */
+                return new PayPalTokenResponse($"An error ocurred while getting the Token: {ex.Message}");
 
+            }
 
         }
-
-        public async Task<PayPalSubscriptionResponse> SuscribeToAPlan(SaveSuscriptionResource resource)
-        {
-            var handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (requestMessage, certificate, chain, policyErrors) => true;
-
-            var httpClient = new HttpClient(handler);
-            var request = new HttpRequestMessage(new HttpMethod("POST"), "https://api-m.sandbox.paypal.com/v1/billing/subscriptions");
-
-            request.Headers.TryAddWithoutValidation("Accept", "application/json");
-            request.Headers.TryAddWithoutValidation("Authorization", "Bearer" + await GetToken());
-            request.Headers.TryAddWithoutValidation("Prefer", "return=representation");
-
-            string dataString = " \n      \"plan_id\": \""+
-                $"{resource.PlanId}"
-                +"\",\n      \"start_time\": \""+GetDate().ToString()
-                +"\",\n      \"application_context\": {\n        \"brand_name\": \"example company\",\n        \"locale\": \"en-US\",\n        \"shipping_preference\": \"SET_PROVIDED_ADDRESS\",\n        \"user_action\": \"SUBSCRIBE_NOW\",\n        \"payment_method\": {\n          \"payer_selected\": \"PAYPAL\",\n          \"payee_preferred\": \"IMMEDIATE_PAYMENT_REQUIRED\"\n        },\n        \"return_url\": \"https://example.com/returnUrl\",\n        \"cancel_url\": \"https://example.com/cancelUrl\"\n      }\n ";
-
-            request.Content = new StringContent(dataString);
-            request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-
-            HttpResponseMessage response = await httpClient.SendAsync(request);
-
-            var model = await response.Content.ReadAsStringAsync();
-            dynamic subscriptionResponse = JsonConvert.DeserializeObject<Object>(model);
-
-
-            var item = new PayPalSubscriptionResource
+        public async Task<PayPalSubscriptionResponse> SuscribePlanAsync(string token, SavePaypalSuscriptionResource resource)
+        {          
+                
+            try
             {
-                PlanId = subscriptionResponse.plan_id,
-                StartTime = subscriptionResponse.start_time,
-                Link = subscriptionResponse.links[0].href,
-            };
-            return new PayPalSubscriptionResponse(item);
+                if (token == null || token.Length <= 0)
+                    throw new Exception("Token was not assigned");
+
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+
+
+                dynamic resourceObject = new
+                {
+                    plan_id = resource.PlanId,
+                    start_time = resource.StartDate
+                };
+
+                var data = JsonConvert.SerializeObject(resourceObject);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+
+                var request = await _httpClient.PostAsync("billing/subscriptions", content);
+
+                if (!request.IsSuccessStatusCode)
+                    throw new Exception("PayPal operation result was bad request");
+
+                var model = await request.Content.ReadAsStringAsync();
+
+                dynamic subscriptionResponse = JsonConvert.DeserializeObject<Object>(model);
+
+                
+
+                var _resource = new PayPalSubscriptionResource {
+                    PlanId = subscriptionResponse.id,
+                    StartTime = subscriptionResponse.create_time,
+                    Link = subscriptionResponse.links[0].href
+                };
+
+                return new PayPalSubscriptionResponse(_resource);
+            }
+            catch(Exception ex)
+            {
+                return new PayPalSubscriptionResponse($"An error ocurred while subscribing to a PayPal plan: {ex.Message}");
+            }
+            
         }
 
-        public static DateTime GetDate()
+        public static string GetDate()
         {
-            DateTime currentDate = DateTime.Now;
-            return currentDate;
+            return DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
         }
+
         // A21AAJmpduzvk1hXc3JCybR4k7xAA_vBLqM7O48CjUCa__1mofvn20xFLxQrrAxFPdIvcAlF4KC9Q9428OFOhivhdChV5Zfaw
     }
 }

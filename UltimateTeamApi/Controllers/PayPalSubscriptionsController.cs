@@ -30,12 +30,12 @@ namespace UltimateTeamApi.Controllers
             OperationId = "Get Pay Pal Token")]
         [SwaggerResponse(200, "Get Pay Pal Token", typeof(PayPalTokenResource))]
 
-        [HttpGet]
+        [HttpGet("login")]
         [ProducesResponseType(typeof(PayPalTokenResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetPayPalToken()
+        public async Task<IActionResult> GetPayPalTokenAsync()
         {
-            var result = await _payPalService.GetToken();
+            var result = await _payPalService.GetTokenAsync();
             if (!result.Success)
                 return BadRequest(result.Message);
             return Ok(result);
@@ -56,9 +56,9 @@ namespace UltimateTeamApi.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(PayPalSubscriptionResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetByIdAsync([FromBody] SaveSuscriptionResource resource)
+        public async Task<IActionResult> PostPayPalSubscriptionAsync([FromQuery]string token, [FromBody] SavePaypalSuscriptionResource resource)
         {
-            var result = await _payPalService.SuscribeToAPlan(resource);
+            var result = await _payPalService.SuscribePlanAsync(token, resource);
 
             if (!result.Success)
                 return BadRequest(result.Message);

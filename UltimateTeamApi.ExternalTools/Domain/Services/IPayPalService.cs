@@ -11,7 +11,7 @@ namespace UltimateTeamApi.ExternalTools.Domain.Services
 {
     public interface IPayPalService
     {
-        Task<PayPalTokenResponse> GetToken();
-        Task<PayPalSubscriptionResponse> SuscribeToAPlan(SaveSuscriptionResource resource);
+        Task<PayPalTokenResponse> GetTokenAsync();
+        Task<PayPalSubscriptionResponse> SuscribePlanAsync(string token, SavePaypalSuscriptionResource resource);
     }
 }
