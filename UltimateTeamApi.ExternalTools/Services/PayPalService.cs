@@ -35,8 +35,11 @@ namespace UltimateTeamApi.ExternalTools.Services
             try
             {
                 _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-                _httpClient.DefaultRequestHeaders.Add("Accept-Language", "es_XC");
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", $"{_clientId}:{_secret}");
+                _httpClient.DefaultRequestHeaders.Add("Accept-Language", "en_US");
+                //_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", $"{_clientId}:{_secret}");
+                string encoded = System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1")
+               .GetBytes(_clientId + ":" + _secret));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + encoded);
 
 
                 var data = JsonConvert.SerializeObject("grant_type=client_credentials");
@@ -44,9 +47,7 @@ namespace UltimateTeamApi.ExternalTools.Services
 
                 var request = await _httpClient.PostAsync("oauth2/token ", content);
 
-
-
-                var model = await request.Content.ReadAsStringAsync();
+                var model = await content.ReadAsStringAsync();
 
                 dynamic tokenResponse = JsonConvert.DeserializeObject<Object>(model);
 
