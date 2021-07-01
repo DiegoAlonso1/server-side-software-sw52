@@ -88,7 +88,7 @@ namespace UltimateTeamApi.Services
             existingSubscription.Paid = subscriptionBillRequest.Paid;
             existingSubscription.PaymentMethod = subscriptionBillRequest.PaymentMethod;
             existingSubscription.SubscriptionTypeId = subscriptionBillRequest.SubscriptionTypeId;
-            existingSubscription.UserId = subscriptionBillRequest.UserId;
+            existingSubscription.PersonId = subscriptionBillRequest.PersonId;
 
             try
             {

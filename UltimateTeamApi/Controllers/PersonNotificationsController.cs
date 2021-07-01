@@ -10,77 +10,79 @@ using UltimateTeamApi.Resources;
 
 namespace UltimateTeamApi.Controllers
 {
-    [Route("api/users/{userId}/notifications")]
+    [Route("api/persons/{personId}/notifications")]
     [Produces("application/json")]
     [ApiController]
-    public class UserNotificationsController : ControllerBase
+    public class PersonNotificationsController : ControllerBase
     {
         private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
-        private readonly IUserService _userService;
+        private readonly IPersonService _personService;
 
-        public UserNotificationsController(INotificationService notificationService, IMapper mapper, IUserService userService)
+        public PersonNotificationsController(INotificationService notificationService, IMapper mapper, IPersonService personService)
         {
             _notificationService = notificationService;
             _mapper = mapper;
-            _userService = userService;
+            _personService = personService;
         }
 
+
+
         /*****************************************************************/
-        /*LIST OF NOTIFICATIONS SENT BY USER ID*/
+        /*LIST OF NOTIFICATIONS SENT BY PERSON ID*/
         /*****************************************************************/
 
         [SwaggerOperation(
-         Summary = "Get All Notifications Sent By User Id",
-         Description = "Get All Notifications Sent By User Id",
-         OperationId = "GetAllNotificationsSentByUserId")]
-        [SwaggerResponse(200, "List of Notifications Sent By User Id", typeof(IEnumerable<NotificationResource>))]
+         Summary = "Get All Notifications Sent By Person Id",
+         Description = "Get All Notifications Sent By Person Id",
+         OperationId = "GetAllNotificationsSentByPersonId")]
+        [SwaggerResponse(200, "List of Notifications Sent By Person Id", typeof(IEnumerable<NotificationResource>))]
 
         [HttpGet("sent")]
         [ProducesResponseType(typeof(IEnumerable<NotificationResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IEnumerable<NotificationResource>> GetAllNotificationsSentByUserIdAsync(int userId)
+        public async Task<IEnumerable<NotificationResource>> GetAllNotificationsSentByPersonIdAsync(int personId)
         {
-            var notifications = await _notificationService.GetAllBySenderIdAsync(userId);
+            var notifications = await _notificationService.GetAllBySenderIdAsync(personId);
             var resources = _mapper.Map<IEnumerable<Notification>, IEnumerable<NotificationResource>>(notifications);
             return resources;
         }
 
         /*****************************************************************/
-        /*LIST OF NOTIFICATIONS RECEIVED BY USER ID*/
+        /*LIST OF NOTIFICATIONS RECEIVED BY PERSON ID*/
         /*****************************************************************/
 
         [SwaggerOperation(
-         Summary = "Get All Notifications Received By User Id",
-         Description = "Get All Notifications Receeived By User Id",
-         OperationId = "GetAllNotificationsReceivedByUserId")]
-        [SwaggerResponse(200, "List of Notifications Received By User Id", typeof(IEnumerable<NotificationResource>))]
+         Summary = "Get All Notifications Received By Person Id",
+         Description = "Get All Notifications Receeived By Person Id",
+         OperationId = "GetAllNotificationsReceivedByPersonId")]
+        [SwaggerResponse(200, "List of Notifications Received By Person Id", typeof(IEnumerable<NotificationResource>))]
 
         [HttpGet("received")]
         [ProducesResponseType(typeof(IEnumerable<NotificationResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IEnumerable<NotificationResource>> GetAllNotificationsRecievedByUserIdAsync(int userId)
+        public async Task<IEnumerable<NotificationResource>> GetAllNotificationsRecievedByPersonIdAsync(int personId)
         {
-            var notifications = await _notificationService.GetAllByRemitendIdAsync(userId);
+            var notifications = await _notificationService.GetAllByRemitendIdAsync(personId);
             var resources = _mapper.Map<IEnumerable<Notification>, IEnumerable<NotificationResource>>(notifications);
             return resources;
         }
 
         /*****************************************************************/
-        /*GET NOTIFICATION BY ID AND USER ID*/
+        /*GET NOTIFICATION BY ID AND PERSON ID*/
         /*****************************************************************/
         [SwaggerOperation(
-          Summary = "Get Notification by Id and User Id",
-          Description = "Get Notification by Id and User Id",
-          OperationId = "GetNotificationByIdAndUserId")]
-        [SwaggerResponse(200, "Get Notification by Id and User Id", typeof(NotificationResource))]
+          Summary = "Get Notification by Id and Person Id",
+          Description = "Get Notification by Id and Person Id",
+          OperationId = "GetNotificationByIdAndPersonId")]
+        [SwaggerResponse(200, "Get Notification by Id and Person Id", typeof(NotificationResource))]
 
         [HttpGet("{notificationId}")]
         [ProducesResponseType(typeof(NotificationResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetByUserIdAndNotificationIdAsync(int userId, int notificationId)
+        public async Task<IActionResult> GetByPersonIdAndNotificationIdAsync(int personId, int notificationId)
         {
-            var result = await _notificationService.GetByIdAndUserIdAsync(userId, notificationId);
+            var result = await _notificationService.GetByIdAndPersonIdAsync(personId, notificationId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var notificationResource = _mapper.Map<Notification, NotificationResource>(result.Resource);
@@ -100,13 +102,13 @@ namespace UltimateTeamApi.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(NotificationResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PostAsync(int userId, [FromBody] SaveNotificationResource resource)
+        public async Task<IActionResult> PostAsync(int personId, [FromBody] SaveNotificationResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var notification = _mapper.Map<SaveNotificationResource, Notification>(resource);
-            var result = await _notificationService.SaveAsync(userId, notification);
+            var result = await _notificationService.SaveAsync(personId, notification);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -128,9 +130,9 @@ namespace UltimateTeamApi.Controllers
         [HttpDelete("{notificationId}")]
         [ProducesResponseType(typeof(NotificationResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> DeleteAsync(int userId, int notificationId)
+        public async Task<IActionResult> DeleteAsync(int personId, int notificationId)
         {
-            var result = await _notificationService.DeleteAsync(userId, notificationId);
+            var result = await _notificationService.DeleteAsync(personId, notificationId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var notificationResource = _mapper.Map<Notification, NotificationResource>(result.Resource);

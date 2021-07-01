@@ -90,8 +90,8 @@ namespace UltimateTeamApi.SpecFlowTest.SessionStadistic
                             /*SCENARY 2*/
         /**************************************************/
 
-        [When(@"the user uses the functionality with id (.*) in the session with id (.*), session stadistics details should be")]
-        public void WhenTheUserUsesTheFunctionalityWithIdInTheSessionWithIdSessionStadisticsDetailsShouldBe(int functionalityId, int sessionId, Table dto)
+        [When(@"the person uses the functionality with id (.*) in the session with id (.*), session stadistics details should be")]
+        public void WhenThePersonUsesTheFunctionalityWithIdInTheSessionWithIdSessionStadisticsDetailsShouldBe(int functionalityId, int sessionId, Table dto)
         {
             try
             {

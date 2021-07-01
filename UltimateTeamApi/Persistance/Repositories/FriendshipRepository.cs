@@ -31,7 +31,7 @@ namespace UltimateTeamApi.Persistance.Repositories
             }
 
             else
-                throw new Exception("Both users have already been asigned.");
+                throw new Exception("Both persons have already been asigned.");
         }
 
         public async Task<Friendship> FindByPrincipalIdAndFriendIdAsync(int principalId, int friendId)
@@ -42,19 +42,19 @@ namespace UltimateTeamApi.Persistance.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<User>> ListFriendsByUserIdAsync(int userId)
+        public async Task<IEnumerable<Person>> ListFriendsByPersonIdAsync(int personId)
         {
             var friendships = await _context.Friendships
-                .Where(f => f.PrincipalId == userId || f.FriendId == userId)
+                .Where(f => f.PrincipalId == personId || f.FriendId == personId)
                 .Include(f => f.Friend)
                 .Include(f => f.Principal)
                 .ToListAsync();
 
-            List<User> friends = new List<User>();
+            List<Person> friends = new List<Person>();
 
             foreach (var friendship in friendships)
             {
-                if (friendship.FriendId != userId)
+                if (friendship.FriendId != personId)
                     friends.Add(friendship.Friend);
                 else
                     friends.Add(friendship.Principal);
@@ -76,7 +76,7 @@ namespace UltimateTeamApi.Persistance.Repositories
                 Remove(friendship);
             
             else
-                throw new Exception("Both users have already been unasigned.");
+                throw new Exception("Both persons have already been unasigned.");
         }
     }
 }

@@ -1,15 +1,21 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UltimateTeamApi.Domain.Models;
 using UltimateTeamApi.Domain.Services;
+using UltimateTeamApi.Domain.Services.Communications;
 using UltimateTeamApi.Extensions;
 using UltimateTeamApi.Resources;
 
 namespace UltimateTeamApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
@@ -27,7 +33,7 @@ namespace UltimateTeamApi.Controllers
 
 
         /******************************************/
-                        /*GET ALL ASYNC*/
+                      /*GET ALL ASYNC*/
         /******************************************/
 
         [SwaggerOperation(
@@ -49,104 +55,79 @@ namespace UltimateTeamApi.Controllers
 
 
         /******************************************/
-                    /*GET BY ID ASYNC*/
+                    /*AUTHENTICATE USER*/
         /******************************************/
         [SwaggerOperation(
-            Summary = "Get User By Id",
-            Description = "Get a User By Id",
-            OperationId = "GetById")]
-        [SwaggerResponse(200, "User By Id", typeof(UserResource))]
+            Summary = "Authenticate User",
+            Description = "Authenticate a User",
+            OperationId = "AuthenticateUser")]
+        [SwaggerResponse(200, "User Authenticated", typeof(AuthenticationResponse))]
 
-        [HttpGet("{userId}")]
-        [ProducesResponseType(typeof(UserResource), 200)]
+        [AllowAnonymous]
+        [HttpPost("login")]
+        [ProducesResponseType(typeof(AuthenticationResponse), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetByIdAsync(int userId)
-        {
-            var result = await _userService.GetByIdAsync(userId);
-
-            if (!result.Success)
-                return BadRequest(result.Message);
-
-            var userResource = _mapper.Map<User, UserResource>(result.Resource);
-            return Ok(userResource);
-        }
-
-
-
-        /******************************************/
-                    /*GET BY EMAIL ASYNC*/
-        /******************************************/
-        [SwaggerOperation(
-            Summary = "Get User By Email",
-            Description = "Get a User By Email",
-            OperationId = "GetByEmail")]
-        [SwaggerResponse(200, "User By Email", typeof(UserResource))]
-
-        [HttpGet("email/{email}")]
-        [ProducesResponseType(typeof(UserResource), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetByEmailAsync(string email)
-        {
-            var result = await _userService.GetByEmailAsync(email);
-
-            if (!result.Success)
-                return BadRequest(result.Message);
-
-            var userResource = _mapper.Map<User, UserResource>(result.Resource);
-            return Ok(userResource);
-        }
-
-
-
-        /******************************************/
-                        /*SAVE USER*/
-        /******************************************/
-        [SwaggerOperation(
-            Summary = "Save User",
-            Description = "Create a User",
-            OperationId = "SaveUser")]
-        [SwaggerResponse(200, "User Created", typeof(UserResource))]
-
-        [HttpPost]
-        [ProducesResponseType(typeof(UserResource), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PostAsync([FromBody] SaveUserResource resource)
+        public async Task<IActionResult> AuthenticateAsync([FromBody] AuthenticationRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var user = _mapper.Map<SaveUserResource, User>(resource);
-            var result = await _userService.SaveAsync(user);
+            var result = await _userService.AuthenticateAsync(request);
 
-            if (!result.Success)
-                return BadRequest(result.Message);
+            if (result == null)
+                return BadRequest("Invalid username or password");
 
-            var userResource = _mapper.Map<User, UserResource>(result.Resource);
-            return Ok(userResource);
+            return Ok(result);
         }
 
 
 
         /******************************************/
-                        /*UPDATE USER*/
+                    /*REGISTER USER*/
         /******************************************/
-
         [SwaggerOperation(
-           Summary = "Update User",
-           Description = "Update a User",
-           OperationId = "UpdateUser")]
+            Summary = "Register User",
+            Description = "Register a User",
+            OperationId = "RegisterUser")]
+        [SwaggerResponse(200, "User Registered", typeof(string))]
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var result = await _userService.RegisterAsync(request);
+
+            if (result == null)
+                return BadRequest("Invalid username or password");
+
+            return Ok("Registration succesful");
+        }
+
+
+
+        /******************************************/
+                    /*UPDATE USER*/
+        /******************************************/
+        [SwaggerOperation(
+            Summary = "Update User",
+            Description = "Update a User",
+            OperationId = "UpdateUser")]
         [SwaggerResponse(200, "User Updated", typeof(UserResource))]
 
         [HttpPut("{userId}")]
         [ProducesResponseType(typeof(UserResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PutAsync(int userId, [FromBody] SaveUserResource resource)
+        public async Task<IActionResult> UpdateAsync(int userId, [FromBody] AuthenticationRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var user = _mapper.Map<SaveUserResource, User>(resource);
-            var result = await _userService.UpdateAsync(userId, user);
+            var result = await _userService.UpdateAsync(userId, request);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -158,7 +139,7 @@ namespace UltimateTeamApi.Controllers
 
 
         /******************************************/
-                        /*DELETE USER*/
+                    /*DELETE USER*/
         /******************************************/
         [SwaggerOperation(
            Summary = "Delete User",

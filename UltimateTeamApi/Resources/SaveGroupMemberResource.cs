@@ -7,6 +7,6 @@ namespace UltimateTeamApi.Resources
 {
     public class SaveGroupMemberResource
     {
-        public bool UserCreator { get; set; }
+        public bool PersonCreator { get; set; }
     }
 }

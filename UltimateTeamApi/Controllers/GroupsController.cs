@@ -60,7 +60,7 @@ namespace UltimateTeamApi.Controllers
         [SwaggerResponse(200, "Group By Id", typeof(GroupResource))]
 
         [HttpGet("{groupId}")]
-        [ProducesResponseType(typeof(UserResource), 200)]
+        [ProducesResponseType(typeof(PersonResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> GetByIdAsync(int groupId)
         {
@@ -166,15 +166,15 @@ namespace UltimateTeamApi.Controllers
             Summary = "Get All Members By Group Id",
             Description = "Get List of All Members By Group Id",
             OperationId = "GetAllMembersByGroupId")]
-        [SwaggerResponse(200, "Members", typeof(IEnumerable<UserResource>))]
+        [SwaggerResponse(200, "Members", typeof(IEnumerable<PersonResource>))]
 
         [HttpGet("{groupId}/groupMembers")]
-        [ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
+        [ProducesResponseType(typeof(IEnumerable<PersonResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IEnumerable<UserResource>> GetAllMembersByGroupIdAsync(int groupId)
+        public async Task<IEnumerable<PersonResource>> GetAllMembersByGroupIdAsync(int groupId)
         {
-            var members = await _groupMemberService.GetAllUsersByGroupIdAsync(groupId);
-            var resources = _mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(members);
+            var members = await _groupMemberService.GetAllPersonsByGroupIdAsync(groupId);
+            var resources = _mapper.Map<IEnumerable<Person>, IEnumerable<PersonResource>>(members);
             return resources;
         }
     }

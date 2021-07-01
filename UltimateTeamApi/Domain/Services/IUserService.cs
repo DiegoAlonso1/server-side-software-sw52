@@ -9,12 +9,11 @@ namespace UltimateTeamApi.Domain.Services
 {
     public interface IUserService
     {
+        Task <AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request);
         Task<IEnumerable<User>> GetAllAsync();
-        Task<IEnumerable<User>> GetAllByAdministratorIdAsync(int administratorId);
-        Task<UserResponse> GetByIdAsync(int userId);
-        Task<UserResponse> GetByEmailAsync(string email);
-        Task<UserResponse> SaveAsync(User user);
-        Task<UserResponse> UpdateAsync(int userId, User userRequest);
+        Task<UserResponse> RegisterAsync(RegisterRequest userRequest);
+        Task<UserResponse> UpdateAsync(int userId, AuthenticationRequest request);
         Task<UserResponse> DeleteAsync(int userId);
+
     }
 }

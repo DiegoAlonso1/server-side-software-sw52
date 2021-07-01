@@ -21,7 +21,7 @@ namespace UltimateTeamApi.ExternalTools.Services
     {
         public async Task<DriveFileResponse> AssignGoogleCredentialAsync(IGoogleAuthProvider auth)
         {
-            Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+            Google.Apis.Drive.v3.DriveService driveService = await getServiceAsync(auth);
 
             if (driveService != null)
                 return new DriveFileResponse();
@@ -34,7 +34,7 @@ namespace UltimateTeamApi.ExternalTools.Services
         {
             try
             {
-                Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+                Google.Apis.Drive.v3.DriveService driveService = await getServiceAsync(auth);
 
                 var request = driveService.Files.Get(fileId);
                 request.Fields = "id,name,description,createdTime,fileExtension,kind,owners,parents,size,version,webContentLink,webViewLink";
@@ -60,7 +60,7 @@ namespace UltimateTeamApi.ExternalTools.Services
 
         public async Task<IEnumerable<DriveFileResource>> GetAllDriveFilesAsync(IGoogleAuthProvider auth)
         {
-            Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+            Google.Apis.Drive.v3.DriveService driveService = await getServiceAsync(auth);
 
             if (driveService == null)
                 return new List<DriveFileResource>();
@@ -83,7 +83,7 @@ namespace UltimateTeamApi.ExternalTools.Services
 
         public async Task<DriveFileResponse> GetDriveFileByIdAsync(IGoogleAuthProvider auth, string fileId)
         {
-            Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+            Google.Apis.Drive.v3.DriveService driveService = await getServiceAsync(auth);
 
             if (driveService == null)
                 return new DriveFileResponse("Error D:");
@@ -106,7 +106,7 @@ namespace UltimateTeamApi.ExternalTools.Services
 
         public async Task<IEnumerable<DriveFileResource>> GetAllDriveFilesByNameAsync(IGoogleAuthProvider auth, string fileName)
         {
-            Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+            Google.Apis.Drive.v3.DriveService driveService = await getServiceAsync(auth);
 
             if (driveService == null)
                 return new List<DriveFileResource>();
@@ -134,7 +134,7 @@ namespace UltimateTeamApi.ExternalTools.Services
             {
                 if (file == null) throw new Exception("The file is empty");
 
-                Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+                Google.Apis.Drive.v3.DriveService driveService = await getServiceAsync(auth);
 
                 CreateMediaUpload createRequest = driveService.Files.Create(
                     new File { Name = file.FileName },
@@ -172,7 +172,7 @@ namespace UltimateTeamApi.ExternalTools.Services
         {
             try
             {
-                Google.Apis.Drive.v3.DriveService driveService = await GetServiceAsync(auth);
+                Google.Apis.Drive.v3.DriveService driveService = await getServiceAsync(auth);
 
                 var request = driveService.Files.Get(fileId);
                 request.Fields = "name";
@@ -230,7 +230,7 @@ namespace UltimateTeamApi.ExternalTools.Services
             return _resource;
         }
 
-        private async Task<Google.Apis.Drive.v3.DriveService> GetServiceAsync(IGoogleAuthProvider auth)
+        private async Task<Google.Apis.Drive.v3.DriveService> getServiceAsync(IGoogleAuthProvider auth)
         {
             GoogleCredential credencial = await auth.GetCredentialAsync();
 

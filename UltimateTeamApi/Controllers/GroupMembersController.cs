@@ -11,7 +11,7 @@ using UltimateTeamApi.Resources;
 
 namespace UltimateTeamApi.Controllers
 {
-    [Route("api/users/{userId}/groups")]
+    [Route("api/persons/{personId}/groups")]
     [Produces("application/json")]
     [ApiController]
     public class GroupMembersController : ControllerBase
@@ -31,17 +31,17 @@ namespace UltimateTeamApi.Controllers
         /******************************************/
 
         [SwaggerOperation(
-            Summary = "Get All Groups By User Id",
-            Description = "Get List of All Groups By User Id",
-            OperationId = "GetAllGroupsByUserId")]
-        [SwaggerResponse(200, "List of Groups By User Id", typeof(IEnumerable<GroupResource>))]
+            Summary = "Get All Groups By Person Id",
+            Description = "Get List of All Groups By Person Id",
+            OperationId = "GetAllGroupsByPersonId")]
+        [SwaggerResponse(200, "List of Groups By Person Id", typeof(IEnumerable<GroupResource>))]
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<GroupResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IEnumerable<GroupResource>> GetAllGroupsByUserIdAsync(int userId)
+        public async Task<IEnumerable<GroupResource>> GetAllGroupsByPersonIdAsync(int personId)
         {
-            var groups = await _groupMemberService.GetAllGroupsByUserIdAsync(userId);
+            var groups = await _groupMemberService.GetAllGroupsByPersonIdAsync(personId);
             var resources = _mapper.Map<IEnumerable<Group>, IEnumerable<GroupResource>>(groups);
             return resources;
         }
@@ -60,9 +60,9 @@ namespace UltimateTeamApi.Controllers
         [HttpPost("{groupId}")]
         [ProducesResponseType(typeof(GroupMemberResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> AssignGroupMemberAsync(int groupId, int userId, [FromBody] SaveGroupMemberResource resource)
+        public async Task<IActionResult> AssignGroupMemberAsync(int groupId, int personId, [FromBody] SaveGroupMemberResource resource)
         {
-            var result = await _groupMemberService.AssignGroupMemberAsync(groupId, userId, resource.UserCreator);
+            var result = await _groupMemberService.AssignGroupMemberAsync(groupId, personId, resource.PersonCreator);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -86,9 +86,9 @@ namespace UltimateTeamApi.Controllers
         [HttpDelete("{groupId}")]
         [ProducesResponseType(typeof(GroupResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> UnassignGroupMemberAsync(int groupId, int userId)
+        public async Task<IActionResult> UnassignGroupMemberAsync(int groupId, int personId)
         {
-            var result = await _groupMemberService.UnassignGroupMemberAsync(groupId, userId);
+            var result = await _groupMemberService.UnassignGroupMemberAsync(groupId, personId);
 
             if (!result.Success)
                 return BadRequest(result.Message);

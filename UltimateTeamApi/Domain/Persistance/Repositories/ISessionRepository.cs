@@ -9,7 +9,8 @@ namespace UltimateTeamApi.Domain.Persistance.Repositories
     public interface ISessionRepository
     {
         Task<IEnumerable<Session>> ListAsync();
-        Task<Session> FindBySessionIdAsync(int sessionId);
+        Task<IEnumerable<Session>> ListByNameAsync(string sessionName);
+        Task<Session> FindByIdAsync(int sessionId);
         Task AddAsync(Session session);
         void Update(Session session);
     }

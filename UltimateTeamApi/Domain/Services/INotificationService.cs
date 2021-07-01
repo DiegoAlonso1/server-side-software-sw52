@@ -12,8 +12,8 @@ namespace UltimateTeamApi.Domain.Services
         Task<IEnumerable<Notification>> GetAllAsync();
         Task<IEnumerable<Notification>> GetAllBySenderIdAsync(int senderId);
         Task<IEnumerable<Notification>> GetAllByRemitendIdAsync(int remitendId);
-        Task<NotificationResponse> GetByIdAndUserIdAsync(int notificationId, int userId);
-        Task<NotificationResponse> SaveAsync(int userId, Notification notification);
-        Task<NotificationResponse> DeleteAsync(int notificationId, int userId);
+        Task<NotificationResponse> GetByIdAndPersonIdAsync(int notificationId, int personId);
+        Task<NotificationResponse> SaveAsync(int personId, Notification notification);
+        Task<NotificationResponse> DeleteAsync(int notificationId, int personId);
     }
 }
