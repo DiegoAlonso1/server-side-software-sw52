@@ -12,6 +12,7 @@ namespace UltimateTeamApi.Services
     public class SessionTypeService : ISessionTypeService
     {
         private readonly ISessionTypeRepository _sessionTypeService;
+
         public SessionTypeService(ISessionTypeRepository sessionTypeService)
         {
             _sessionTypeService = sessionTypeService;
@@ -23,12 +24,12 @@ namespace UltimateTeamApi.Services
 
         public async Task<SessionTypeResponse> GetByIdAsync(int sessionTypeId)
         {
-            var existingFunctionality = await _sessionTypeService.FindByIdAsync(sessionTypeId);
+            var existingSessionType = await _sessionTypeService.FindByIdAsync(sessionTypeId);
 
-            if (existingFunctionality == null)
-                return new SessionTypeResponse("Functionality not found");
+            if (existingSessionType == null)
+                return new SessionTypeResponse("SessionType not found");
 
-            return new SessionTypeResponse(existingFunctionality);
+            return new SessionTypeResponse(existingSessionType);
         }
     }
 }

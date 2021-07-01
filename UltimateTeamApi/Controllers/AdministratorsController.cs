@@ -112,8 +112,8 @@ namespace UltimateTeamApi.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var userResource = _mapper.Map<Administrator, AdministratorResource>(result.Resource);
-            return Ok(userResource);
+            var adminResource = _mapper.Map<Administrator, AdministratorResource>(result.Resource);
+            return Ok(adminResource);
         }
 
         /******************************************/
@@ -140,8 +140,8 @@ namespace UltimateTeamApi.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var userResource = _mapper.Map<Administrator, AdministratorResource>(result.Resource);
-            return Ok(userResource);
+            var adminResource = _mapper.Map<Administrator, AdministratorResource>(result.Resource);
+            return Ok(adminResource);
         }
 
 

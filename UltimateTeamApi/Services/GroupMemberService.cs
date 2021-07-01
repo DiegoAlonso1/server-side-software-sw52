@@ -13,24 +13,24 @@ namespace UltimateTeamApi.Services
     {
         private readonly IGroupMemberRepository _groupMemberRepository;
         private readonly IGroupRepository _groupRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IPersonRepository _personRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public GroupMemberService(IGroupMemberRepository groupMemberRepository, IUnitOfWork unitOfWork, IGroupRepository groupRepository, IUserRepository userRepository)
+        public GroupMemberService(IGroupMemberRepository groupMemberRepository, IUnitOfWork unitOfWork, IGroupRepository groupRepository, IPersonRepository personRepository)
         {
             _groupMemberRepository = groupMemberRepository;
             _unitOfWork = unitOfWork;
             _groupRepository = groupRepository;
-            _userRepository = userRepository;
+            _personRepository = personRepository;
         }
 
-        public async Task<GroupMemberResponse> AssignGroupMemberAsync(int groupId, int userId, bool userCreator)
+        public async Task<GroupMemberResponse> AssignGroupMemberAsync(int groupId, int personId, bool personCreator)
         {
             try
             {
-                await _groupMemberRepository.AssignGroupMemberAsync(groupId, userId, userCreator);
+                await _groupMemberRepository.AssignGroupMemberAsync(groupId, personId, personCreator);
                 await _unitOfWork.CompleteAsync();
-                GroupMember groupMemberResult = await _groupMemberRepository.FindByGroupIdAndUserIdAsync(groupId, userId);
+                GroupMember groupMemberResult = await _groupMemberRepository.FindByGroupIdAndPersonIdAsync(groupId, personId);
                 return new GroupMemberResponse(groupMemberResult);
 
             }
@@ -40,21 +40,21 @@ namespace UltimateTeamApi.Services
             }
         }
 
-        public async Task<IEnumerable<User>> GetAllUsersByGroupIdAsync(int groupId)
+        public async Task<IEnumerable<Person>> GetAllPersonsByGroupIdAsync(int groupId)
         {
-            return await _groupMemberRepository.ListUsersByGroupIdAsync(groupId);
+            return await _groupMemberRepository.ListPersonsByGroupIdAsync(groupId);
         }
 
-        public async Task<IEnumerable<Group>> GetAllGroupsByUserIdAsync(int userId)
+        public async Task<IEnumerable<Group>> GetAllGroupsByPersonIdAsync(int personId)
         {
-            return await _groupMemberRepository.ListGroupsByUserIdAsync(userId);
+            return await _groupMemberRepository.ListGroupsByPersonIdAsync(personId);
         }
 
-        public async Task<GroupMemberResponse> UnassignGroupMemberAsync(int groupId, int userId)
+        public async Task<GroupMemberResponse> UnassignGroupMemberAsync(int groupId, int personId)
         {
             try
             {
-                GroupMember groupMember = await _groupMemberRepository.FindByGroupIdAndUserIdAsync(groupId, userId);
+                GroupMember groupMember = await _groupMemberRepository.FindByGroupIdAndPersonIdAsync(groupId, personId);
 
                 _groupMemberRepository.Remove(groupMember);
                 await _unitOfWork.CompleteAsync();

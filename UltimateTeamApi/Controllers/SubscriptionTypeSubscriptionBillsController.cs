@@ -36,7 +36,7 @@ namespace UltimateTeamApi.Controllers
         [SwaggerResponse(200, "List of Sub Bills By Type Id", typeof(IEnumerable<SubscriptionBillResource>))]
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
+        [ProducesResponseType(typeof(IEnumerable<PersonResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IEnumerable<SubscriptionBillResource>> GetAllByAdministratorIdAsync(int subTypeId)
         {

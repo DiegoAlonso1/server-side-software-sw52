@@ -16,6 +16,6 @@ namespace UltimateTeamApi.Resources
         public bool Paid { get; set; }
         public EPaymentMethod PaymentMethod { get; set; }
         public SubscriptionType SubscriptionType { get; set; }
-        public User User { get; set; }
+        public Person person { get; set; }
     }
 }

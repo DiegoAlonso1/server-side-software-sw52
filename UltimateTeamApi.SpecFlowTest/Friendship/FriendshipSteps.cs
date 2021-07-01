@@ -11,11 +11,11 @@ namespace UltimateTeamApi.SpecFlowTest.Friendship
     [Binding]
     public class FriendshipSteps : BaseTest
     {
-        private string UserEndpoint { get; set; }
+        private string PersonEndpoint { get; set; }
 
         public FriendshipSteps()
         {
-            UserEndpoint = $"{ApiUri}api/users";
+            PersonEndpoint = $"{ApiUri}api/persons";
         }
 
 
@@ -23,11 +23,11 @@ namespace UltimateTeamApi.SpecFlowTest.Friendship
         /*INITIALIZING TEST WITH SOME ENTITIES INSTANCES*/
         /**************************************************/
 
-        //[When(@"users required attributes provided to initialize instances")]
-        //This function is on the UserSteps.cs
+        //[When(@"persons required attributes provided to initialize instances")]
+        //This function is on the PersonSteps.cs
 
-        [Then(@"assign the user with Id (.*) with the user with Id (.*)")]
-        public void ThenAssignTheUserWithIdWithTheUserWithId(int principalId, int friendId)
+        [Then(@"assign the person with Id (.*) with the person with Id (.*)")]
+        public void ThenAssignThePersonWithIdWithThePersonWithId(int principalId, int friendId)
         {
             try
             {
@@ -47,21 +47,21 @@ namespace UltimateTeamApi.SpecFlowTest.Friendship
                            /*SCENARY 1*/
         /**************************************************/
         
-        [When(@"the user with Id (.*) goes to Friend Lists")]
-        public void WhenTheUserWithIdGoesToFriendLists(int userId)
+        [When(@"the person with Id (.*) goes to Friend Lists")]
+        public void WhenThePersonWithIdGoesToFriendLists(int personId)
         {
-            var result = Task.Run(async () => await Client.GetAsync($"{UserEndpoint}/{userId}")).Result;
-            Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get User by Id Integration Test Completed");
+            var result = Task.Run(async () => await Client.GetAsync($"{PersonEndpoint}/{personId}")).Result;
+            Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get Person by Id Integration Test Completed");
         }
 
-        [Then(@"the friend list of user with Id (.*) should be")]
-        public void ThenTheFriendListOfUserWithIdShouldBe(int userId, Table dto)
+        [Then(@"the friend list of person with Id (.*) should be")]
+        public void ThenTheFriendListOfPersonWithIdShouldBe(int personId, Table dto)
         {
-            var users = dto.CreateInstance<List<Domain.Models.User>>();
-            var result = Task.Run(async () => await Client.GetAsync($"{FriendshipEndpoint(userId)}")).Result;
+            var persons = dto.CreateInstance<List<Domain.Models.Person>>();
+            var result = Task.Run(async () => await Client.GetAsync($"{FriendshipEndpoint(personId)}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Friends Details Integration Test Completed");
-            //var usersToCompare = ObjectData<List<Domain.Models.User>>(result.Content.ReadAsStringAsync().Result);
-            //Assert.IsTrue(dto.IsEquivalentToInstance(usersToCompare));
+            //var personsToCompare = ObjectData<List<Domain.Models.Person>>(result.Content.ReadAsStringAsync().Result);
+            //Assert.IsTrue(dto.IsEquivalentToInstance(personsToCompare));
         }
 
 
@@ -70,8 +70,8 @@ namespace UltimateTeamApi.SpecFlowTest.Friendship
                             /*SCENARY 2*/
         /**************************************************/
 
-        [When(@"the user with Id (.*) accepts the friend request from the user with Id (.*), the user details should be")]
-        public void WhenTheUserWithIdAcceptsTheFriendRequestFromTheUserWithIdTheUserDetailsShouldBe(int friendId, int principalId, Table dto)
+        [When(@"the person with Id (.*) accepts the friend request from the person with Id (.*), the person details should be")]
+        public void WhenThePersonWithIdAcceptsTheFriendRequestFromThePersonWithIdThePersonDetailsShouldBe(int friendId, int principalId, Table dto)
         {
             try
             {
@@ -91,22 +91,22 @@ namespace UltimateTeamApi.SpecFlowTest.Friendship
                             /*SCENARY 3*/
         /**************************************************/
 
-        [When(@"the user with id (.*) click on the Trash can button next to the user with Id (.*)")]
-        public void WhenTheUserWithIdClickOnTheTrashCanButtonNextToTheUserWithId(int principalId, int friendId)
+        [When(@"the person with id (.*) click on the Trash can button next to the person with Id (.*)")]
+        public void WhenThePersonWithIdClickOnTheTrashCanButtonNextToThePersonWithId(int principalId, int friendId)
         {
-            var result = Task.Run(async () => await Client.GetAsync($"{UserEndpoint}/{principalId}")).Result;
+            var result = Task.Run(async () => await Client.GetAsync($"{PersonEndpoint}/{principalId}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK);
         }
 
-        [Then(@"the user with id (.*) is removed from the friend list of the user with Id (.*) and removed user details should be")]
-        public void ThenTheUserWithIdIsRemovedFromTheFriendListOfTheUserWithIdAndRemovedUserDetailsShouldBe(int friendId, int principalId, Table dto)
+        [Then(@"the person with id (.*) is removed from the friend list of the person with Id (.*) and removed person details should be")]
+        public void ThenThePersonWithIdIsRemovedFromTheFriendListOfThePersonWithIdAndRemovedPersonDetailsShouldBe(int friendId, int principalId, Table dto)
         {
             try
             {
                 var result = Task.Run(async () => await Client.DeleteAsync($"{FriendshipEndpoint(principalId)}/{friendId}")).Result;
                 Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Unassing Friendship Integration Test Completed");
-                //var userToCompare = ObjectData<Domain.Models.User>(result.Content.ReadAsStringAsync().Result);
-                //Assert.IsTrue(dto.IsEquivalentToInstance(userToCompare));
+                //var personToCompare = ObjectData<Domain.Models.Person>(result.Content.ReadAsStringAsync().Result);
+                //Assert.IsTrue(dto.IsEquivalentToInstance(personToCompare));
             }
             catch (Exception ex)
             {
@@ -119,7 +119,7 @@ namespace UltimateTeamApi.SpecFlowTest.Friendship
 
         private string FriendshipEndpoint(int principalId)
         {
-            return $"{ApiUri}api/users/{principalId}/friends";
+            return $"{ApiUri}api/persons/{principalId}/friends";
         }
     }
 }

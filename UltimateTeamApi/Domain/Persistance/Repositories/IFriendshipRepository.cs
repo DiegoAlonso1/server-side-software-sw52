@@ -8,7 +8,7 @@ namespace UltimateTeamApi.Domain.Persistance.Repositories
 {
     public interface IFriendshipRepository
     {
-        Task<IEnumerable<User>> ListFriendsByUserIdAsync(int userId);
+        Task<IEnumerable<Person>> ListFriendsByPersonIdAsync(int personId);
         Task<Friendship> FindByPrincipalIdAndFriendIdAsync(int principalId, int friendId);
         Task AddAsync(Friendship friendship);
         void Remove(Friendship friendship);

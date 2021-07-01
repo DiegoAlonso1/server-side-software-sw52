@@ -58,7 +58,7 @@ namespace UltimateTeamApi.Controllers
             OperationId = "AssignSessionStadistic")]
         [SwaggerResponse(200, "SessionStadistic Assigned", typeof(SessionStadisticResource))]
 
-        [HttpGet("{functionalityId}")]
+        [HttpPost("{functionalityId}")]
         [ProducesResponseType(typeof(SessionStadisticResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> AssignSessionStadisticAsync(int sessionId, int functionalityId)

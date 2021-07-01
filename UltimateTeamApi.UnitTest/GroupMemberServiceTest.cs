@@ -27,24 +27,24 @@ namespace UltimateTeamApi.UnitTest
             //Arrange
             var mockGroupMemberRepository = GetDefaultIGroupMemberRepositoryInstance();
             var mockGroupRepository = GetDefaultIGroupRepositoryInstance();
-            var mockUserRepository = GetDefaultIUserRepositoryInstance();
+            var mockPersonRepository = GetDefaultIPersonRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            GroupMember groupMember = new GroupMember { UserId = 1, GroupId = 1, UserCreator = true };
+            GroupMember groupMember = new GroupMember { PersonId = 1, GroupId = 1, PersonCreator = true };
             var groupId = groupMember.GroupId;
-            var userId = groupMember.UserId;
-            bool userCreator = groupMember.UserCreator;
+            var personId = groupMember.PersonId;
+            bool personCreator = groupMember.PersonCreator;
 
-            mockGroupMemberRepository.Setup(r => r.AssignGroupMemberAsync(groupId, userId, userCreator))
+            mockGroupMemberRepository.Setup(r => r.AssignGroupMemberAsync(groupId, personId, personCreator))
                 .Returns(Task.CompletedTask);
             mockUnitOfWork.Setup(u => u.CompleteAsync())
                 .Returns(Task.CompletedTask);
-            mockGroupMemberRepository.Setup(r => r.FindByGroupIdAndUserIdAsync(groupId, userId))
+            mockGroupMemberRepository.Setup(r => r.FindByGroupIdAndPersonIdAsync(groupId, personId))
                 .Returns(Task.FromResult(groupMember));
 
-            var service = new GroupMemberService(mockGroupMemberRepository.Object, mockUnitOfWork.Object, mockGroupRepository.Object, mockUserRepository.Object);
+            var service = new GroupMemberService(mockGroupMemberRepository.Object, mockUnitOfWork.Object, mockGroupRepository.Object, mockPersonRepository.Object);
 
             //Act
-            var result = await service.AssignGroupMemberAsync(groupId, userId, userCreator);
+            var result = await service.AssignGroupMemberAsync(groupId, personId, personCreator);
             var groupMemberResult = result.Resource;
 
             //Assert
@@ -60,24 +60,24 @@ namespace UltimateTeamApi.UnitTest
             //Arrange
             var mockGroupMemberRepository = GetDefaultIGroupMemberRepositoryInstance();
             var mockGroupRepository = GetDefaultIGroupRepositoryInstance();
-            var mockUserRepository = GetDefaultIUserRepositoryInstance();
+            var mockPersonRepository = GetDefaultIPersonRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            GroupMember groupMember = new GroupMember {  UserId = 1, GroupId = 1, UserCreator = true };
+            GroupMember groupMember = new GroupMember {  PersonId = 1, GroupId = 1, PersonCreator = true };
             var groupId = groupMember.GroupId;
-            var userId = groupMember.UserId;
-            bool userCretor = groupMember.UserCreator;
+            var personId = groupMember.PersonId;
+            bool personCretor = groupMember.PersonCreator;
 
-            mockGroupMemberRepository.Setup(r => r.AssignGroupMemberAsync(groupId, userId, userCretor))
-                .Throws(new Exception("Group and user have already been asigned."));
+            mockGroupMemberRepository.Setup(r => r.AssignGroupMemberAsync(groupId, personId, personCretor))
+                .Throws(new Exception("Group and person have already been asigned."));
 
-            var service = new GroupMemberService(mockGroupMemberRepository.Object, mockUnitOfWork.Object, mockGroupRepository.Object, mockUserRepository.Object);
+            var service = new GroupMemberService(mockGroupMemberRepository.Object, mockUnitOfWork.Object, mockGroupRepository.Object, mockPersonRepository.Object);
 
             //Act
-            var result = await service.AssignGroupMemberAsync(groupId, userId, userCretor);
+            var result = await service.AssignGroupMemberAsync(groupId, personId, personCretor);
             var message = result.Message;
 
             //Assert
-            message.Should().Be("An error ocurred while assigning Member to Group: Group and user have already been asigned.");
+            message.Should().Be("An error ocurred while assigning Member to Group: Group and person have already been asigned.");
         }
 
 
@@ -91,9 +91,9 @@ namespace UltimateTeamApi.UnitTest
         {
             return new Mock<IGroupRepository>();
         }
-        private Mock<IUserRepository> GetDefaultIUserRepositoryInstance()
+        private Mock<IPersonRepository> GetDefaultIPersonRepositoryInstance()
         {
-            return new Mock<IUserRepository>();
+            return new Mock<IPersonRepository>();
         }
         private Mock<IUnitOfWork> GetDefaultIUnitOfWorkInstance()
         {

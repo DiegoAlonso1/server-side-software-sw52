@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UltimateTeamApi.Domain.Models;
+using UltimateTeamApi.Domain.Services.Communications;
 using UltimateTeamApi.Resources;
 
 namespace UltimateTeamApi.Mapping
@@ -12,7 +13,7 @@ namespace UltimateTeamApi.Mapping
     {
         public ModelToResourceProfile()
         {
-            CreateMap<User, UserResource>();
+            CreateMap<Person, PersonResource>();
             CreateMap<Functionality, FunctionalityResource>();
             CreateMap<SessionStadistic, SessionStadisticResource>();
             CreateMap<Group, GroupResource>();
@@ -20,6 +21,11 @@ namespace UltimateTeamApi.Mapping
             CreateMap<Administrator, AdministratorResource>();
             CreateMap<SubscriptionBill, SubscriptionBillResource>();
             CreateMap<SubscriptionType, SubscriptionTypeResource>();
+            CreateMap<Session, SessionResource>();
+            CreateMap<SessionParticipant, SessionParticipantResource>();
+            CreateMap<SessionType, SessionTypeResource>();
+            CreateMap<User, UserResource>();
+            CreateMap<User, AuthenticationResponse>();
         }
     }
 }

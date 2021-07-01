@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace UltimateTeamApi.Resources
 {
-	public class SessionResources
+	public class SessionResource
 	{
 		public int Id { get; set; }
         public string Name { get; set; }
