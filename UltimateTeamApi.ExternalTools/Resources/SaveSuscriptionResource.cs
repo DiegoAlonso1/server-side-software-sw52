@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UltimateTeamApi.ExternalTools.Resources
 {
-    public class SaveSuscription
+    public class SaveSuscriptionResource
     {
         public string PlanId { get; set; }
 
